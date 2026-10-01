@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joselyn | Secure Architecture</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-theme="purple">
+  <div class="starfield"></div>
+
+  <!-- Nebula clouds -->
+  <div class="nebula nebula-1"></div>
+  <div class="nebula nebula-2"></div>
+  <div class="nebula nebula-3"></div>
+
+  <!-- PokeAPI Official Artwork Sprites -->
+  <div class="pokemon-container pokemon-altaria">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/334.png" alt="Altaria" width="80" height="80">
+    <div class="cloud-puff cloud-puff-1"></div>
+    <div class="cloud-puff cloud-puff-2"></div>
+  </div>
+
+  <div class="pokemon-container pokemon-sylveon">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/700.png" alt="Sylveon" width="70" height="70">
+    <div class="sparkle sparkle-1"></div>
+    <div class="sparkle sparkle-2"></div>
+    <div class="sparkle sparkle-3"></div>
+  </div>
+
+  <div class="pokemon-container pokemon-milotic">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/350.png" alt="Milotic" width="90" height="50">
+    <div class="shimmer shimmer-1"></div>
+    <div class="shimmer shimmer-2"></div>
+  </div>
+
+  <div class="pokemon-container pokemon-arceus">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/493.png" alt="Arceus" width="85" height="85">
+  </div>
+
+  <div class="pokemon-container pokemon-deoxys">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/386.png" alt="Deoxys" width="75" height="75">
+  </div>
+
+  <!-- Shooting stars -->
+  <div class="shooting-star shooting-star-1"></div>
+  <div class="shooting-star shooting-star-2"></div>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">Joselyn</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Me</a></li>
+        <li><a href="interests.html">Tech Interests</a></li>
+        <li><a href="cybersecurity.html">Cybersecurity</a></li>
+        <li><a href="threat-model.html">Threat Model</a></li>
+        <li><a href="secure-architecture.html" class="active">Secure Architecture</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="page-content">
+    <div class="page-header">
+      <h1>Assignment 3 – Secure Web Architecture</h1>
+      <p class="subtitle">Defense-in-Depth Design for a Cybersecurity Awareness Web Application</p>
+    </div>
+
+    <div class="card">
+      <h2>1. Introduction</h2>
+      <p>
+        This document describes the secure web architecture for a proposed full-stack cybersecurity awareness web application. The application would extend the current static website with user accounts, dynamic content management, and interactive features while maintaining a strong security posture.
+      </p>
+      <p>
+        <strong>Current architecture:</strong> The existing website is a static site hosted on GitHub Pages. It consists of HTML, CSS, and JavaScript files served directly to the browser. There is no backend, database, authentication, or server-side processing.
+      </p>
+      <p>
+        <strong>Proposed architecture:</strong> The secure architecture described in this document represents a proposed future state where the application includes a frontend, web server, application layer, database, authentication, authorization, encryption, session management, and input validation.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>2. Current vs. Proposed Architecture</h2>
+      <table style="width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem;">
+        <thead>
+          <tr style="background: var(--glow-soft);">
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Component</th>
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Current (Static Site)</th>
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Proposed (Full Application)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);"><strong>Frontend</strong></td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">HTML, CSS, JavaScript</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">HTML, CSS, JavaScript + Framework (React/Vue)</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);"><strong>Web Server</strong></td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">GitHub Pages (managed)</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Nginx/Apache (reverse proxy, load balancer)</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);"><strong>Application Layer</strong></td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">None (no backend)</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Node.js/Python (business logic, API endpoints)</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);"><strong>Database</strong></td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">None</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">PostgreSQL/MySQL (encrypted, access-controlled)</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);"><strong>Authentication</strong></td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">None</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Multi-factor authentication, password hashing</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);"><strong>Authorization</strong></td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">None</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Role-based access control (RBAC)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>3. Secure Architecture Diagram</h2>
+      <p>The following diagram shows the proposed secure architecture and how the components connect:</p>
+      <div style="background: rgba(10, 14, 26, 0.6); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; margin: 1.5rem 0; text-align: center; font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.8;">
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">┌──────────┐</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">│   User   │</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">└────┬─────┘</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent2);">     │</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">┌────▼─────┐</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">│ Frontend │</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">└────┬─────┘</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent2);">     │ HTTPS/TLS 1.3</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">┌────▼─────────┐</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">│  Web Server  │</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">│  (Nginx)     │</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">└──┬───┬───┬───┘</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent2);">   │   │   │</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">┌──▼───▼───▼──────────┐</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">│   Application Layer   │</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">│   (Node.js/Python)    │</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">└──┬───┬───┬───┬───┬──┘</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent2);">   │   │   │   │   │</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">   │   │   │   │   └─────────────┐</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">   │   │   │   │               │</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">   │   │   │   │   ┌─────────▼─────────┐</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">   │   │   │   │   │    Database       │</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">   │   │   │   │   │  (PostgreSQL)     │</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">   │   │   │   │   └───────────────────┘</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">   │   │   │   │</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">   │   │   │   └─────────────────┐</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">   │   │   │                     │</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">   │   │   │   ┌───────────────▼───────────────┐</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">   │   │   │   │      Authentication           │</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">   │   │   │   │  (MFA, Password Hashing)     │</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">   │   │   │   └───────────────────────────────┘</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">   │   │   │</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">   │   │   └─────────────────┐</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">   │   │                     │</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">   │   │   ┌───────────────▼───────────────┐</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">   │   │   │      Authorization            │</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">   │   │   │  (RBAC, Least Privilege)      │</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">   │   │   └───────────────────────────────┘</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">   │   │</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">   │   └─────────────────┐</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">   │                     │</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">   │   ┌───────────────▼───────────────┐</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">   │   │     Session Management         │</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">   │   │  (Secure Cookies, Timeout)     │</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">   │   └───────────────────────────────┘</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">   │</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">   └─────────────────┐</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">                     │</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">   ┌─────────────────▼─────────────────┐</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">   │       Input Validation            │</span></div>
+        <div style="margin-bottom: 0.5rem;"><span style="color: var(--accent1);">   │  (Sanitization, Allowlists)       │</span></div>
+        <div><span style="color: var(--accent1);">   └───────────────────────────────────┘</span></div>
+      </div>
+      <p>
+        <strong>Encryption (HTTPS/TLS)</strong> protects all data in transit between the user and the web server. <strong>Encryption at rest</strong> protects data stored in the database.
+      </p>
+    </div>
+
+    <hr class="divider">
+
+    <div class="card">
+      <h2>4. Architecture Components</h2>
+
+      <h3>4.1 Frontend</h3>
+      <p>
+        <strong>Purpose:</strong> The frontend is the user-facing layer of the application. It renders the user interface, captures user input, and communicates with the backend via API calls.
+      </p>
+      <p>
+        <strong>How it fits:</strong> The frontend is the entry point for all user interactions. It sends requests to the web server and displays responses to the user.
+      </p>
+      <p>
+        <strong>Security controls:</strong>
+      </p>
+      <ul>
+        <li>Content Security Policy (CSP) headers to prevent XSS</li>
+        <li>Input sanitization before sending data to the server</li>
+        <li>HTTPS-only communication (no mixed content)</li>
+        <li>Output encoding to prevent DOM-based XSS</li>
+        <li>Rate limiting on client-side requests</li>
+      </ul>
+
+      <h3>4.2 Web Server</h3>
+      <p>
+        <strong>Purpose:</strong> The web server receives HTTP requests from clients, serves static files, and routes dynamic requests to the application layer.
+      </p>
+      <p>
+        <strong>How it fits:</strong> The web server is the gateway between the outside world and the internal application. It terminates TLS connections and forwards requests to the application layer.
+      </p>
+      <p>
+        <strong>Security controls:</strong>
+      </p>
+      <ul>
+        <li>TLS 1.3 encryption for all connections</li>
+        <li>Rate limiting and DDoS protection</li>
+        <li>Web Application Firewall (WAF) rules</li>
+        <li>Access logging and monitoring</li>
+        <li>Security headers (HSTS, X-Frame-Options, X-Content-Type-Options)</li>
+      </ul>
+
+      <h3>4.3 Application Layer</h3>
+      <p>
+        <strong>Purpose:</strong> The application layer contains the business logic. It processes requests, enforces authorization rules, and interacts with the database.
+      </p>
+      <p>
+        <strong>How it fits:</strong> The application layer sits between the web server and the database. It validates input, executes business rules, and returns responses.
+      </p>
+      <p>
+        <strong>Security controls:</strong>
+      </p>
+      <ul>
+        <li>Input validation and sanitization</li>
+        <li>Parameterized queries to prevent SQL injection</li>
+        <li>Role-based access control (RBAC) enforcement</li>
+        <li>Error handling that does not leak sensitive information</li>
+        <li>API rate limiting and throttling</li>
+      </ul>
+
+      <h3>4.4 Database</h3>
+      <p>
+        <strong>Purpose:</strong> The database stores persistent data such as user accounts, content, and application state.
+      </p>
+      <p>
+        <strong>How it fits:</strong> The database is the final layer of the architecture. It is accessed only by the application layer, never directly by the frontend or web server.
+      </p>
+      <p>
+        <strong>Security controls:</strong>
+      </p>
+      <ul>
+        <li>Encryption at rest (AES-256)</li>
+        <li>Access controls and least privilege</li>
+        <li>Parameterized queries only</li>
+        <li>Regular backups and disaster recovery</li>
+        <li>Database activity monitoring and auditing</li>
+      </ul>
+
+      <h3>4.5 Authentication</h3>
+      <p>
+        <strong>Purpose:</strong> Authentication verifies the identity of users before granting access to protected resources.
+      </p>
+      <p>
+        <strong>How it fits:</strong> Authentication is handled at the application layer. When a user logs in, the application verifies their credentials and creates a session.
+      </p>
+      <p>
+        <strong>Security controls:</strong>
+      </p>
+      <ul>
+        <li>Multi-factor authentication (MFA)</li>
+        <li>Password hashing (bcrypt/Argon2)</li>
+        <li>Brute force protection (rate limiting, account lockout)</li>
+        <li>Secure password reset flow</li>
+        <li>Account lockout after failed attempts</li>
+      </ul>
+
+      <h3>4.6 Authorization</h3>
+      <p>
+        <strong>Purpose:</strong> Authorization determines what an authenticated user is allowed to do.
+      </p>
+      <p>
+        <strong>How it fits:</strong> Authorization is enforced at the application layer. Every request is checked against the user's permissions before processing.
+      </p>
+      <p>
+        <strong>Security controls:</strong>
+      </p>
+      <ul>
+        <li>Role-based access control (RBAC)</li>
+        <li>Principle of least privilege</li>
+        <li>Server-side authorization checks on every request</li>
+        <li>Resource-level access control</li>
+        <li>Deny-by-default policy</li>
+      </ul>
+
+      <h3>4.7 Encryption</h3>
+      <p>
+        <strong>Purpose:</strong> Encryption protects data in transit and at rest from unauthorized access.
+      </p>
+      <p>
+        <strong>How it fits:</strong> Encryption is applied at multiple layers. TLS protects data between the user and server. Encryption at rest protects data in the database.
+      </p>
+      <p>
+        <strong>Security controls:</strong>
+      </p>
+      <ul>
+        <li>TLS 1.3 for all data in transit</li>
+        <li>AES-256 encryption for data at rest</li>
+        <li>HTTP Strict Transport Security (HSTS)</li>
+        <li>Certificate management and rotation</li>
+        <li>Secure key management (HSM or key vault)</li>
+      </ul>
+
+      <h3>4.8 Session Management</h3>
+      <p>
+        <strong>Purpose:</strong> Session management maintains user state across multiple requests after authentication.
+      </p>
+      <p>
+        <strong>How it fits:</strong> Sessions are created at the application layer after successful authentication. The session token is stored securely in the user's browser.
+      </p>
+      <p>
+        <strong>Security controls:</strong>
+      </p>
+      <ul>
+        <li>Secure, HTTP-only cookies</li>
+        <li>Session timeout and expiration</li>
+        <li>Session token rotation</li>
+        <li>CSRF protection tokens</li>
+        <li>Session invalidation on logout</li>
+      </ul>
+
+      <h3>4.9 Input Validation</h3>
+      <p>
+        <strong>Purpose:</strong> Input validation ensures that all data entering the system is safe and conforms to expected formats.
+      </p>
+      <p>
+        <strong>How it fits:</strong> Input validation is performed at multiple layers. The frontend validates for user experience. The application layer validates for security.
+      </p>
+      <p>
+        <strong>Security controls:</strong>
+      </p>
+      <ul>
+        <li>Allowlist-based validation</li>
+        <li>Type checking and format validation</li>
+        <li>Length limits on all inputs</li>
+        <li>Output encoding before rendering</li>
+        <li>Server-side validation (never trust client-side only)</li>
+      </ul>
+    </div>
+
+    <hr class="divider">
+
+    <div class="card">
+      <h2>5. How Security Is Incorporated Into the Architecture</h2>
+      <p>
+        Security is incorporated into the architecture using a <strong>defense in depth</strong> approach. This means multiple layers of security controls work together to protect the application. If one layer fails, others still provide protection.
+      </p>
+
+      <h3>Defense in Depth</h3>
+      <p>
+        The architecture implements security at every layer:
+      </p>
+      <ul>
+        <li><strong>Frontend:</strong> Input sanitization, output encoding, CSP headers</li>
+        <li><strong>Web Server:</strong> TLS encryption, rate limiting, WAF, security headers</li>
+        <li><strong>Application Layer:</strong> Input validation, authorization checks, error handling</li>
+        <li><strong>Database:</strong> Encryption at rest, access controls, parameterized queries</li>
+      </ul>
+
+      <h3>Least Privilege</h3>
+      <p>
+        Each component has only the access it needs to function. The database user used by the application has only the permissions required for the application's queries. Users have only the permissions required for their role.
+      </p>
+
+      <h3>Separation of Duties</h3>
+      <p>
+        Different components handle different responsibilities. The web server handles TLS termination and routing. The application layer handles business logic and authorization. The database handles data storage. No single component has all the responsibility.
+      </p>
+
+      <h3>Fail Securely</h3>
+      <p>
+        When something goes wrong, the system defaults to denying access. Error messages are generic and do not reveal internal details. Failed authentication attempts trigger account lockout.
+      </p>
+
+      <h3>Security by Design</h3>
+      <p>
+        Security is built into the architecture from the start, not added as an afterthought. Every component is designed with security in mind. The architecture assumes that attackers will try to exploit it and implements controls to prevent, detect, and respond to attacks.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>6. Conclusion</h2>
+      <p>
+        The proposed secure web architecture provides a robust defense in depth for the cybersecurity awareness web application. By implementing security controls at every layer — from the frontend to the database — the application can protect against a wide range of threats while maintaining usability and performance.
+      </p>
+      <p>
+        The current static GitHub Pages website does not have a database, authentication system, or backend. The architecture described in this document represents the proposed future state of the application and demonstrates how security would be incorporated as the application evolves.
+      </p>
+      <p>
+        Key security principles applied throughout the architecture include defense in depth, least privilege, separation of duties, fail securely, and security by design. These principles ensure that the application remains secure as it grows and new features are added.
+      </p>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Joselyn | Information Technology | Kean University</p>
+  </footer>
+
+  <!-- Theme Switcher -->
+  <button class="theme-toggle" aria-label="Change theme">🎨</button>
+  <div class="theme-panel">
+    <button class="theme-option active" data-theme="purple" aria-label="Purple Galaxy">
+      <span class="theme-preview purple"></span>
+      Purple Galaxy
+    </button>
+    <button class="theme-option" data-theme="pink" aria-label="Pink Galaxy">
+      <span class="theme-preview pink"></span>
+      Pink Galaxy
+    </button>
+    <button class="theme-option" data-theme="blue" aria-label="Blue Galaxy">
+      <span class="theme-preview blue"></span>
+      Blue Galaxy
+    </button>
+  </div>
+
+  <!-- Chatbox -->
+  <button class="chatbox-toggle" aria-label="Open chat">💬</button>
+  <div class="chatbox-panel">
+    <div class="chatbox-header">
+      <h3>Mission Comms</h3>
+      <button class="chatbox-close" aria-label="Close chat">&times;</button>
+    </div>
+    <div class="chatbox-messages"></div>
+    <div class="chatbox-input-area">
+      <input type="text" class="chatbox-input" placeholder="Ask me something...">
+      <button class="chatbox-send">Send</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

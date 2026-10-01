@@ -135,8 +135,101 @@ function initChatbox() {
   const input = document.querySelector('.chatbox-input');
   const sendBtn = document.querySelector('.chatbox-send');
   const messagesContainer = document.querySelector('.chatbox-messages');
+  const micBtn = document.querySelector('.chatbox-mic');
+  const statusEl = document.querySelector('.chatbox-status');
 
   if (!toggle || !panel) return;
+
+  let recognition = null;
+  let isListening = false;
+
+  function setStatus(message) {
+    if (statusEl) statusEl.textContent = message || '';
+  }
+
+  function speakText(text) {
+    if (!('speechSynthesis' in window)) {
+      setStatus('Speech output is not supported in this browser.');
+      return;
+    }
+
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.rate = 1;
+    utterance.pitch = 1;
+
+    utterance.onstart = () => setStatus('Speaking...');
+    utterance.onend = () => setStatus('');
+    utterance.onerror = () => setStatus('Could not play audio.');
+
+    window.speechSynthesis.speak(utterance);
+  }
+
+  function setupMicrophone() {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (!micBtn) return;
+
+    if (!SpeechRecognition) {
+      micBtn.disabled = true;
+      micBtn.title = 'Speech recognition is not supported in this browser';
+      setStatus('Voice input is not supported in this browser.');
+      return;
+    }
+
+    recognition = new SpeechRecognition();
+    recognition.lang = 'en-US';
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    recognition.onstart = () => {
+      isListening = true;
+      micBtn.classList.add('listening');
+      setStatus('Listening...');
+    };
+
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript.trim();
+      if (transcript) {
+        input.value = transcript;
+        setStatus(`Heard: "${transcript}"`);
+        sendMessage();
+      }
+    };
+
+    recognition.onerror = (event) => {
+      setStatus(`Microphone error: ${event.error}`);
+      isListening = false;
+      micBtn.classList.remove('listening');
+    };
+
+    recognition.onend = () => {
+      isListening = false;
+      micBtn.classList.remove('listening');
+      if (statusEl && statusEl.textContent === 'Listening...') {
+        setStatus('');
+      }
+    };
+
+    micBtn.addEventListener('click', () => {
+      if (isListening) {
+        recognition.stop();
+        return;
+      }
+
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+
+      try {
+        recognition.start();
+      } catch (error) {
+        setStatus('Could not start microphone.');
+      }
+    });
+  }
+
+  setupMicrophone();
 
   // Open/close panel
   toggle.addEventListener('click', () => {
@@ -164,6 +257,10 @@ function initChatbox() {
     // Clear input
     input.value = '';
 
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+    }
+
     // Scroll to bottom
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
 
@@ -175,6 +272,7 @@ function initChatbox() {
       botMsg.textContent = botResponse;
       messagesContainer.appendChild(botMsg);
       messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      speakText(botResponse);
     }, 400);
   }
 

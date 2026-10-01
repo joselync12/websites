@@ -548,6 +548,39 @@ footer {
   opacity: 0.85;
 }
 
+.chatbox-mic {
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.5rem 0.65rem;
+  color: var(--text);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.5s ease, opacity 0.2s;
+}
+
+.chatbox-mic:hover {
+  border-color: var(--accent2);
+}
+
+.chatbox-mic.listening {
+  border-color: var(--accent2);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.12);
+}
+
+.chatbox-mic:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.chatbox-status {
+  padding: 0 0.7rem 0.7rem;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  min-height: 1.1rem;
+}
+
 /* --- Theme Switcher --- */
 .theme-toggle {
   position: fixed;

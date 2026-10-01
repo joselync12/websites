@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joselyn | Threat Model</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-theme="purple">
+  <div class="starfield"></div>
+
+  <!-- Nebula clouds -->
+  <div class="nebula nebula-1"></div>
+  <div class="nebula nebula-2"></div>
+  <div class="nebula nebula-3"></div>
+
+  <!-- Pixel Pokemon -->
+  <div class="pokemon-container pokemon-altaria">
+    <svg viewBox="0 0 16 14" xmlns="http://www.w3.org/2000/svg">
+      <rect x="6" y="0" width="4" height="1" fill="#4A90D9"/>
+      <rect x="5" y="1" width="6" height="1" fill="#4A90D9"/>
+      <rect x="6" y="1" width="1" height="1" fill="#7AB8E8"/>
+      <rect x="9" y="1" width="1" height="1" fill="#7AB8E8"/>
+      <rect x="4" y="2" width="8" height="1" fill="#4A90D9"/>
+      <rect x="5" y="2" width="1" height="1" fill="#7AB8E8"/>
+      <rect x="10" y="2" width="1" height="1" fill="#7AB8E8"/>
+      <rect x="3" y="2" width="1" height="1" fill="#F0F0F0"/>
+      <rect x="12" y="2" width="1" height="1" fill="#F0F0F0"/>
+      <rect x="2" y="3" width="2" height="1" fill="#F0F0F0"/>
+      <rect x="4" y="3" width="8" height="1" fill="#4A90D9"/>
+      <rect x="5" y="3" width="1" height="1" fill="#1A1A1A"/>
+      <rect x="6" y="3" width="1" height="1" fill="#FFFFFF"/>
+      <rect x="9" y="3" width="1" height="1" fill="#1A1A1A"/>
+      <rect x="10" y="3" width="1" height="1" fill="#FFFFFF"/>
+      <rect x="12" y="3" width="2" height="1" fill="#F0F0F0"/>
+      <rect x="1" y="4" width="3" height="1" fill="#F0F0F0"/>
+      <rect x="4" y="4" width="8" height="1" fill="#4A90D9"/>
+      <rect x="7" y="4" width="2" height="1" fill="#F0A040"/>
+      <rect x="12" y="4" width="3" height="1" fill="#F0F0F0"/>
+      <rect x="0" y="5" width="4" height="1" fill="#F0F0F0"/>
+      <rect x="4" y="5" width="8" height="1" fill="#4A90D9"/>
+      <rect x="5" y="5" width="1" height="1" fill="#7AB8E8"/>
+      <rect x="10" y="5" width="1" height="1" fill="#7AB8E8"/>
+      <rect x="12" y="5" width="4" height="1" fill="#F0F0F0"/>
+      <rect x="0" y="6" width="3" height="1" fill="#F0F0F0"/>
+      <rect x="3" y="6" width="10" height="1" fill="#4A90D9"/>
+      <rect x="4" y="6" width="1" height="1" fill="#7AB8E8"/>
+      <rect x="11" y="6" width="1" height="1" fill="#7AB8E8"/>
+      <rect x="13" y="6" width="3" height="1" fill="#F0F0F0"/>
+      <rect x="1" y="7" width="2" height="1" fill="#F0F0F0"/>
+      <rect x="3" y="7" width="10" height="1" fill="#4A90D9"/>
+      <rect x="13" y="7" width="2" height="1" fill="#F0F0F0"/>
+      <rect x="2" y="8" width="12" height="1" fill="#4A90D9"/>
+      <rect x="3" y="8" width="1" height="1" fill="#7AB8E8"/>
+      <rect x="12" y="8" width="1" height="1" fill="#7AB8E8"/>
+      <rect x="3" y="9" width="10" height="1" fill="#4A90D9"/>
+      <rect x="4" y="10" width="8" height="1" fill="#4A90D9"/>
+      <rect x="5" y="10" width="1" height="1" fill="#2A6090"/>
+      <rect x="10" y="10" width="1" height="1" fill="#2A6090"/>
+      <rect x="5" y="11" width="6" height="1" fill="#4A90D9"/>
+      <rect x="6" y="12" width="4" height="1" fill="#2A6090"/>
+      <rect x="7" y="13" width="2" height="1" fill="#2A6090"/>
+    </svg>
+    <div class="cloud-puff cloud-puff-1"></div>
+    <div class="cloud-puff cloud-puff-2"></div>
+  </div>
+
+  <div class="pokemon-container pokemon-sylveon">
+    <svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
+      <rect x="3" y="0" width="2" height="1" fill="#D4709A"/>
+      <rect x="9" y="0" width="2" height="1" fill="#D4709A"/>
+      <rect x="2" y="1" width="3" height="1" fill="#D4709A"/>
+      <rect x="9" y="1" width="3" height="1" fill="#D4709A"/>
+      <rect x="2" y="2" width="10" height="1" fill="#F5A0C0"/>
+      <rect x="3" y="2" width="1" height="1" fill="#F8C8D8"/>
+      <rect x="10" y="2" width="1" height="1" fill="#F8C8D8"/>
+      <rect x="2" y="3" width="10" height="1" fill="#F5A0C0"/>
+      <rect x="4" y="3" width="1" height="1" fill="#2F2F2F"/>
+      <rect x="5" y="3" width="1" height="1" fill="#FFFFFF"/>
+      <rect x="8" y="3" width="1" height="1" fill="#2F2F2F"/>
+      <rect x="9" y="3" width="1" height="1" fill="#FFFFFF"/>
+      <rect x="2" y="4" width="10" height="1" fill="#F5A0C0"/>
+      <rect x="3" y="4" width="1" height="1" fill="#F8C8D8"/>
+      <rect x="10" y="4" width="1" height="1" fill="#F8C8D8"/>
+      <rect x="1" y="5" width="2" height="1" fill="#87CEEB"/>
+      <rect x="3" y="5" width="8" height="1" fill="#F5A0C0"/>
+      <rect x="11" y="5" width="2" height="1" fill="#87CEEB"/>
+      <rect x="0" y="6" width="2" height="1" fill="#87CEEB"/>
+      <rect x="2" y="6" width="10" height="1" fill="#F5A0C0"/>
+      <rect x="12" y="6" width="2" height="1" fill="#87CEEB"/>
+      <rect x="0" y="7" width="1" height="1" fill="#87CEEB"/>
+      <rect x="2" y="7" width="10" height="1" fill="#F5A0C0"/>
+      <rect x="13" y="7" width="1" height="1" fill="#87CEEB"/>
+      <rect x="2" y="8" width="10" height="1" fill="#F5A0C0"/>
+      <rect x="3" y="8" width="1" height="1" fill="#F8C8D8"/>
+      <rect x="10" y="8" width="1" height="1" fill="#F8C8D8"/>
+      <rect x="3" y="9" width="8" height="1" fill="#F5A0C0"/>
+      <rect x="4" y="10" width="6" height="1" fill="#F5A0C0"/>
+      <rect x="5" y="10" width="1" height="1" fill="#D4709A"/>
+      <rect x="8" y="10" width="1" height="1" fill="#D4709A"/>
+      <rect x="4" y="11" width="2" height="1" fill="#D4709A"/>
+      <rect x="8" y="11" width="2" height="1" fill="#D4709A"/>
+      <rect x="4" y="12" width="2" height="1" fill="#D4709A"/>
+      <rect x="8" y="12" width="2" height="1" fill="#D4709A"/>
+      <rect x="5" y="13" width="1" height="1" fill="#D4709A"/>
+      <rect x="8" y="13" width="1" height="1" fill="#D4709A"/>
+    </svg>
+    <div class="sparkle sparkle-1"></div>
+    <div class="sparkle sparkle-2"></div>
+    <div class="sparkle sparkle-3"></div>
+  </div>
+
+  <div class="pokemon-container pokemon-milotic">
+    <svg viewBox="0 0 18 10" xmlns="http://www.w3.org/2000/svg">
+      <rect x="7" y="0" width="4" height="1" fill="#F5E6D0"/>
+      <rect x="8" y="0" width="1" height="1" fill="#FAF0E0"/>
+      <rect x="6" y="1" width="6" height="1" fill="#F5E6D0"/>
+      <rect x="7" y="1" width="1" height="1" fill="#2F2F2F"/>
+      <rect x="8" y="1" width="1" height="1" fill="#E06060"/>
+      <rect x="10" y="1" width="1" height="1" fill="#2F2F2F"/>
+      <rect x="11" y="1" width="1" height="1" fill="#E06060"/>
+      <rect x="5" y="2" width="8" height="1" fill="#F5E6D0"/>
+      <rect x="6" y="2" width="1" height="1" fill="#FAF0E0"/>
+      <rect x="11" y="2" width="1" height="1" fill="#FAF0E0"/>
+      <rect x="4" y="3" width="8" height="1" fill="#F5E6D0"/>
+      <rect x="12" y="3" width="2" height="1" fill="#E8A0B0"/>
+      <rect x="5" y="3" width="1" height="1" fill="#FAF0E0"/>
+      <rect x="3" y="4" width="8" height="1" fill="#F5E6D0"/>
+      <rect x="11" y="4" width="2" height="1" fill="#E8A0B0"/>
+      <rect x="13" y="4" width="1" height="1" fill="#E8A0B0"/>
+      <rect x="2" y="5" width="8" height="1" fill="#F5E6D0"/>
+      <rect x="10" y="5" width="2" height="1" fill="#E8A0B0"/>
+      <rect x="12" y="5" width="1" height="1" fill="#E8A0B0"/>
+      <rect x="2" y="6" width="7" height="1" fill="#F5E6D0"/>
+      <rect x="9" y="6" width="2" height="1" fill="#E8A0B0"/>
+      <rect x="3" y="6" width="1" height="1" fill="#FAF0E0"/>
+      <rect x="3" y="7" width="6" height="1" fill="#F5E6D0"/>
+      <rect x="9" y="7" width="1" height="1" fill="#E8A0B0"/>
+      <rect x="4" y="8" width="5" height="1" fill="#F5E6D0"/>
+      <rect x="9" y="8" width="1" height="1" fill="#7EB8D4"/>
+      <rect x="5" y="9" width="4" height="1" fill="#7EB8D4"/>
+      <rect x="4" y="9" width="1" height="1" fill="#D4C0A0"/>
+    </svg>
+    <div class="shimmer shimmer-1"></div>
+    <div class="shimmer shimmer-2"></div>
+  </div>
+
+  <!-- Shooting stars -->
+  <div class="shooting-star shooting-star-1"></div>
+  <div class="shooting-star shooting-star-2"></div>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">Joselyn</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Me</a></li>
+        <li><a href="interests.html">Tech Interests</a></li>
+        <li><a href="cybersecurity.html">Cybersecurity</a></li>
+        <li><a href="threat-model.html" class="active">Threat Model</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="page-content">
+    <div class="page-header">
+      <h1>Assignment 2 – Website Threat Model</h1>
+      <p class="subtitle">STRIDE Analysis for a Cybersecurity Awareness Website</p>
+    </div>
+
+    <div class="card">
+      <h2>1. Introduction</h2>
+      <p>
+        This document presents a threat model for a personal cybersecurity awareness website using the <strong>STRIDE</strong> methodology. The website is a static site hosted on GitHub Pages that educates visitors about phishing awareness and showcases the builder's skills and security knowledge.
+      </p>
+      <p>
+        <strong>Current architecture:</strong> The website is a fully static site with no backend, database, or authentication. All content is served directly from HTML, CSS, and JavaScript files.
+      </p>
+      <p>
+        <strong>Proposed/future architecture:</strong> The Web Server, Application, Database, and Authentication components described in this document represent a proposed future architecture where the website may include user accounts, dynamic content, and server-side processing.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>2. Architecture Diagram</h2>
+      <p>The following diagram shows the proposed architecture for the website:</p>
+      <div style="background: rgba(10, 14, 26, 0.6); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; margin: 1.5rem 0; text-align: center; font-family: 'Courier New', monospace; font-size: 0.9rem; line-height: 2;">
+        <div style="margin-bottom: 0.5rem;">
+          <span style="color: var(--accent1);">┌─────────┐</span>
+        </div>
+        <div style="margin-bottom: 0.5rem;">
+          <span style="color: var(--accent1);">│  User   │</span>
+        </div>
+        <div style="margin-bottom: 0.5rem;">
+          <span style="color: var(--accent1);">└────┬────┘</span>
+        </div>
+        <div style="margin-bottom: 0.5rem;">
+          <span style="color: var(--accent2);">     │ HTTPS</span>
+        </div>
+        <div style="margin-bottom: 0.5rem;">
+          <span style="color: var(--accent1);">┌────▼─────────────┐</span>
+        </div>
+        <div style="margin-bottom: 0.5rem;">
+          <span style="color: var(--accent1);">│  Web Browser     │</span>
+        </div>
+        <div style="margin-bottom: 0.5rem;">
+          <span style="color: var(--accent1);">│  (Client-Side)   │</span>
+        </div>
+        <div style="margin-bottom: 0.5rem;">
+          <span style="color: var(--accent1);">└────┬─────────────┘</span>
+        </div>
+        <div style="margin-bottom: 0.5rem;">
+          <span style="color: var(--accent2);">     │ HTTP/HTTPS</span>
+        </div>
+        <div style="margin-bottom: 0.5rem;">
+          <span style="color: var(--accent1);">┌────▼─────────────┐</span>
+        </div>
+        <div style="margin-bottom: 0.5rem;">
+          <span style="color: var(--accent1);">│  Web Server      │</span>
+        </div>
+        <div style="margin-bottom: 0.5rem;">
+          <span style="color: var(--accent1);">│  (GitHub Pages)  │</span>
+        </div>
+        <div style="margin-bottom: 0.5rem;">
+          <span style="color: var(--accent1);">└────┬─────────────┘</span>
+        </div>
+        <div style="margin-bottom: 0.5rem;">
+          <span style="color: var(--accent2);">     │ Server-Side</span>
+        </div>
+        <div style="margin-bottom: 0.5rem;">
+          <span style="color: var(--accent1);">┌────▼─────────────┐</span>
+        </div>
+        <div style="margin-bottom: 0.5rem;">
+          <span style="color: var(--accent1);">│  Application     │</span>
+        </div>
+        <div style="margin-bottom: 0.5rem;">
+          <span style="color: var(--accent1);">│  (Business Logic)│</span>
+        </div>
+        <div style="margin-bottom: 0.5rem;">
+          <span style="color: var(--accent1);">└────┬─────────────┘</span>
+        </div>
+        <div style="margin-bottom: 0.5rem;">
+          <span style="color: var(--accent2);">     │ Database Query</span>
+        </div>
+        <div style="margin-bottom: 0.5rem;">
+          <span style="color: var(--accent1);">┌────▼─────────────┐</span>
+        </div>
+        <div style="margin-bottom: 0.5rem;">
+          <span style="color: var(--accent1);">│  Database        │</span>
+        </div>
+        <div style="margin-bottom: 0.5rem;">
+          <span style="color: var(--accent1);">│  (Storage)       │</span>
+        </div>
+        <div>
+          <span style="color: var(--accent1);">└──────────────────┘</span>
+        </div>
+      </div>
+      <p>
+        <strong>Note:</strong> The <em>Web Server</em>, <em>Application</em>, <em>Database</em>, and <em>Authentication</em> components represent the <strong>proposed/future architecture</strong>. The current website is a static GitHub Pages site with no server-side logic or database.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>3. STRIDE Threat Model</h2>
+      <p>
+        STRIDE is a threat modeling framework developed by Microsoft. Each letter represents a category of security threat:
+      </p>
+      <ul>
+        <li><strong>S</strong> — Spoofing: Impersonating something or someone else</li>
+        <li><strong>T</strong> — Tampering: Modifying data or code</li>
+        <li><strong>R</strong> — Repudiation: Claiming to have not performed an action</li>
+        <li><strong>I</strong> — Information Disclosure: Exposing information to unauthorized parties</li>
+        <li><strong>D</strong> — Denial of Service: Making a system unavailable</li>
+        <li><strong>E</strong> — Elevation of Privilege: Gaining unauthorized access to higher privileges</li>
+      </ul>
+    </div>
+
+    <hr class="divider">
+
+    <div class="card">
+      <h2>3.1 Spoofing</h2>
+      <p>Spoofing involves an attacker impersonating a legitimate user, system, or component to gain trust or access.</p>
+      <table style="width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem;">
+        <thead>
+          <tr style="background: var(--glow-soft);">
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Threat</th>
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Risk to Website</th>
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Security Mitigation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Phishing clone of website</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Attackers create a fake version of the site to trick visitors into revealing information or downloading malware.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Use a custom domain, enable HTTPS (GitHub Pages provides this), and educate visitors to verify the URL.</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">DNS spoofing</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Attackers redirect visitors from the legitimate site to a malicious clone by poisoning DNS records.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Use DNSSEC, enable HSTS headers, and rely on GitHub Pages' built-in DNS infrastructure.</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Fake login page (future)</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">If authentication is added, attackers could create a fake login page to steal credentials.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Implement multi-factor authentication (MFA), use HTTPS exclusively, and display a user-specific image or phrase during login.</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Chatbot impersonation</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">An attacker could manipulate the chatbot's keyword matching to provide misleading or harmful responses.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Keep chatbot responses generic and pre-written, never share sensitive info, and validate all inputs.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>3.2 Tampering</h2>
+      <p>Tampering involves unauthorized modification of data, code, or configuration.</p>
+      <table style="width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem;">
+        <thead>
+          <tr style="background: var(--glow-soft);">
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Threat</th>
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Risk to Website</th>
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Security Mitigation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Client-side code modification</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Users could modify HTML/CSS/JS in browser dev tools to alter content or bypass restrictions.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">This is inherent to client-side code. Move critical logic to the server side in the future and implement server-side validation.</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Content injection via URL parameters</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">If URL parameters are added without sanitization, attackers could inject malicious content.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Validate and sanitize all input, use allowlists, and implement Content Security Policy (CSP) headers.</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">GitHub repository tampering</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">If an attacker gains access to the GitHub repo, they could modify the site's source code.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Enable two-factor authentication (2FA) on GitHub, use branch protection rules, and limit repository collaborators.</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Dependency tampering</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">If third-party libraries are added, attackers could compromise them to inject malicious code.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Minimize dependencies, audit all third-party code, use Subresource Integrity (SRI), and pin dependency versions.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>3.3 Repudiation</h2>
+      <p>Repudiation involves a user denying that they performed an action, with no way to prove otherwise.</p>
+      <table style="width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem;">
+        <thead>
+          <tr style="background: var(--glow-soft);">
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Threat</th>
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Risk to Website</th>
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Security Mitigation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Lack of audit trail</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">The current static site has no server-side logging, so there is no record of who accessed what.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">If a backend is added, implement comprehensive logging of all user actions, authentication events, and data access.</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Chatbot conversation denial</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">A user could claim they never received specific information from the chatbot.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Currently, conversations are not stored. If logging is added, ensure chatbot interactions are recorded with timestamps.</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Non-repudiation failure (future)</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">If user accounts are added, users could deny actions like posting content or changing settings.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Implement digital signatures, maintain immutable audit logs, and require authentication for all state-changing actions.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>3.4 Information Disclosure</h2>
+      <p>Information disclosure involves exposing sensitive data to unauthorized parties.</p>
+      <table style="width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem;">
+        <thead>
+          <tr style="background: var(--glow-soft);">
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Threat</th>
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Risk to Website</th>
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Security Mitigation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Sensitive data exposure</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Personal information such as address, phone number, student ID, or financial data could be accidentally published.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Follow data minimization principles. Only publish information that is necessary and appropriate for a public portfolio.</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Source code exposure</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">All HTML/CSS/JS is visible in browser dev tools. Hardcoded secrets would be exposed.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Never hardcode API keys, passwords, or secrets in client-side code. Use environment variables and server-side proxies for sensitive operations.</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Chatbot data leakage</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">The chatbot could inadvertently reveal sensitive information through its responses.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Ensure all chatbot responses are pre-written and reviewed. Never include personal or sensitive data in chatbot answers.</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">localStorage exposure</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Theme preferences and other data stored in localStorage could be accessed by malicious scripts.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Only store non-sensitive data in localStorage. Implement Content Security Policy (CSP) to prevent unauthorized script execution.</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Error message leakage (future)</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Detailed error messages could reveal database structure, file paths, or server configuration.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Use generic error messages for users. Log detailed errors server-side only and never expose them to the client.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>3.5 Denial of Service</h2>
+      <p>Denial of Service (DoS) attacks aim to make a system unavailable to legitimate users.</p>
+      <table style="width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem;">
+        <thead>
+          <tr style="background: var(--glow-soft);">
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Threat</th>
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Risk to Website</th>
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Security Mitigation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">DDoS attack</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Attackers flood the server with traffic, making the site unavailable.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">GitHub Pages provides built-in DDoS protection. For future architectures, use a CDN, rate limiting, and traffic filtering.</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Resource exhaustion</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">The starfield animation with 120 animated stars could cause performance issues on low-end devices.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Use CSS animations (already implemented), respect <code>prefers-reduced-motion</code>, and optimize animation performance.</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Chatbot spam</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">A user could send many messages to the chatbox, potentially degrading performance.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Implement client-side rate limiting, debounce input, and limit message length.</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">GitHub Pages outage</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">If GitHub Pages experiences downtime, the site becomes unavailable.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Consider a backup hosting provider or a static site mirror. Monitor site uptime.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>3.6 Elevation of Privilege</h2>
+      <p>Elevation of privilege involves an attacker gaining access to higher-level permissions than they should have.</p>
+      <table style="width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem;">
+        <thead>
+          <tr style="background: var(--glow-soft);">
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Threat</th>
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Risk to Website</th>
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Security Mitigation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Unauthorized repository access</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">An attacker gains write access to the GitHub repo and modifies the site.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Enable 2FA, use a strong unique password, enable branch protection, and limit collaborators.</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Privilege escalation (future)</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">If user roles are added, an attacker could escalate from a regular user to an administrator.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Implement role-based access control (RBAC), follow the principle of least privilege, and validate permissions server-side for every request.</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Session hijacking (future)</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">An attacker steals a user's session token to impersonate them.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Use secure, HTTP-only cookies, implement session expiration, rotate session IDs, and bind sessions to IP addresses.</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">GitHub Actions compromise (future)</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">If CI/CD pipelines are added, attackers could modify build processes to inject malicious code.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Audit workflow files, pin action versions, use least-privilege tokens, and review all pipeline changes.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr class="divider">
+
+    <div class="card">
+      <h2>4. Specific Attack Categories</h2>
+
+      <h3>4.1 Authentication Attacks</h3>
+      <p>
+        <strong>Applicability:</strong> The current website has no authentication system. These attacks apply to the <strong>proposed/future architecture</strong> where user accounts may be added.
+      </p>
+      <table style="width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem;">
+        <thead>
+          <tr style="background: var(--glow-soft);">
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Attack</th>
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Risk</th>
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Mitigation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Brute force</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Attacker tries many password combinations to gain access.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Implement rate limiting, account lockout after failed attempts, CAPTCHA, and strong password policies.</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Credential stuffing</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Attacker uses leaked credentials from other breaches to access accounts.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Implement multi-factor authentication (MFA), monitor for breached credentials, and enforce unique passwords.</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Session hijacking</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Attacker steals session tokens to impersonate a logged-in user.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Use secure HTTP-only cookies, implement session timeout, rotate tokens, and use HTTPS exclusively.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>4.2 Authorization Attacks</h3>
+      <p>
+        <strong>Applicability:</strong> The current website has no authorization system. These attacks apply to the <strong>proposed/future architecture</strong> where user roles and permissions may be added.
+      </p>
+      <table style="width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem;">
+        <thead>
+          <tr style="background: var(--glow-soft);">
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Attack</th>
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Risk</th>
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Mitigation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Privilege escalation</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">A regular user gains admin privileges.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Implement role-based access control (RBAC), validate permissions server-side, and follow least privilege.</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Insecure direct object references (IDOR)</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Attacker accesses other users' data by modifying object IDs in requests.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Implement access control checks for every request, use indirect references, and validate ownership server-side.</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Missing function-level access control</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Attacker accesses admin functions by guessing URLs or endpoints.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Enforce authorization checks on every endpoint, never rely on client-side hiding, and return consistent error messages.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>4.3 SQL Injection</h3>
+      <p>
+        <strong>Applicability:</strong> The current website has no database. These attacks apply to the <strong>proposed/future architecture</strong> where a database may be added.
+      </p>
+      <table style="width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem;">
+        <thead>
+          <tr style="background: var(--glow-soft);">
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Attack</th>
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Risk</th>
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Mitigation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Classic SQL injection</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Attacker injects SQL code through input fields to manipulate database queries.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Use parameterized queries/prepared statements, an ORM, and input validation. Never concatenate user input into SQL.</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Blind SQL injection</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Attacker extracts data by observing boolean or time-based responses.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Use parameterized queries, implement WAF rules, and monitor for unusual query patterns.</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">NoSQL injection</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Attacker injects malicious queries into NoSQL databases like MongoDB.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Validate and sanitize all input, use type checking, and avoid passing raw user input to database queries.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>4.4 Cross-Site Scripting (XSS)</h3>
+      <p>
+        <strong>Applicability:</strong> XSS is relevant to both the current and future architecture. The current chatbox uses <code>textContent</code> which is safe, but future features could introduce XSS risks.
+      </p>
+      <table style="width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem;">
+        <thead>
+          <tr style="background: var(--glow-soft);">
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Attack</th>
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Risk</th>
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Mitigation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Stored XSS</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Malicious script is stored on the server and executed when users visit the page.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Sanitize all user input before storing, use output encoding, and implement Content Security Policy (CSP).</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Reflected XSS</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Malicious script is reflected off the server in response to a crafted request.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Validate and sanitize all input, use output encoding, and implement CSP headers.</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">DOM-based XSS</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Malicious script executes due to unsafe DOM manipulation on the client side.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Use <code>textContent</code> instead of <code>innerHTML</code>, avoid <code>eval()</code>, and sanitize all data before DOM insertion.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>4.5 Denial-of-Service (DoS) Attacks</h3>
+      <p>
+        <strong>Applicability:</strong> DoS attacks are relevant to both the current and future architecture.
+      </p>
+      <table style="width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem;">
+        <thead>
+          <tr style="background: var(--glow-soft);">
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Attack</th>
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Risk</th>
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Mitigation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">DDoS</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Attackers flood the server with traffic to make the site unavailable.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Use a CDN, implement rate limiting, use traffic filtering, and rely on GitHub Pages' built-in DDoS protection.</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Resource exhaustion</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Attackers consume server resources (CPU, memory, bandwidth) to degrade performance.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Implement rate limiting, set resource quotas, use caching, and monitor resource usage.</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Slowloris (future)</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Attacker opens many connections and holds them open to exhaust server connections.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Set connection timeouts, limit concurrent connections, and use a reverse proxy.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>4.6 Credential Attacks</h3>
+      <p>
+        <strong>Applicability:</strong> The current website has no credential system. These attacks apply to the <strong>proposed/future architecture</strong> where user accounts may be added.
+      </p>
+      <table style="width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem;">
+        <thead>
+          <tr style="background: var(--glow-soft);">
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Attack</th>
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Risk</th>
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Mitigation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Brute force</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Attacker tries many password combinations.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Implement rate limiting, account lockout, CAPTCHA, and strong password requirements.</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Password spraying</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Attacker tries a few common passwords against many accounts.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Enforce unique passwords, implement MFA, and monitor for distributed login attempts.</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Keylogging</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Malware captures keystrokes to steal credentials.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">This is a client-side threat. Educate users to use antivirus software and avoid suspicious downloads.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>4.7 Data Leakage</h3>
+      <p>
+        <strong>Applicability:</strong> Data leakage is relevant to both the current and future architecture.
+      </p>
+      <table style="width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem;">
+        <thead>
+          <tr style="background: var(--glow-soft);">
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Threat</th>
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Risk</th>
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Mitigation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Sensitive info in source code</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">API keys, passwords, or personal data hardcoded in client-side code.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Never hardcode secrets. Use environment variables and server-side proxies. Audit code before publishing.</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Sensitive info in chatbot</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Chatbot responses could contain personal or sensitive data.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Review all chatbot responses. Only include information that is appropriate for public viewing.</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Sensitive info in comments</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">HTML/CSS/JS comments could reveal internal details or sensitive information.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Remove or sanitize comments before publishing. Use minification to strip comments in production.</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Sensitive info in error messages (future)</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Detailed error messages could reveal server configuration or database structure.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Use generic error messages for users. Log detailed errors server-side only.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>4.8 Unauthorized Access</h3>
+      <p>
+        <strong>Applicability:</strong> Unauthorized access is relevant to both the current and future architecture.
+      </p>
+      <table style="width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem;">
+        <thead>
+          <tr style="background: var(--glow-soft);">
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Threat</th>
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Risk</th>
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Mitigation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Unauthorized repository access</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Attacker gains write access to the GitHub repo and modifies the site.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Enable 2FA, use strong passwords, enable branch protection, and limit collaborators.</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Unauthorized deployment (future)</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Attacker deploys malicious code to the hosting platform.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Use deployment keys, implement CI/CD security, require code review, and monitor deployment logs.</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Domain hijacking</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Attacker gains control of the domain registrar account.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Enable domain registrar lock, use strong credentials, enable 2FA on the registrar account, and monitor domain settings.</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Unauthorized admin access (future)</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Attacker gains access to admin panels or management interfaces.</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Implement strong authentication for admin panels, use IP allowlisting, enable MFA, and log all admin actions.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr class="divider">
+
+    <div class="card">
+      <h2>5. Risk Summary Matrix</h2>
+      <table style="width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem;">
+        <thead>
+          <tr style="background: var(--glow-soft);">
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Threat</th>
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Likelihood</th>
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Impact</th>
+            <th style="padding: 0.75rem; text-align: left; border: 1px solid var(--border);">Risk Level</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Spoofing</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Medium</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Medium</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);"><strong style="color: #f5a0c0;">Medium</strong></td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Tampering</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Medium</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Medium</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);"><strong style="color: #f5a0c0;">Medium</strong></td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Repudiation</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Low</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Low</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);"><strong style="color: #4fd8c4;">Low</strong></td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Information Disclosure</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Low</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Medium</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);"><strong style="color: #4fd8c4;">Low</strong></td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Denial of Service</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Low</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Low</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);"><strong style="color: #4fd8c4;">Low</strong></td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Elevation of Privilege</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Medium</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">High</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);"><strong style="color: #f5a0c0;">Medium</strong></td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Authentication Attacks</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Medium</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">High</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);"><strong style="color: #f5a0c0;">Medium</strong></td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Authorization Attacks</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Medium</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">High</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);"><strong style="color: #f5a0c0;">Medium</strong></td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">SQL Injection</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Medium</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">High</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);"><strong style="color: #f5a0c0;">Medium</strong></td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">XSS</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Low</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Medium</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);"><strong style="color: #4fd8c4;">Low</strong></td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Credential Attacks</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Medium</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">High</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);"><strong style="color: #f5a0c0;">Medium</strong></td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Data Leakage</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Low</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Medium</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);"><strong style="color: #4fd8c4;">Low</strong></td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Unauthorized Access</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">Medium</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);">High</td>
+            <td style="padding: 0.75rem; border: 1px solid var(--border);"><strong style="color: #f5a0c0;">Medium</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>6. Recommendations</h2>
+      <ol>
+        <li><strong>Enable two-factor authentication (2FA) on GitHub</strong> — Protects against unauthorized repository access, which is the highest-risk threat to the current static site.</li>
+        <li><strong>Continue using <code>textContent</code> instead of <code>innerHTML</code></strong> — Prevents DOM-based XSS vulnerabilities in the chatbox and future features.</li>
+        <li><strong>Exclude all sensitive personal information</strong> — Never publish address, phone number, student ID, passwords, or financial data on the site.</li>
+        <li><strong>Add Content Security Policy (CSP) headers</strong> — Prevents XSS and code injection attacks by restricting which scripts can execute.</li>
+        <li><strong>Audit code before publishing</strong> — Ensure no secrets, API keys, or sensitive data are hardcoded in client-side code.</li>
+        <li><strong>Use a custom domain</strong> — Adds legitimacy, makes phishing harder, and provides more control over DNS settings.</li>
+        <li><strong>Monitor GitHub repository activity</strong> — Detect unauthorized changes early by enabling notifications and reviewing access logs.</li>
+        <li><strong>Implement rate limiting for the chatbox</strong> — Prevent abuse and resource exhaustion from excessive messages.</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h2>7. Conclusion</h2>
+      <p>
+        This threat model analyzed the security posture of a personal cybersecurity awareness website using the STRIDE methodology. The current website is a static GitHub Pages site with no backend, database, or authentication, which significantly reduces the attack surface. The primary risks are <strong>unauthorized repository access</strong> and <strong>phishing clones</strong>, which can be mitigated through GitHub security best practices.
+      </p>
+      <p>
+        The proposed future architecture — including a web server, application logic, database, and authentication system — introduces additional threats that must be addressed with proper security controls. By following the recommendations in this document, the website can maintain a strong security posture as it evolves.
+      </p>
+      <p>
+        The minimalist, dependency-free approach of the current site is itself a security strength: fewer components mean fewer vulnerabilities. Maintaining this philosophy while adding features will be key to keeping the site secure.
+      </p>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Joselyn | Information Technology | Kean University</p>
+  </footer>
+
+  <!-- Theme Switcher -->
+  <button class="theme-toggle" aria-label="Change theme">🎨</button>
+  <div class="theme-panel">
+    <button class="theme-option active" data-theme="purple" aria-label="Purple Galaxy">
+      <span class="theme-preview purple"></span>
+      Purple Galaxy
+    </button>
+    <button class="theme-option" data-theme="pink" aria-label="Pink Galaxy">
+      <span class="theme-preview pink"></span>
+      Pink Galaxy
+    </button>
+    <button class="theme-option" data-theme="blue" aria-label="Blue Galaxy">
+      <span class="theme-preview blue"></span>
+      Blue Galaxy
+    </button>
+  </div>
+
+  <!-- Chatbox -->
+  <button class="chatbox-toggle" aria-label="Open chat">💬</button>
+  <div class="chatbox-panel">
+    <div class="chatbox-header">
+      <h3>Mission Comms</h3>
+      <button class="chatbox-close" aria-label="Close chat">&times;</button>
+    </div>
+    <div class="chatbox-messages"></div>
+    <div class="chatbox-input-area">
+      <input type="text" class="chatbox-input" placeholder="Ask me something...">
+      <button class="chatbox-send">Send</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

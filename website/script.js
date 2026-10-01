@@ -1,6 +1,6 @@
 /* ============================================
    Joselyn's Personal Website — Script
-   Starfield + Rule-Based Chatbox
+   Starfield + Rule-Based Chatbox + Theme Switcher
    ============================================ */
 
 /* --- Starfield Effect --- */
@@ -193,8 +193,51 @@ function initChatbox() {
   messagesContainer.appendChild(greeting);
 }
 
+/* --- Theme Switcher Logic --- */
+function initThemeSwitcher() {
+  const toggle = document.querySelector('.theme-toggle');
+  const panel = document.querySelector('.theme-panel');
+  const options = document.querySelectorAll('.theme-option');
+
+  if (!toggle || !panel) return;
+
+  // Load saved theme or default to purple
+  const savedTheme = localStorage.getItem('theme') || 'purple';
+  setTheme(savedTheme);
+
+  // Toggle panel open/close
+  toggle.addEventListener('click', () => {
+    panel.classList.toggle('open');
+  });
+
+  // Close panel when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!panel.contains(e.target) && !toggle.contains(e.target)) {
+      panel.classList.remove('open');
+    }
+  });
+
+  // Handle theme selection
+  options.forEach(option => {
+    option.addEventListener('click', () => {
+      const theme = option.dataset.theme;
+      setTheme(theme);
+      localStorage.setItem('theme', theme);
+      panel.classList.remove('open');
+    });
+  });
+}
+
+function setTheme(theme) {
+  document.body.setAttribute('data-theme', theme);
+  document.querySelectorAll('.theme-option').forEach(opt => {
+    opt.classList.toggle('active', opt.dataset.theme === theme);
+  });
+}
+
 /* --- Initialize on page load --- */
 document.addEventListener('DOMContentLoaded', () => {
   createStarfield();
   initChatbox();
+  initThemeSwitcher();
 });

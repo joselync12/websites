@@ -16,30 +16,38 @@
 
   <!-- PokeAPI Official Artwork Sprites -->
   <div class="pokemon-container pokemon-altaria">
-    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/334.png" alt="Altaria" width="80" height="80">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/334.png" alt="Altaria" width="80" height="80">
     <div class="cloud-puff cloud-puff-1"></div>
     <div class="cloud-puff cloud-puff-2"></div>
   </div>
 
   <div class="pokemon-container pokemon-sylveon">
-    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/700.png" alt="Sylveon" width="70" height="70">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/700.png" alt="Sylveon" width="70" height="70">
     <div class="sparkle sparkle-1"></div>
     <div class="sparkle sparkle-2"></div>
     <div class="sparkle sparkle-3"></div>
   </div>
 
   <div class="pokemon-container pokemon-milotic">
-    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/350.png" alt="Milotic" width="90" height="50">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/350.png" alt="Milotic" width="90" height="50">
     <div class="shimmer shimmer-1"></div>
     <div class="shimmer shimmer-2"></div>
   </div>
 
   <div class="pokemon-container pokemon-arceus">
-    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/493.png" alt="Arceus" width="85" height="85">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/493.png" alt="Arceus" width="85" height="85">
   </div>
 
   <div class="pokemon-container pokemon-deoxys">
-    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/386.png" alt="Deoxys" width="75" height="75">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/386.png" alt="Deoxys" width="75" height="75">
+  </div>
+
+  <div class="pokemon-container pokemon-latias">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/380.png" alt="Latias" width="65" height="65">
+  </div>
+
+  <div class="pokemon-container pokemon-latios">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/381.png" alt="Latios" width="65" height="65">
   </div>
 
   <!-- Shooting stars -->
@@ -132,6 +140,16 @@
         <li><strong>When in doubt, verify</strong> — contact the organization through a trusted channel</li>
       </ul>
     </div>
+
+    <div class="card">
+      <h2>Phishing Trivia</h2>
+      <p><strong>Question:</strong> You receive an email from a random email address asking you to click a link to verify your account. What should you do?</p>
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin: 1rem 0;">
+        <button onclick="triviaWrong()" style="padding: 0.75rem 1.5rem; background: rgba(245, 100, 100, 0.15); border: 1px solid rgba(245, 100, 100, 0.4); border-radius: 8px; color: #f56464; cursor: pointer; font-size: 0.9rem; font-family: inherit;">Click the link</button>
+        <button onclick="triviaCorrect()" style="padding: 0.75rem 1.5rem; background: rgba(79, 216, 196, 0.15); border: 1px solid rgba(79, 216, 196, 0.4); border-radius: 8px; color: #4fd8c4; cursor: pointer; font-size: 0.9rem; font-family: inherit;">Don't click</button>
+      </div>
+      <p id="trivia-result" style="font-weight: 600; min-height: 1.5rem;"></p>
+    </div>
   </main>
 
   <footer>
@@ -172,5 +190,17 @@
   </div>
 
   <script src="script.js"></script>
+  <script>
+    function triviaWrong() {
+      var el = document.getElementById('trivia-result');
+      el.textContent = 'Wrong! Never click suspicious links.';
+      el.style.color = '#f56464';
+    }
+    function triviaCorrect() {
+      var el = document.getElementById('trivia-result');
+      el.textContent = 'Correct! Always verify before clicking.';
+      el.style.color = '#4fd8c4';
+    }
+  </script>
 </body>
 </html>

@@ -762,55 +762,59 @@ footer {
   opacity: 0.5;
 }
 
-.pokemon-container svg {
+.pokemon-container svg,
+.pokemon-container img {
   display: block;
   filter: drop-shadow(0 0 8px currentColor);
+  image-rendering: pixelated;
 }
 
 /* Altaria */
 .pokemon-altaria {
-  top: 15%;
-  right: 8%;
-  animation: float 6s ease-in-out infinite;
+  top: 22%;
+  right: 2%;
+  animation: fly-around 20s ease-in-out infinite;
   color: var(--altaria-glow);
 }
 
-.pokemon-altaria svg {
+.pokemon-altaria svg,
+.pokemon-altaria img {
   width: 80px;
-  height: 70px;
+  height: 80px;
 }
 
 /* Sylveon */
 .pokemon-sylveon {
-  bottom: 20%;
-  left: 5%;
-  animation: sway 8s ease-in-out infinite;
+  bottom: 12%;
+  left: 2%;
+  animation: ribbon-wave 5s ease-in-out infinite;
   color: var(--sylveon-glow);
 }
 
-.pokemon-sylveon svg {
+.pokemon-sylveon svg,
+.pokemon-sylveon img {
   width: 70px;
   height: 70px;
 }
 
 /* Milotic */
 .pokemon-milotic {
-  bottom: 30%;
-  right: 12%;
-  animation: wave 10s ease-in-out infinite;
+  bottom: 38%;
+  right: 3%;
+  animation: tail-wave 8s ease-in-out infinite;
   color: var(--milotic-glow);
 }
 
 .pokemon-milotic svg,
 .pokemon-milotic img {
   width: 90px;
-  height: 50px;
+  height: 90px;
 }
 
 /* Arceus */
 .pokemon-arceus {
-  top: 8%;
-  left: 5%;
+  top: 5%;
+  left: 2%;
   animation: float 7s ease-in-out infinite;
   color: rgba(245, 230, 208, 0.35);
 }
@@ -822,9 +826,9 @@ footer {
 
 /* Deoxys */
 .pokemon-deoxys {
-  bottom: 12%;
-  right: 5%;
-  animation: sway 9s ease-in-out infinite;
+  bottom: 5%;
+  right: 2%;
+  animation: spin-slow 12s ease-in-out infinite;
   color: rgba(126, 184, 212, 0.35);
 }
 
@@ -985,10 +989,160 @@ footer {
   50% { opacity: 1; transform: scale(1.5); }
 }
 
+@keyframes fly-across {
+  0%, 100% { transform: translateX(0) translateY(0); }
+  25% { transform: translateX(15px) translateY(-8px); }
+  50% { transform: translateX(0) translateY(-15px); }
+  75% { transform: translateX(-15px) translateY(-8px); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(2deg); }
+}
+
+@keyframes bounce-gentle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes drift-slow {
+  0%, 100% { transform: translateX(0) translateY(0) rotate(0deg); }
+  25% { transform: translateX(8px) translateY(-5px) rotate(1deg); }
+  50% { transform: translateX(0) translateY(-10px) rotate(0deg); }
+  75% { transform: translateX(-8px) translateY(-5px) rotate(-1deg); }
+}
+
+@keyframes hover-rotate {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-10px) rotate(3deg); }
+}
+
+@keyframes fly-across-page {
+  0% { transform: translateX(-10vw) translateY(0); }
+  25% { transform: translateX(0vw) translateY(-15px); }
+  50% { transform: translateX(10vw) translateY(0); }
+  75% { transform: translateX(0vw) translateY(15px); }
+  100% { transform: translateX(-10vw) translateY(0); }
+}
+
+@keyframes jump {
+  0%, 100% { transform: translateY(0) scaleY(1); }
+  30% { transform: translateY(-20px) scaleY(1.05); }
+  50% { transform: translateY(0) scaleY(0.95); }
+  70% { transform: translateY(-10px) scaleY(1.02); }
+}
+
+@keyframes run {
+  0%, 100% { transform: translateX(0) translateY(0); }
+  25% { transform: translateX(20px) translateY(-5px); }
+  50% { transform: translateX(40px) translateY(0); }
+  75% { transform: translateX(20px) translateY(-5px); }
+}
+
+@keyframes spin-slow {
+  0% { transform: rotate(0deg) translateY(0); }
+  25% { transform: rotate(90deg) translateY(-5px); }
+  50% { transform: rotate(180deg) translateY(0); }
+  75% { transform: rotate(270deg) translateY(-5px); }
+  100% { transform: rotate(360deg) translateY(0); }
+}
+
+@keyframes fly-around {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(12vw, -25px); }
+  50%  { transform: translate(25vw, 0); }
+  75%  { transform: translate(12vw, 25px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes ribbon-wave {
+  0%, 100% { transform: translateY(0) rotate(-4deg); }
+  50% { transform: translateY(-6px) rotate(4deg); }
+}
+
+@keyframes tail-wave {
+  0%, 100% { transform: translateX(0) rotate(-4deg); }
+  25% { transform: translateX(6px) rotate(0deg); }
+  50% { transform: translateX(0) rotate(4deg); }
+  75% { transform: translateX(-6px) rotate(0deg); }
+}
+
+/* Eevee */
+.pokemon-eevee {
+  bottom: 28%;
+  left: 6%;
+  animation: jump 4s ease-in-out infinite;
+  color: rgba(200, 160, 100, 0.35);
+}
+.pokemon-eevee img { width: 55px; height: 55px; }
+
+/* Jirachi */
+.pokemon-jirachi {
+  top: 18%;
+  right: 2%;
+  animation: fly-around 16s ease-in-out infinite;
+  color: rgba(245, 220, 130, 0.35);
+}
+.pokemon-jirachi img { width: 60px; height: 60px; }
+
+/* Mew */
+.pokemon-mew {
+  top: 48%;
+  left: 1%;
+  animation: fly-around 14s ease-in-out infinite;
+  color: rgba(245, 180, 220, 0.35);
+}
+.pokemon-mew img { width: 55px; height: 55px; }
+
+/* Celebi */
+.pokemon-celebi {
+  bottom: 32%;
+  right: 4%;
+  animation: fly-around 18s ease-in-out infinite;
+  color: rgba(130, 220, 130, 0.35);
+}
+.pokemon-celebi img { width: 55px; height: 55px; }
+
+/* Gardevoir */
+.pokemon-gardevoir {
+  top: 32%;
+  left: 3%;
+  animation: fly-around 22s ease-in-out infinite;
+  color: rgba(240, 200, 220, 0.35);
+}
+.pokemon-gardevoir img { width: 65px; height: 65px; }
+
+/* Dragonair */
+.pokemon-dragonair {
+  top: 62%;
+  right: 1%;
+  animation: fly-around 15s ease-in-out infinite;
+  color: rgba(130, 180, 240, 0.35);
+}
+.pokemon-dragonair img { width: 70px; height: 70px; }
+
+/* Latias */
+.pokemon-latias {
+  bottom: 18%;
+  left: 2%;
+  animation: fly-around 25s ease-in-out infinite;
+  color: rgba(240, 130, 130, 0.35);
+}
+.pokemon-latias img { width: 65px; height: 65px; }
+
+/* Latios */
+.pokemon-latios {
+  top: 42%;
+  right: 3%;
+  animation: fly-around 28s ease-in-out infinite;
+  color: rgba(130, 180, 240, 0.35);
+}
+.pokemon-latios img { width: 65px; height: 65px; }
+
 /* --- Reduced Motion --- */
 @media (prefers-reduced-motion: reduce) {
   .nebula,
-  .pokemon-container,
   .cloud-puff,
   .sparkle,
   .shimmer,

@@ -826,6 +826,27 @@
     <div class="chatbox-status" role="status" aria-live="polite"></div>
   </div>
 
+  <!-- Digital Person Panel -->
+  <button class="dp-toggle" aria-label="Open digital person">🧑</button>
+  <div class="dp-panel">
+    <div class="dp-panel-header">
+      <img class="dp-panel-avatar" id="dp-panel-avatar" alt="Digital person avatar" hidden>
+      <div class="dp-panel-title">
+        <h3>Digital Person</h3>
+        <span class="dp-panel-avatar-status" id="dp-panel-avatar-status"></span>
+      </div>
+      <button class="dp-panel-close" aria-label="Close digital person">&times;</button>
+    </div>
+    <div class="dp-panel-messages" id="dp-panel-messages"></div>
+    <div class="dp-panel-input-area">
+      <input type="text" class="dp-panel-input" id="dp-panel-input" placeholder="Ask your digital person...">
+      <button class="dp-panel-mic" id="dp-panel-mic" type="button" aria-label="Use microphone">🎤</button>
+      <button class="dp-panel-send" id="dp-panel-send">Ask</button>
+    </div>
+    <div class="dp-panel-status" role="status" aria-live="polite" id="dp-panel-status"></div>
+  </div>
+
   <script src="script.js"></script>
+  <script src="digital-person.js"></script>
 </body>
 </html>

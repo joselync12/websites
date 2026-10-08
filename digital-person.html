@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joselyn | AI Digital Person</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-theme="purple">
+  <div class="starfield"></div>
+
+  <!-- Nebula clouds -->
+  <div class="nebula nebula-1"></div>
+  <div class="nebula nebula-2"></div>
+  <div class="nebula nebula-3"></div>
+
+  <!-- Shooting stars -->
+  <div class="shooting-star shooting-star-1"></div>
+  <div class="shooting-star shooting-star-2"></div>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">Joselyn</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Me</a></li>
+        <li><a href="interests.html">Tech Interests</a></li>
+        <li><a href="cybersecurity.html">Cybersecurity</a></li>
+        <li><a href="threat-model.html">Threat Model</a></li>
+        <li><a href="secure-architecture.html">Secure Architecture</a></li>
+        <li><a href="auth-access.html">Auth & Access</a></li>
+        <li><a href="digital-person.html" class="active">AI Digital Person</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="page-content">
+    <div class="page-header">
+      <h1>AI Digital Person</h1>
+      <p class="subtitle">Upload a photo and bring your digital person to life</p>
+    </div>
+
+    <!-- Step 1: Upload a photo -->
+    <div class="card">
+      <h2>1. Upload a Photo</h2>
+      <p>Choose a photo from your device to become your digital person's avatar. The image stays in your browser — it is never uploaded anywhere.</p>
+      <div class="dp-upload-area">
+        <label class="dp-file-label" for="dp-photo-input">📷 Choose Photo</label>
+        <input type="file" id="dp-photo-input" accept="image/*">
+        <span class="dp-file-name muted" id="dp-file-name">No file selected</span>
+      </div>
+      <div class="dp-preview-wrap" id="dp-preview-wrap" hidden>
+        <img id="dp-preview" class="dp-preview" alt="Selected photo preview">
+      </div>
+    </div>
+
+    <!-- Step 2: Create -->
+    <div class="card">
+      <h2>2. Create Digital Person</h2>
+      <p>Click the button to generate your digital person using the photo you selected.</p>
+      <button class="dp-create-btn" id="dp-create-btn" disabled>✨ Create Digital Person</button>
+      <p class="muted" id="dp-create-status"></p>
+    </div>
+
+    <!-- Step 3: Digital person + chat -->
+    <div class="card dp-stage" id="dp-stage" hidden>
+      <h2>3. Meet Your Digital Person</h2>
+
+      <div class="dp-avatar-frame">
+        <img id="dp-avatar" class="dp-avatar" alt="Digital person avatar">
+        <div class="dp-avatar-ring"></div>
+        <div class="dp-avatar-name">Mission Comms Companion</div>
+        <div class="dp-avatar-status" id="dp-avatar-status"></div>
+      </div>
+
+      <div class="dp-response" id="dp-response" aria-live="polite">
+        <p class="dp-response-placeholder">Ask a question below and your digital person will answer out loud!</p>
+      </div>
+
+      <div class="dp-input-area">
+        <input type="text" class="dp-input" id="dp-question" placeholder="Ask your digital person something...">
+        <button class="dp-mic" id="dp-mic" type="button" aria-label="Use microphone">🎤</button>
+        <button class="dp-ask" id="dp-ask" type="button">Ask</button>
+      </div>
+      <div class="dp-status" role="status" aria-live="polite" id="dp-status"></div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Joselyn | Information Technology | Kean University</p>
+  </footer>
+
+  <!-- Theme Switcher -->
+  <button class="theme-toggle" aria-label="Change theme">🎨</button>
+  <div class="theme-panel">
+    <button class="theme-option active" data-theme="purple" aria-label="Purple Galaxy">
+      <span class="theme-preview purple"></span>
+      Purple Galaxy
+    </button>
+    <button class="theme-option" data-theme="pink" aria-label="Pink Galaxy">
+      <span class="theme-preview pink"></span>
+      Pink Galaxy
+    </button>
+    <button class="theme-option" data-theme="blue" aria-label="Blue Galaxy">
+      <span class="theme-preview blue"></span>
+      Blue Galaxy
+    </button>
+  </div>
+
+  <!-- Chatbox -->
+  <button class="chatbox-toggle" aria-label="Open chat">💬</button>
+  <div class="chatbox-panel">
+    <div class="chatbox-header">
+      <h3>Mission Comms</h3>
+      <button class="chatbox-close" aria-label="Close chat">&times;</button>
+    </div>
+    <div class="chatbox-messages"></div>
+    <div class="chatbox-input-area">
+      <input type="text" class="chatbox-input" placeholder="Ask me something...">
+      <button class="chatbox-mic" type="button" aria-label="Use microphone">🎤</button>
+      <button class="chatbox-send">Send</button>
+    </div>
+    <div class="chatbox-status" role="status" aria-live="polite"></div>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="digital-person.js"></script>
+</body>
+</html>

@@ -64,6 +64,25 @@ async function getBotResponse(userMessage) {
   }
 }
 
+/* --- Shared text-to-speech (used by chatbox + digital person) --- */
+function speakText(text, statusEl) {
+  if (!('speechSynthesis' in window)) {
+    if (statusEl) statusEl.textContent = 'Speech output is not supported in this browser.';
+    return;
+  }
+
+  window.speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.rate = 1;
+  utterance.pitch = 1;
+
+  utterance.onstart = () => { if (statusEl) statusEl.textContent = 'Speaking...'; };
+  utterance.onend = () => { if (statusEl) statusEl.textContent = ''; };
+  utterance.onerror = () => { if (statusEl) statusEl.textContent = 'Could not play audio.'; };
+
+  window.speechSynthesis.speak(utterance);
+}
+
 function initChatbox() {
   const toggle = document.querySelector('.chatbox-toggle');
   const panel = document.querySelector('.chatbox-panel');
@@ -81,24 +100,6 @@ function initChatbox() {
 
   function setStatus(message) {
     if (statusEl) statusEl.textContent = message || '';
-  }
-
-  function speakText(text) {
-    if (!('speechSynthesis' in window)) {
-      setStatus('Speech output is not supported in this browser.');
-      return;
-    }
-
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.rate = 1;
-    utterance.pitch = 1;
-
-    utterance.onstart = () => setStatus('Speaking...');
-    utterance.onend = () => setStatus('');
-    utterance.onerror = () => setStatus('Could not play audio.');
-
-    window.speechSynthesis.speak(utterance);
   }
 
   function setupMicrophone() {
@@ -210,7 +211,7 @@ function initChatbox() {
     getBotResponse(text).then((botResponse) => {
       typingMsg.textContent = botResponse;
       messagesContainer.scrollTop = messagesContainer.scrollHeight;
-      speakText(botResponse);
+      speakText(botResponse, statusEl);
     });
   }
 

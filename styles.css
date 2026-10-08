@@ -1150,3 +1150,265 @@ footer {
     animation: none !important;
   }
 }
+
+/* ============================================
+   AI Digital Person (Part 3)
+   ============================================ */
+.dp-upload-area {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+#dp-photo-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.dp-file-label {
+  display: inline-block;
+  background: var(--glow-soft);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.55rem 1.1rem;
+  color: var(--text);
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dp-file-label:hover {
+  border-color: var(--border-hover);
+  box-shadow: 0 0 16px var(--glow-faint);
+}
+
+.dp-file-name {
+  font-size: 0.9rem;
+}
+
+.dp-preview-wrap {
+  margin-top: 1rem;
+}
+
+.dp-preview {
+  display: block;
+  max-width: 220px;
+  max-height: 220px;
+  border-radius: 12px;
+  border: 2px solid var(--border);
+  object-fit: cover;
+  box-shadow: 0 4px 24px var(--shadow);
+}
+
+.dp-create-btn {
+  background: linear-gradient(135deg, var(--accent1), var(--accent2));
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem 1.4rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.dp-create-btn:hover:not(:disabled) {
+  box-shadow: 0 0 20px var(--glow);
+  transform: translateY(-1px);
+}
+
+.dp-create-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* --- Digital person stage --- */
+.dp-stage {
+  text-align: center;
+}
+
+.dp-avatar-frame {
+  position: relative;
+  display: inline-block;
+  margin: 1rem auto 1.5rem;
+}
+
+.dp-avatar {
+  display: block;
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--border-hover);
+  box-shadow: 0 0 30px var(--glow-soft);
+  position: relative;
+  z-index: 1;
+}
+
+.dp-avatar-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 196px;
+  height: 196px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 2px solid var(--accent2);
+  opacity: 0.5;
+  animation: dp-pulse 2.6s ease-in-out infinite;
+}
+
+@keyframes dp-pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+  50% { transform: translate(-50%, -50%) scale(1.07); opacity: 0.15; }
+}
+
+.dp-avatar-name {
+  margin-top: 0.8rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.dp-avatar-status {
+  font-size: 0.85rem;
+  color: var(--accent2);
+  min-height: 1.2rem;
+}
+
+/* --- Response area --- */
+.dp-response {
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.1rem 1.3rem;
+  margin: 1rem auto;
+  min-height: 90px;
+  text-align: left;
+  transition: border-color 0.3s ease;
+}
+
+.dp-response:hover {
+  border-color: var(--border-hover);
+}
+
+.dp-response-placeholder,
+.dp-response-text {
+  margin: 0;
+  color: var(--text-body);
+  line-height: 1.7;
+}
+
+.dp-response-placeholder {
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+.dp-thinking {
+  color: var(--text-muted);
+  animation: dp-blink 1.2s ease-in-out infinite;
+}
+
+@keyframes dp-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* --- Input row --- */
+.dp-input-area {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+}
+
+.dp-input {
+  flex: 1;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  color: var(--text);
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dp-input:focus {
+  outline: none;
+  border-color: var(--accent1);
+  box-shadow: 0 0 12px var(--glow-faint);
+}
+
+.dp-input::placeholder {
+  color: var(--text-muted);
+}
+
+.dp-mic {
+  background: var(--glow-soft);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0 0.8rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dp-mic:hover:not(:disabled) {
+  border-color: var(--border-hover);
+  box-shadow: 0 0 12px var(--glow-faint);
+}
+
+.dp-mic.listening {
+  background: var(--accent2);
+  animation: dp-pulse 1s ease-in-out infinite;
+}
+
+.dp-mic:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.dp-ask {
+  background: linear-gradient(135deg, var(--accent1), var(--accent2));
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0 1.3rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.dp-ask:hover {
+  box-shadow: 0 0 16px var(--glow);
+  transform: translateY(-1px);
+}
+
+.dp-status {
+  min-height: 1.3rem;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--accent2);
+}
+
+@media (max-width: 520px) {
+  .dp-input-area {
+    flex-wrap: wrap;
+  }
+
+  .dp-input {
+    flex: 1 1 100%;
+  }
+
+  .dp-mic,
+  .dp-ask {
+    flex: 1;
+    padding: 0.6rem;
+  }
+}

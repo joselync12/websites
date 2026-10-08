@@ -27,7 +27,6 @@ function initDigitalPerson() {
   let photoDataUrl = null;
   let recognition = null;
   let isListening = false;
-  const dpHistory = []; // digital person's own conversation memory
 
   function setStatus(message) {
     if (statusEl) statusEl.textContent = message || '';
@@ -77,14 +76,6 @@ function initDigitalPerson() {
   });
 
   /* --- 3. Ask + AI response --- */
-  function showResponse(text) {
-    responseBox.innerHTML = ''; // clear placeholder
-    const p = document.createElement('p');
-    p.classList.add('dp-response-text');
-    p.textContent = text;
-    responseBox.appendChild(p);
-  }
-
   function askQuestion() {
     const question = questionInput.value.trim();
     if (!question || stage.hidden) return;

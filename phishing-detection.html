@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joselyn | Phishing Detection</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .project-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; }
+    .project-btn { display: inline-block; padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 0.95rem; font-weight: 600; text-decoration: none; font-family: inherit; cursor: pointer; text-align: center; transition: opacity 0.2s, border-color 0.2s, color 0.2s; }
+    .project-btn-primary { background: linear-gradient(135deg, var(--accent1), var(--accent2)); color: #fff; border: none; }
+    .project-btn-primary:hover { opacity: 0.85; }
+    .project-btn-secondary { background: transparent; color: var(--text-body); border: 1px solid var(--border); }
+    .project-btn-secondary:hover { color: var(--text); border-color: var(--accent2); }
+  </style>
+</head>
+<body data-theme="purple">
+  <div class="starfield"></div>
+
+  <!-- Nebula clouds -->
+  <div class="nebula nebula-1"></div>
+  <div class="nebula nebula-2"></div>
+  <div class="nebula nebula-3"></div>
+
+  <!-- PokeAPI Official Artwork Sprites -->
+  <div class="pokemon-container pokemon-altaria">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/334.png" alt="Altaria" width="80" height="80">
+    <div class="cloud-puff cloud-puff-1"></div>
+    <div class="cloud-puff cloud-puff-2"></div>
+  </div>
+
+  <div class="pokemon-container pokemon-sylveon">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/700.png" alt="Sylveon" width="70" height="70">
+    <div class="sparkle sparkle-1"></div>
+    <div class="sparkle sparkle-2"></div>
+    <div class="sparkle sparkle-3"></div>
+  </div>
+
+  <div class="pokemon-container pokemon-milotic">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/350.png" alt="Milotic" width="90" height="50">
+    <div class="shimmer shimmer-1"></div>
+    <div class="shimmer shimmer-2"></div>
+  </div>
+
+  <div class="pokemon-container pokemon-arceus">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/493.png" alt="Arceus" width="85" height="85">
+  </div>
+
+  <div class="pokemon-container pokemon-deoxys">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/386.png" alt="Deoxys" width="75" height="75">
+  </div>
+
+  <div class="pokemon-container pokemon-eevee">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/133.png" alt="Eevee" width="55" height="55">
+  </div>
+
+  <div class="pokemon-container pokemon-jirachi">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/385.png" alt="Jirachi" width="60" height="60">
+  </div>
+
+  <!-- Shooting stars -->
+  <div class="shooting-star shooting-star-1"></div>
+  <div class="shooting-star shooting-star-2"></div>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">Joselyn</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Me</a></li>
+        <li><a href="interests.html">Tech Interests</a></li>
+        <li><a href="cybersecurity.html">Cybersecurity</a></li>
+        <li><a href="threat-model.html">Threat Model</a></li>
+        <li><a href="secure-architecture.html">Secure Architecture</a></li>
+        <li><a href="auth-access.html">Auth & Access</a></li>
+        <li><a href="digital-person.html">AI Digital Person</a></li>
+        <li><a href="phishing-detection.html" class="active">Phishing Detection</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="page-content">
+    <div class="page-header">
+      <h1>Machine Learning-Based Phishing Website Detection</h1>
+      <p class="subtitle">Using Decision Tree and Random Forest models to spot dangerous websites</p>
+    </div>
+
+    <div class="card">
+      <h2>Project Overview</h2>
+      <p>
+        This cybersecurity project investigates whether <strong>machine learning can identify
+        phishing websites</strong> using only numerical URL characteristics. I trained and
+        compared two scikit-learn classifiers — a <strong>Decision Tree</strong> and a
+        <strong>Random Forest</strong> — to distinguish legitimate websites from phishing
+        ones by analyzing features like URL length, number of dots, presence of a
+        shortened URL, and other structural signals.
+      </p>
+      <p>
+        The analysis uses the <strong>Web Page Phishing Dataset</strong> from Kaggle
+        (100,077 records, 19 URL features). After removing exact duplicates,
+        <strong>21,891 records</strong> were used for training and evaluation.
+      </p>
+      <p class="muted">
+        Built with Python in Google Colab using pandas and scikit-learn. The full
+        analysis lives in a Jupyter notebook with a final report PDF.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Results</h2>
+      <p>Both models were evaluated on a held-out test set:</p>
+      <ul class="tag-list">
+        <li>Decision Tree — <strong>81.41%</strong> accuracy</li>
+        <li>Random Forest — <strong>82.58%</strong> accuracy</li>
+      </ul>
+      <p>
+        The Random Forest model performed best, achieving approximately
+        <strong>94% recall for phishing websites</strong> — it caught nearly all
+        dangerous sites in the test set. The trade-off is that it also flagged some
+        legitimate websites as phishing (false positives), which is an important
+        security consideration: false positives may block legitimate sites, while
+        false negatives may let users reach phishing ones.
+      </p>
+      <p class="muted">
+        This project demonstrates that URL-based machine learning can support phishing
+        detection, but it should not be the only layer of protection.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Try It Yourself</h2>
+      <p>
+        The project includes an interactive website where you can paste any URL and see
+        what the trained models predict, along with the full results dashboard.
+      </p>
+      <div class="project-actions">
+        <a class="project-btn project-btn-primary" href="https://joselync12.github.io/Phishing-Website-Detection/" target="_blank" rel="noopener">Try Phishing Detector</a>
+        <a class="project-btn project-btn-secondary" href="https://github.com/joselync12/Phishing-Website-Detection" target="_blank" rel="noopener">GitHub Repository</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Joselyn | Information Technology | Kean University</p>
+  </footer>
+
+  <!-- Theme Switcher -->
+  <button class="theme-toggle" aria-label="Change theme">🎨</button>
+  <div class="theme-panel">
+    <button class="theme-option active" data-theme="purple" aria-label="Purple Galaxy">
+      <span class="theme-preview purple"></span>
+      Purple Galaxy
+    </button>
+    <button class="theme-option" data-theme="pink" aria-label="Pink Galaxy">
+      <span class="theme-preview pink"></span>
+      Pink Galaxy
+    </button>
+    <button class="theme-option" data-theme="blue" aria-label="Blue Galaxy">
+      <span class="theme-preview blue"></span>
+      Blue Galaxy
+    </button>
+  </div>
+
+  <!-- Chatbox -->
+  <button class="chatbox-toggle" aria-label="Open chat">💬</button>
+  <div class="chatbox-panel">
+    <div class="chatbox-header">
+      <h3>Mission Comms</h3>
+      <button class="chatbox-close" aria-label="Close chat">&times;</button>
+    </div>
+    <div class="chatbox-messages"></div>
+    <div class="chatbox-input-area">
+      <input type="text" class="chatbox-input" placeholder="Ask me something...">
+      <button class="chatbox-mic" type="button" aria-label="Use microphone">🎤</button>
+      <button class="chatbox-send">Send</button>
+    </div>
+    <div class="chatbox-status" role="status" aria-live="polite"></div>
+  </div>
+
+  <!-- Digital Person Panel -->
+  <button class="dp-toggle" aria-label="Open digital person">🧑</button>
+  <div class="dp-panel">
+    <div class="dp-panel-header">
+      <img class="dp-panel-avatar" id="dp-panel-avatar" alt="Digital person avatar" hidden>
+      <div class="dp-panel-title">
+        <h3>Digital Person</h3>
+        <span class="dp-panel-avatar-status" id="dp-panel-avatar-status"></span>
+      </div>
+      <button class="dp-panel-close" aria-label="Close digital person">&times;</button>
+    </div>
+    <div class="dp-panel-messages" id="dp-panel-messages"></div>
+    <div class="dp-panel-input-area">
+      <input type="text" class="dp-panel-input" id="dp-panel-input" placeholder="Ask your digital person...">
+      <button class="dp-panel-mic" id="dp-panel-mic" type="button" aria-label="Use microphone">🎤</button>
+      <button class="dp-panel-send" id="dp-panel-send">Ask</button>
+    </div>
+    <div class="dp-panel-status" role="status" aria-live="polite" id="dp-panel-status"></div>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="digital-person.js"></script>
+</body>
+</html>

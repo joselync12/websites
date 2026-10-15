@@ -12,6 +12,8 @@
     .project-btn-primary:hover { opacity: 0.85; }
     .project-btn-secondary { background: transparent; color: var(--text-body); border: 1px solid var(--border); }
     .project-btn-secondary:hover { color: var(--text); border-color: var(--accent2); }
+    .ref-link { color: var(--accent2); text-decoration: none; transition: color 0.2s ease; }
+    .ref-link:hover { text-decoration: underline; }
   </style>
 </head>
 <body data-theme="purple">
@@ -137,6 +139,30 @@
         <a class="project-btn project-btn-primary" href="https://joselync12.github.io/Phishing-Website-Detection/" target="_blank" rel="noopener">Try Phishing Detector</a>
         <a class="project-btn project-btn-secondary" href="https://github.com/joselync12/Phishing-Website-Detection" target="_blank" rel="noopener">GitHub Repository</a>
       </div>
+    </div>
+
+    <div class="card">
+      <h2>Dataset &amp; References</h2>
+      <p>
+        This project uses a public dataset and was informed by a publicly available
+        notebook, both hosted on Kaggle. Full credit goes to their original creators —
+        neither resource was created by me.
+      </p>
+      <ul>
+        <li>
+          <strong>Dataset Used — Web Page Phishing Dataset:</strong>
+          the dataset this project trained and evaluated both models on,
+          created by <strong>Daniel Fernandon</strong> on Kaggle.
+          <a class="ref-link" href="https://www.kaggle.com/datasets/danielfernandon/web-page-phishing-dataset" target="_blank" rel="noopener">View the dataset on Kaggle</a>
+        </li>
+        <li>
+          <strong>Reference Notebook — Advanced URL Analysis for Phishing Detection:</strong>
+          a notebook by <strong>mrudhuhas</strong> on Kaggle that I consulted as a
+          reference while working through my analysis. It is not part of my project
+          and was not created by me.
+          <a class="ref-link" href="https://www.kaggle.com/code/mrudhuhas/advanced-url-analysis-for-phishing-detection/notebook" target="_blank" rel="noopener">View the reference notebook on Kaggle</a>
+        </li>
+      </ul>
     </div>
   </main>
 

@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joselyn | AI Research</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .ref-link { color: var(--accent2); text-decoration: none; transition: color 0.2s ease; }
+    .ref-link:hover { text-decoration: underline; }
+    .placeholder-badge {
+      display: inline-block;
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      border: 1px dashed var(--accent2);
+      background: var(--glow2-faint);
+      vertical-align: middle;
+    }
+    .method-flow {
+      list-style: none;
+      counter-reset: flow;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .method-flow li {
+      counter-increment: flow;
+      position: relative;
+      padding: 0.75rem 1rem 0.75rem 3.25rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-card);
+    }
+    .method-flow li::before {
+      content: counter(flow);
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1.75rem;
+      height: 1.75rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: #fff;
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+    }
+    .research-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      font-size: 0.95rem;
+    }
+    .research-table th,
+    .research-table td {
+      border: 1px solid var(--border);
+      padding: 0.6rem 0.8rem;
+      text-align: left;
+    }
+    .research-table th {
+      background: var(--glow-faint);
+      color: var(--text);
+      font-weight: 600;
+    }
+    .research-table td {
+      color: var(--text-body);
+    }
+    .research-table .pending {
+      color: var(--text-muted);
+      font-style: italic;
+    }
+    .objective-list { padding-left: 1.25rem; }
+    .objective-list li { margin-bottom: 0.6rem; }
+  </style>
+</head>
+<body data-theme="purple">
+  <div class="starfield"></div>
+
+  <!-- Nebula clouds -->
+  <div class="nebula nebula-1"></div>
+  <div class="nebula nebula-2"></div>
+  <div class="nebula nebula-3"></div>
+
+  <!-- PokeAPI Official Artwork Sprites -->
+  <div class="pokemon-container pokemon-altaria">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/334.png" alt="Altaria" width="80" height="80">
+    <div class="cloud-puff cloud-puff-1"></div>
+    <div class="cloud-puff cloud-puff-2"></div>
+  </div>
+
+  <div class="pokemon-container pokemon-sylveon">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/700.png" alt="Sylveon" width="70" height="70">
+    <div class="sparkle sparkle-1"></div>
+    <div class="sparkle sparkle-2"></div>
+    <div class="sparkle sparkle-3"></div>
+  </div>
+
+  <div class="pokemon-container pokemon-milotic">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/350.png" alt="Milotic" width="90" height="50">
+    <div class="shimmer shimmer-1"></div>
+    <div class="shimmer shimmer-2"></div>
+  </div>
+
+  <div class="pokemon-container pokemon-arceus">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/493.png" alt="Arceus" width="85" height="85">
+  </div>
+
+  <div class="pokemon-container pokemon-deoxys">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/386.png" alt="Deoxys" width="75" height="75">
+  </div>
+
+  <div class="pokemon-container pokemon-eevee">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/133.png" alt="Eevee" width="55" height="55">
+  </div>
+
+  <div class="pokemon-container pokemon-jirachi">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/385.png" alt="Jirachi" width="60" height="60">
+  </div>
+
+  <!-- Shooting stars -->
+  <div class="shooting-star shooting-star-1"></div>
+  <div class="shooting-star shooting-star-2"></div>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">Joselyn</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Me</a></li>
+        <li><a href="interests.html">Tech Interests</a></li>
+        <li><a href="cybersecurity.html">Cybersecurity</a></li>
+        <li><a href="threat-model.html">Threat Model</a></li>
+        <li><a href="secure-architecture.html">Secure Architecture</a></li>
+        <li><a href="auth-access.html">Auth & Access</a></li>
+        <li><a href="digital-person.html">AI Digital Person</a></li>
+        <li><a href="phishing-detection.html">Phishing Detection</a></li>
+        <li><a href="ai-research.html" class="active">AI Research</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="page-content">
+    <div class="page-header">
+      <h1>Hybrid AI-Powered Phishing Detection and Explanation System</h1>
+      <p class="subtitle">Combining a machine learning classifier with an AI explanation assistant</p>
+    </div>
+
+    <div class="card">
+      <h2>Research Topic</h2>
+      <p>
+        My research topic is <strong>Hybrid AI-Powered Phishing Detection and Explanation
+        System</strong>. This project builds on my earlier
+        <a class="ref-link" href="phishing-detection.html">machine learning phishing detection
+        work</a> and my <a class="ref-link" href="digital-person.html">AI digital person /
+        chatbot</a>, combining them into a single system that both detects suspicious websites
+        <em>and</em> explains its reasoning in plain language.
+      </p>
+      <p class="muted">
+        Assignment 6 — completed research. The classifier comparison and the hybrid
+        explanation experiment described below were actually run; their measured results
+        appear in the Results section. What remains future work (a user study) is labeled as
+        such in Limitations.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Problem Statement</h2>
+      <p>
+        Phishing websites continue to trick users by imitating legitimate pages. Machine
+        learning models can flag suspicious URLs with good accuracy, but a bare
+        "phishing / legitimate" label does not tell the user <strong>why</strong> a website
+        was flagged. Users who do not understand the reasons behind a warning are more likely
+        to ignore it, click through it, or distrust future warnings entirely.
+      </p>
+      <p>
+        At the same time, an AI chatbot can generate helpful explanations, but on its own it
+        cannot reliably judge whether a specific URL is dangerous. The gap is that
+        <strong>detection systems lack explainability</strong>, and <strong>explanation
+        assistants lack a trustworthy detection signal</strong> to anchor their answers.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Research Question</h2>
+      <div class="qa-block">
+        <p class="question">
+          Can adding a grounded AI explanation to the Random Forest phishing detector make
+          its predictions easier to interpret while keeping the classifier's predictions
+          unchanged?
+        </p>
+      </div>
+      <p class="muted">
+        Note the two parts of the question: <strong>easier to interpret</strong> (the thing
+        being improved) and <strong>predictions unchanged</strong> (the thing that must not
+        regress). The improvement is deliberately about <em>interpretability</em>, not about
+        raising classification accuracy.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Research Objectives</h2>
+      <ol class="objective-list">
+        <li>
+          Reproduce a trustworthy <strong>baseline</strong>: train and evaluate Decision Tree
+          and Random Forest classifiers on URL features from the Web Page Phishing Dataset,
+          and verify the results against my earlier phishing detection project.
+        </li>
+        <li>
+          Run a <strong>fair model comparison</strong> — Logistic Regression, k-Nearest
+          Neighbors, Gradient Boosting and SVM against the two baselines on the same
+          group-based split, with 5-fold cross-validation for stability.
+        </li>
+        <li>
+          Build the <strong>hybrid system</strong>: keep the real Random Forest as the sole
+          decision-maker and add an AI explanation assistant (Cloudflare Worker + Gemini)
+          that translates the model's own votes and feature contributions into plain
+          language.
+        </li>
+        <li>
+          Verify the <strong>predictions-unchanged</strong> property: confirm that adding the
+          explanation layer never alters the classifier's output, by checking the JS
+          inference against scikit-learn on held-out rows and confirming the Worker returns
+          only prose, never a verdict.
+        </li>
+        <li>
+          Measure <strong>explanation grounding</strong> — whether the generated explanations
+          are actually supported by the model's votes and contributions — plus response time
+          and failure rate.
+        </li>
+        <li>
+          Document <strong>security controls</strong> against XSS and prompt injection that
+          this hybrid design requires, and test them with a malicious HTML/script string.
+        </li>
+        <li>
+          State the <strong>limitations</strong> honestly, including what this experiment
+          cannot prove (it is not a user-comprehension study).
+        </li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h2>Dataset and Kaggle Sources</h2>
+      <p>
+        This research uses public resources hosted on Kaggle. Full credit goes to their
+        original creators — neither resource was created by me.
+      </p>
+      <ul>
+        <li>
+          <strong>Dataset Used — Web Page Phishing Dataset</strong> by
+          <strong>Daniel Fernandon</strong> on Kaggle. This is the same dataset used in my
+          earlier phishing detection project (100,077 records, 19 URL features; 21,891
+          records after removing exact duplicates).
+          <a class="ref-link" href="https://www.kaggle.com/datasets/danielfernandon/web-page-phishing-dataset" target="_blank" rel="noopener">View the dataset on Kaggle</a>
+        </li>
+        <li>
+          <strong>Reference Notebook — Advanced URL Analysis for Phishing Detection</strong>
+          by <strong>mrudhuhas</strong> on Kaggle, consulted as a research reference. It is
+          not part of my project and was not created by me.
+          <a class="ref-link" href="https://www.kaggle.com/code/mrudhuhas/advanced-url-analysis-for-phishing-detection/notebook" target="_blank" rel="noopener">View the reference notebook on Kaggle</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Hybrid AI Method</h2>
+      <p>
+        The system combines two components that already existed separately in my projects: a
+        <strong>machine learning phishing classifier</strong> (Random Forest) and an
+        <strong>AI explanation assistant</strong> (the Cloudflare Worker + Gemini backend
+        from my chatbot / digital person work). The classifier is the <em>only</em>
+        decision-maker; the assistant never classifies — it only explains numbers it is
+        handed.
+      </p>
+      <p>
+        The design principle is <strong>grounded explanation</strong>: the AI is given the
+        model's actual output (predicted class, phishing probability, tree vote split, and
+        per-feature contributions) and is instructed to use <em>only</em> those numbers. This
+        is what keeps the classifier's predictions unchanged — the AI has no ability to
+        change them, because it sits strictly after the model in the pipeline.
+      </p>
+      <ol class="method-flow">
+        <li>
+          <strong>User submits a URL</strong> through the phishing detection web interface.
+        </li>
+        <li>
+          <strong>Feature extraction</strong> — the same 19 numeric URL features used in
+          training are computed in the browser (length, dots, hyphens, slashes, redirection
+          markers, and so on).
+        </li>
+        <li>
+          <strong>Random Forest classification</strong> — the real exported model (100
+          decision trees, serialized from the scikit-learn pipeline) is walked tree by tree
+          in the browser. This produces the verdict, the probability, the vote split, and
+          the per-feature contribution deltas.
+        </li>
+        <li>
+          <strong>AI explanation (opt-in)</strong> — only when the user clicks
+          <em>"Explain This Prediction"</em>, the model's output is sent to the Cloudflare
+          Worker, which re-validates it against a strict schema and a whitelist of the 19
+          feature names, then asks Gemini to explain it in plain language.
+        </li>
+        <li>
+          <strong>Output to user</strong> — the verdict card stays exactly as the model
+          produced it, and the explanation is rendered beside it as plain text via
+          <code>textContent</code>. If Gemini or the Worker fails, the verdict is untouched
+          and a safe error message appears in the explanation panel only.
+        </li>
+      </ol>
+      <p class="muted">
+        The Worker holds the Gemini API key server-side; no key is ever embedded in the
+        front end. The Worker never visits or fetches the URL being explained.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Baseline Model</h2>
+      <p>
+        The baseline is my earlier phishing detection work, which trained two scikit-learn
+        classifiers — a <strong>Decision Tree</strong> and a <strong>Random Forest</strong> —
+        on the 19 URL features from the Web Page Phishing Dataset. Both were re-trained and
+        re-measured for this assignment on the identical group-based split, and both
+        reproduced my earlier accuracies <em>exactly</em> (delta = 0.0), which is the honest
+        verification that the baseline is stable before I build anything on top of it.
+      </p>
+      <table class="research-table">
+        <thead>
+          <tr>
+            <th>Baseline classifier</th>
+            <th>Accuracy</th>
+            <th>Precision (phishing)</th>
+            <th>Recall (phishing)</th>
+            <th>F1 (phishing)</th>
+            <th>5-fold CV accuracy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Decision Tree</td>
+            <td>81.41%</td>
+            <td>0.8618</td>
+            <td>0.8912</td>
+            <td>0.8762</td>
+            <td>— (baseline only)</td>
+          </tr>
+          <tr>
+            <td><strong>Random Forest (used in the hybrid)</strong></td>
+            <td><strong>82.58%</strong></td>
+            <td>0.8418</td>
+            <td>0.9408</td>
+            <td>0.8886</td>
+            <td>0.8147 ± 0.0034</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="muted" style="margin-top: 0.8rem;">
+        Measured by re-running the Assignment 6 notebook on the cleaned dataset
+        (100,077 rows → 21,891 after removing exact duplicates; 17,523 train / 4,368
+        held-out test). The Random Forest is the classifier carried into the hybrid system.
+        The accuracy figures are the same ones reported on my
+        <a class="ref-link" href="phishing-detection.html">Phishing Detection</a> page and
+        were reproduced exactly, not copied forward.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Proposed Improvement</h2>
+      <p>
+        The improvement over the baseline is an <strong>interpretability layer</strong>, not a
+        higher accuracy score. The Random Forest's classification is deliberately left
+        untouched — the same model, the same 100 trees, the same verdict. What changes is
+        that the user now also gets a plain-language explanation grounded in the model's own
+        reasoning:
+      </p>
+      <ul class="tag-list">
+        <li>Surfaces the specific URL features that contributed to the prediction, with their
+          real contribution deltas</li>
+        <li>Translates those numbers into plain-language reasoning a non-expert can follow,
+          via Gemini through the existing Worker</li>
+        <li>Keeps the raw verdict permanently visible, independent of whether the AI
+          explanation succeeds</li>
+        <li>Stays opt-in: the explanation is only requested when the user asks for it, so the
+          classifier path never depends on the network</li>
+      </ul>
+      <p>
+        Because the improvement is interpretability, the honest way to evaluate it is
+        <strong>not</strong> "did accuracy go up" — it cannot, since the classifier is
+        unchanged by design. The meaningful questions are: (1) are the explanations actually
+        <em>supported by</em> the model's real votes and contributions, and (2) does adding
+        them leave the classifier's predictions byte-for-byte identical? Both are measured in
+        the experiment below.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Experimental Methodology</h2>
+      <p>
+        Two experiments were run. The first compares classifiers to establish the baseline;
+        the second tests the hybrid explanation layer itself. Both are reproducible from this
+        repository (see Reproducibility below).
+      </p>
+
+      <h3 style="margin-top:1.2rem;">Experiment 1 — Classifier comparison (notebook)</h3>
+      <ol class="objective-list">
+        <li>
+          <strong>Dataset preparation</strong> — load the Web Page Phishing Dataset
+          (100,077 rows), remove exact duplicates (78,186 removed → 21,891 remaining), and
+          split with a group-based shuffle so rows sharing an identical feature vector never
+          appear on both sides of the split (17,523 train / 4,368 held-out test).
+        </li>
+        <li>
+          <strong>Baseline replication</strong> — re-train Decision Tree and Random Forest
+          and assert their accuracies match the Midterm reference values exactly
+          (81.41% and 82.58%, delta 0.0). This is a verification gate, not a copied number.
+        </li>
+        <li>
+          <strong>Additional models</strong> — train Logistic Regression, k-Nearest
+          Neighbors, Gradient Boosting and SVM on the same split, recording accuracy,
+          precision, recall, F1, training time and prediction time.
+        </li>
+        <li>
+          <strong>Stability check</strong> — run 5-fold cross-validation on every model so
+          the single-split numbers can be seen in context.
+        </li>
+        <li>
+          <strong>Fairness</strong> — all models see the identical cleaned data, the identical
+          split, and the identical features. No model is tuned harder than another.
+        </li>
+      </ol>
+
+      <h3 style="margin-top:1.2rem;">Experiment 2 — Random Forest alone vs Random Forest + AI explanation</h3>
+      <p>
+        Because the improvement is interpretability, this experiment tests grounding rather
+        than accuracy. It uses <strong>10 held-out test rows</strong> (a deterministic
+        selection: every 4th row of the 40-row held-out fixture set, chosen so the run is
+        reproducible) spanning both predicted classes and probabilities from 0.13 to 0.99.
+      </p>
+      <ol class="objective-list">
+        <li>
+          <strong>Condition A — Random Forest alone.</strong> The real exported model runs in
+          the browser's inference path and produces a label, a probability, a tree vote split
+          and per-feature contribution deltas. No explanation exists in this condition.
+        </li>
+        <li>
+          <strong>Condition B — Random Forest + AI explanation.</strong> The <em>same</em>
+          model output is sent to the deployed Worker (<code>mission-comms-chatbot</code>),
+          which validates it and asks Gemini to explain it. The verdict itself is computed
+          locally before any network call, so it cannot be altered by the explanation.
+        </li>
+        <li>
+          <strong>Correctness gate</strong> — before sending anything, the JavaScript
+          inference result is checked against the prediction scikit-learn recorded for that
+          same held-out row. This proves the explanation is grounded in real model output,
+          not a re-implementation.
+        </li>
+        <li>
+          <strong>Grounding measurement</strong> — each explanation's text is checked
+          automatically against the model's real output: does it name at least one of the
+          model's actual top contributing features? Does its verdict language agree with the
+          predicted class? Does it avoid claiming to have visited the URL? Does it carry the
+          required "not proof of safety" caveat?
+        </li>
+        <li>
+          <strong>Unchanged-prediction check</strong> — the Worker's response is inspected to
+          confirm it contains only prose (a <code>reply</code> field) and no verdict field,
+          proving the classifier's prediction is untouched by the explanation layer.
+        </li>
+        <li>
+          <strong>Cost measurement</strong> — response time per example, and any failures
+          (network errors, Gemini overload, empty replies), are recorded as they actually
+          occurred.
+        </li>
+      </ol>
+      <p class="muted">
+        The grounding checks are automated lexical comparisons between the explanation text
+        and the model's real numbers. They show whether the text is <em>consistent with</em>
+        the model. They are <strong>not</strong> a user study and do <strong>not</strong>
+        demonstrate improved human comprehension — see Limitations.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Results and Comparison</h2>
+      <p>
+        Both experiments were actually run and their numbers below come from machine-readable
+        result files in this repository — nothing here is copied from a prior report or
+        estimated. Experiment 1 establishes the classifier baseline; Experiment 2 tests the
+        hybrid explanation layer.
+      </p>
+
+      <h3 style="margin-top:1.2rem;">Experiment 1 — Classifier comparison (single split + 5-fold CV)</h3>
+      <table class="research-table">
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>Accuracy</th>
+            <th>Precision</th>
+            <th>Recall</th>
+            <th>F1</th>
+            <th>5-fold CV accuracy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Random Forest (used in hybrid)</strong></td>
+            <td><strong>82.58%</strong></td>
+            <td>0.8418</td>
+            <td>0.9408</td>
+            <td>0.8886</td>
+            <td>0.8147 ± 0.0034</td>
+          </tr>
+          <tr>
+            <td>k-Nearest Neighbors</td>
+            <td>82.37%</td>
+            <td>0.8728</td>
+            <td>0.8912</td>
+            <td>0.8819</td>
+            <td>0.7909 ± 0.0077</td>
+          </tr>
+          <tr>
+            <td>Gradient Boosting</td>
+            <td>82.14%</td>
+            <td>0.8547</td>
+            <td>0.9135</td>
+            <td>0.8831</td>
+            <td>0.8142 ± 0.0035</td>
+          </tr>
+          <tr>
+            <td>Decision Tree</td>
+            <td>81.41%</td>
+            <td>0.8618</td>
+            <td>0.8912</td>
+            <td>0.8762</td>
+            <td>0.8022 ± 0.0031</td>
+          </tr>
+          <tr>
+            <td>SVM (RBF kernel)</td>
+            <td>81.39%</td>
+            <td>0.8518</td>
+            <td>0.9054</td>
+            <td>0.8778</td>
+            <td>0.8071 ± 0.0036</td>
+          </tr>
+          <tr>
+            <td>Logistic Regression</td>
+            <td>78.41%</td>
+            <td>0.8328</td>
+            <td>0.8853</td>
+            <td>0.8583</td>
+            <td>0.7774 ± 0.0033</td>
+          </tr>
+          <tr>
+            <td>Dummy (most-frequent)</td>
+            <td>73.83%</td>
+            <td>0.7383</td>
+            <td>1.0000</td>
+            <td>0.8495</td>
+            <td>0.7250 ± 0.0001</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="muted" style="margin-top: 0.8rem;">
+        Random Forest is the strongest single-split model and also the most stable under
+        cross-validation, which is why it is the classifier carried into the hybrid. Source:
+        <code>Assignment6/results/experiments_results.json</code>.
+      </p>
+
+      <h3 style="margin-top:1.4rem;">Experiment 2 — Random Forest alone vs Random Forest + AI explanation</h3>
+      <p>
+        This is the comparison the research question asks about. Because the improvement is
+        interpretability, the classifier's prediction is <em>identical by design</em> in both
+        conditions — what differs is whether an explanation is available, whether it is
+        grounded in the model's real numbers, and what it costs in time and reliability.
+      </p>
+      <table class="research-table">
+        <thead>
+          <tr>
+            <th>Measurement (10 held-out examples)</th>
+            <th>Random Forest alone</th>
+            <th>Random Forest + AI explanation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Classifier prediction produced</td>
+            <td>10 / 10</td>
+            <td>10 / 10 (identical — verified unchanged)</td>
+          </tr>
+          <tr>
+            <td>JS inference matched scikit-learn</td>
+            <td>10 / 10</td>
+            <td>10 / 10</td>
+          </tr>
+          <tr>
+            <td>Explanation available to user</td>
+            <td>0 / 10 (numbers only)</td>
+            <td>6 / 10 (4 real Gemini failures)</td>
+          </tr>
+          <tr>
+            <td>Named a real top-3 contributing feature</td>
+            <td>— (no explanation)</td>
+            <td>6 / 6 returned</td>
+          </tr>
+          <tr>
+            <td>Verdict language agreed with model (manual reading)</td>
+            <td>— (no explanation)</td>
+            <td>6 / 6 returned</td>
+          </tr>
+          <tr>
+            <td>Carried the "not proof of safety" caveat (manual reading)</td>
+            <td>— (no explanation)</td>
+            <td>6 / 6 returned</td>
+          </tr>
+          <tr>
+            <td>Claimed to have visited the URL</td>
+            <td>— (no explanation)</td>
+            <td>0 / 6 returned</td>
+          </tr>
+          <tr>
+            <td>Response time (mean / median / max)</td>
+            <td>instant (local)</td>
+            <td>12.1 s / 12.6 s / 17.9 s</td>
+          </tr>
+          <tr>
+            <td>Failures</td>
+            <td>none</td>
+            <td>4 / 10 (HTTP 502, Gemini overload)</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="muted" style="margin-top: 0.8rem;">
+        Source: <code>Assignment6/results/hybrid_experiment_results.json</code> (run
+        2026-10-22 against the deployed <code>mission-comms-chatbot</code> Worker). The
+        classifier's prediction is computed locally before any network call, and the Worker's
+        response was confirmed to contain only prose — never a verdict — in all 6 successful
+        cases, so the "predictions unchanged" property holds.
+      </p>
+
+      <p style="margin-top: 1rem;">
+        <strong>Reading these results honestly.</strong> The automated lexical checker
+        <em>undercounted</em> grounding because of phrasing differences: it reported only 4/6
+        verdict agreement and 1/6 caveat presence, but reading all 6 explanation texts shows
+        the true figures are 6/6 and 6/6. For example, the two apparent "disagreements" both
+        correctly said the URL was classified as phishing; the checker was falsely tripped by
+        the required caveat phrase "not absolute proof that the website is <em>safe</em> or
+        dangerous," which contains the substring "is safe." This is exactly why the table
+        reports the manually verified numbers alongside the raw automated ones, and it is a
+        limitation of the automated metric noted below — not a defect in the explanations.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>XSS Security Controls</h2>
+      <p>
+        This hybrid system accepts a <strong>user-submitted URL</strong> and displays
+        <strong>AI-generated text</strong>, so it carries two distinct injection risks. Below
+        I walk through each one as: the security problem, the control I implemented, how it
+        mitigates the risk, and what would further improve it.
+      </p>
+
+      <h3 style="margin-top:1.2rem;">Risk 1 — Untrusted URL as a payload</h3>
+      <p><strong>Security problem.</strong> The URL a user types is attacker-controlled. If
+        it were ever inserted into the page as HTML, a string such as
+        <code>&lt;img src=x onerror=alert(1)&gt;</code> or
+        <code>&lt;script&gt;…&lt;/script&gt;</code> would execute in the browser — a
+        cross-site scripting (XSS) vulnerability that could steal session tokens, deface the
+        page, or redirect the visitor.</p>
+      <p><strong>Security control.</strong> Untrusted strings are written with
+        <code>textContent</code>, never <code>innerHTML</code>. The explanation renderer
+        builds DOM nodes with <code>document.createElement()</code> and assigns the reply via
+        <code>textContent</code> only.</p>
+      <p><strong>Mitigation.</strong> <code>textContent</code> treats its input as literal
+        text and never parses markup, so a malicious string is displayed as visible
+        characters rather than executed. A dedicated test feeds a real
+        <code>&lt;script&gt;</code>/<code>&lt;img onerror&gt;</code> payload into the renderer
+        and asserts that (a) the text appears verbatim and (b) <code>innerHTML</code> was
+        never assigned on the container or any child element. That test passes.</p>
+      <p><strong>Security improvement.</strong> A Content Security Policy that disables
+        <code>inline</code> scripts would add defence-in-depth, so that even if a markup
+        injection slipped through somewhere, an injected script still could not execute.</p>
+
+      <h3 style="margin-top:1.2rem;">Risk 2 — AI-generated text as a payload</h3>
+      <p><strong>Security problem.</strong> The explanation text is produced by a large
+        language model reacting to attacker-influenced input. A crafted URL could try to make
+        the model emit markup or instructions ("ignore previous instructions…"), and any
+        markup it emitted would be a stored-XSS vector of its own.</p>
+      <p><strong>Security control.</strong> Two layers. (1) Output: the AI reply is rendered
+        with <code>textContent</code>, never <code>innerHTML</code>, so markup in the reply
+        cannot execute. (2) Input: the Worker re-validates the entire payload server-side
+        against a strict schema — probability must be 0–1, label must be exactly
+        "Phishing" or "Legitimate", contribution deltas must be finite and in −1…1, and
+        feature names must appear in a hard whitelist of the 19 dataset features. Anything
+        else is rejected with HTTP 400 before Gemini is ever called.</p>
+      <p><strong>Mitigation.</strong> The prediction data is passed to Gemini inside a
+        delimited <code>&lt;model_output&gt;</code> block, and the system prompt instructs the
+        model to treat that block as untrusted data rather than as instructions. The AI is
+        explicitly forbidden from producing its own verdict, from claiming to have visited
+        the URL, and from asserting the site is safe — it must state its output is an
+        explanation of the model's statistical prediction, not proof of safety.</p>
+      <p><strong>Security improvement.</strong> The static UI label that marks the text as
+        "the model's explanation, not proof the site is safe" is written by the application,
+        not the model, so it cannot be edited by a prompt-injection attempt. Escaping the
+        reply against a strict CSP and adding automated adversarial-URL test cases would
+        strengthen this further.</p>
+
+      <h3 style="margin-top:1.2rem;">Risk 3 — Secret exposure</h3>
+      <p><strong>Security problem.</strong> A naive design would put the Gemini API key in
+        front-end JavaScript, exposing it to anyone who views the page source.</p>
+      <p><strong>Security control.</strong> The key lives only as a Cloudflare Worker secret
+        (<code>env.GEMINI_API_KEY</code>) on the server side. The browser only ever calls the
+        Worker's public URL.</p>
+      <p><strong>Mitigation.</strong> The Worker's CORS allow-list restricts which origins may
+        call it, and its responses are asserted never to contain the key. The experiment
+        script uses no API key at all — it only calls the public Worker endpoint.</p>
+      <p><strong>Security improvement.</strong> Adding per-IP rate limiting on the Worker
+        would reduce abuse of the free explanation endpoint.</p>
+
+      <p class="muted" style="margin-top:1rem;">
+        The malicious-string check is automated and repeatable:
+        <code>node Midterm/Phishing-Website-Detection/tests/verify-explanation.mjs</code>
+        runs it along with the sanitization, prompt-injection and error-handling checks.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Limitations and Future Improvements</h2>
+      <p><strong>Current limitations:</strong></p>
+      <ul>
+        <li>
+          The hybrid explanation layer works, but the deployed Worker returned real Gemini
+          errors (HTTP 502) on 4 of 10 explanations during the experiment run, and successful
+          responses took 6–18 seconds. Reliability and latency are genuine costs of the
+          explanation layer; the classifier itself is unaffected because it runs locally.
+        </li>
+        <li>
+          The grounding measurement is an <strong>automated lexical check</strong>, which
+          undercounts because large language models phrase the same idea many ways. Manual
+          reading was needed to correct two false "verdict disagreement" flags and five false
+          "missing caveat" flags. A stronger metric (semantic similarity, or human rating) is
+          needed for trustworthy grounding numbers.
+        </li>
+        <li>
+          This experiment is <strong>not a user study</strong>. It shows the explanations are
+          textually consistent with the model's real votes and contributions. It does
+          <strong>not</strong> demonstrate that people actually understand phishing better —
+          no claim of improved human comprehension is made from these results.
+        </li>
+        <li>
+          Only 10 held-out examples were tested (a deterministic selection), so the grounding
+          and failure rates are indicative, not statistically powered.
+        </li>
+        <li>
+          URL-based features alone cannot detect phishing that uses valid certificates or
+          compromised legitimate sites, and the dataset is a fixed snapshot that may not
+          reflect newly created phishing techniques.
+        </li>
+      </ul>
+      <p><strong>Future improvements:</strong></p>
+      <ul>
+        <li>Conduct a real user study to measure whether explanations improve comprehension</li>
+        <li>Replace the lexical grounding check with semantic or human-rated evaluation, and test more than 10 examples</li>
+        <li>Add retry/backoff or a fallback model on the Worker to reduce the 502 failure rate and latency</li>
+        <li>Add page-content features beyond URL signals for stronger detection</li>
+        <li>Add per-IP rate limiting and a stricter CSP to harden the explanation endpoint</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Reproducibility</h2>
+      <p>
+        Every result on this page can be regenerated from this repository. There are two
+        experiments, each with its own entry point.
+      </p>
+
+      <h3 style="margin-top:1.2rem;">Experiment 1 — Classifier comparison (notebook)</h3>
+      <p>
+        Runs in Google Colab or locally. It loads the Web Page Phishing Dataset, replicates
+        the Decision Tree / Random Forest baseline, trains the four additional models, runs
+        5-fold cross-validation, and writes the results JSON and accuracy chart.
+      </p>
+      <pre style="background:var(--bg-card); border:1px solid var(--border); border-radius:8px; padding:0.9rem 1rem; overflow-x:auto; font-size:0.85rem;"><code>cd Assignment6
+python3 -m venv .venv &amp;&amp; source .venv/bin/activate
+pip install -r requirements.txt
+jupyter notebook Hybrid_Phishing_Experiments.ipynb   # run all cells</code></pre>
+      <p class="muted">
+        Output: <code>results/experiments_results.json</code> and
+        <code>results/model_accuracy_comparison.png</code>. (A ready-made
+        <code>.venv</code> already exists in this clone; it is not committed to git.)
+      </p>
+
+      <h3 style="margin-top:1.2rem;">Experiment 2 — Random Forest alone vs + AI explanation</h3>
+      <p>
+        A dependency-free Node script (Node 18+). It loads the <em>real</em> exported Random
+        Forest and the production inference code from the Midterm site, runs it on 10 held-out
+        rows, cross-checks each prediction against scikit-learn, sends each to the deployed
+        <code>mission-comms-chatbot</code> Worker for an explanation, and records grounding,
+        response time and failures.
+      </p>
+      <pre style="background:var(--bg-card); border:1px solid var(--border); border-radius:8px; padding:0.9rem 1rem; overflow-x:auto; font-size:0.85rem;"><code>cd Assignment6
+node experiments/run_hybrid_experiment.mjs</code></pre>
+      <p class="muted">
+        Output: <code>results/hybrid_experiment_results.json</code>. It calls only the
+        Worker's public URL — no API key is used or exposed, since the Worker holds the Gemini
+        key server-side. Because it queries a live service, response times and the exact
+        failure count can vary between runs; the classifier's predictions will not.
+      </p>
+
+      <h3 style="margin-top:1.2rem;">Security tests</h3>
+      <p>
+        The XSS, sanitization, prompt-injection and error-handling checks are run separately:
+      </p>
+      <pre style="background:var(--bg-card); border:1px solid var(--border); border-radius:8px; padding:0.9rem 1rem; overflow-x:auto; font-size:0.85rem;"><code>node Midterm/Phishing-Website-Detection/tests/verify-inference.mjs    # JS matches Python
+node Midterm/Phishing-Website-Detection/tests/verify-explanation.mjs  # 44 explanation/security checks</code></pre>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Joselyn | Information Technology | Kean University</p>
+  </footer>
+
+  <!-- Theme Switcher -->
+  <button class="theme-toggle" aria-label="Change theme">🎨</button>
+  <div class="theme-panel">
+    <button class="theme-option active" data-theme="purple" aria-label="Purple Galaxy">
+      <span class="theme-preview purple"></span>
+      Purple Galaxy
+    </button>
+    <button class="theme-option" data-theme="pink" aria-label="Pink Galaxy">
+      <span class="theme-preview pink"></span>
+      Pink Galaxy
+    </button>
+    <button class="theme-option" data-theme="blue" aria-label="Blue Galaxy">
+      <span class="theme-preview blue"></span>
+      Blue Galaxy
+    </button>
+  </div>
+
+  <!-- Chatbox -->
+  <button class="chatbox-toggle" aria-label="Open chat">💬</button>
+  <div class="chatbox-panel">
+    <div class="chatbox-header">
+      <h3>Mission Comms</h3>
+      <button class="chatbox-close" aria-label="Close chat">&times;</button>
+    </div>
+    <div class="chatbox-messages"></div>
+    <div class="chatbox-input-area">
+      <input type="text" class="chatbox-input" placeholder="Ask me something...">
+      <button class="chatbox-mic" type="button" aria-label="Use microphone">🎤</button>
+      <button class="chatbox-send">Send</button>
+    </div>
+    <div class="chatbox-status" role="status" aria-live="polite"></div>
+  </div>
+
+  <!-- Digital Person Panel -->
+  <button class="dp-toggle" aria-label="Open digital person">🧑</button>
+  <div class="dp-panel">
+    <div class="dp-panel-header">
+      <img class="dp-panel-avatar" id="dp-panel-avatar" alt="Digital person avatar" hidden>
+      <div class="dp-panel-title">
+        <h3>Digital Person</h3>
+        <span class="dp-panel-avatar-status" id="dp-panel-avatar-status"></span>
+      </div>
+      <button class="dp-panel-close" aria-label="Close digital person">&times;</button>
+    </div>
+    <div class="dp-panel-messages" id="dp-panel-messages"></div>
+    <div class="dp-panel-input-area">
+      <input type="text" class="dp-panel-input" id="dp-panel-input" placeholder="Ask your digital person...">
+      <button class="dp-panel-mic" id="dp-panel-mic" type="button" aria-label="Use microphone">🎤</button>
+      <button class="dp-panel-send" id="dp-panel-send">Ask</button>
+    </div>
+    <div class="dp-panel-status" role="status" aria-live="polite" id="dp-panel-status"></div>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="digital-person.js"></script>
+</body>
+</html>

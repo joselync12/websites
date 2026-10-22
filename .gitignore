@@ -1,0 +1,12 @@
+# Nested git repo — published separately at joselync12/Phishing-Website-Detection
+Midterm/
+
+# Python virtual environments
+Assignment6/.venv/
+.venv/
+venv/
+
+# macOS / editor junk
+.DS_Store
+.vscode/
+.idea/

@@ -1,0 +1,9 @@
+# Assignment 6 — Hybrid AI-Powered Phishing Detection and Explanation System
+# Core libraries needed to run Hybrid_Phishing_Experiments.ipynb
+pandas>=2.0
+scikit-learn>=1.4
+numpy>=1.26
+matplotlib>=3.8
+
+# To open the notebook locally in a browser (not needed in Google Colab):
+# jupyter

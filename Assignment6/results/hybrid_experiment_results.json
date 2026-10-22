@@ -1,0 +1,983 @@
+{
+  "experiment": "random_forest_alone_vs_random_forest_plus_ai_explanation",
+  "generated_utc": "2026-10-22T19:59:07.123Z",
+  "worker_url": "https://mission-comms-chatbot.joselyn-tech3498.workers.dev",
+  "worker_name": "mission-comms-chatbot",
+  "model": "Random Forest (exported from the Midterm pipeline; 100 trees)",
+  "model_source": "Midterm/Phishing-Website-Detection/docs/models/random_forest.json",
+  "inference_code_source": "Midterm/Phishing-Website-Detection/docs/js/analyzer.js (production path)",
+  "examples_selection": "deterministic: every 4th of the 40 held-out fixture rows (indices 0,4,...,36)",
+  "examples_total": 10,
+  "api_keys_used": "none — the Worker holds the Gemini key server-side",
+  "measurement_caveat": "Grounding checks are automated lexical comparisons between the explanation text and the model's real votes/contributions. They are NOT a user study and do NOT demonstrate improved human comprehension.",
+  "aggregate": {
+    "examples_total": 10,
+    "js_matches_python_count": 10,
+    "explanations_returned": 6,
+    "failures": 4,
+    "failure_reasons": [
+      {
+        "test_row": 4,
+        "error": "Gemini error"
+      },
+      {
+        "test_row": 8,
+        "error": "Gemini error"
+      },
+      {
+        "test_row": 16,
+        "error": "Gemini error"
+      },
+      {
+        "test_row": 36,
+        "error": "Gemini error"
+      }
+    ],
+    "latency_ms": {
+      "mean": 12143,
+      "median": 12594,
+      "min": 5770,
+      "max": 17865
+    },
+    "classifier_prediction_unchanged_count": 6,
+    "grounding": {
+      "mentions_a_top_contributing_feature": 6,
+      "verdict_language_agrees_with_model": 4,
+      "claims_to_have_visited_url": 0,
+      "states_it_is_not_proof_of_safety": 1,
+      "of": 6
+    }
+  },
+  "examples": [
+    {
+      "test_row": 0,
+      "features": [
+        37,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "expected_from_python": {
+        "predicted_class": 1,
+        "phishing_probability": 0.517022
+      },
+      "actual_js": {
+        "predicted_class": 1,
+        "label": "Phishing",
+        "phishing_probability": 0.5170218528289997,
+        "votes": {
+          "phishing": 52,
+          "legitimate": 48
+        },
+        "n_trees": 100,
+        "top_contributions": [
+          {
+            "feature": "n_slash",
+            "delta": -0.19625264750999993
+          },
+          {
+            "feature": "n_hypens",
+            "delta": 0.040941419142000016
+          },
+          {
+            "feature": "n_dots",
+            "delta": -0.036777904916
+          },
+          {
+            "feature": "n_equal",
+            "delta": -0.034038766824000005
+          },
+          {
+            "feature": "n_redirection",
+            "delta": 0.030040611982000004
+          }
+        ]
+      },
+      "condition_a_random_forest_alone": {
+        "prediction_shown_to_user": "Phishing",
+        "probability_shown_to_user": 0.5170218528289997,
+        "explanation_available": false,
+        "explanation_source": "none — raw numeric contributions only"
+      },
+      "explanation_request": {
+        "label_sent": "Phishing",
+        "probability_sent": 0.5170218528289997,
+        "contributions_sent": 6,
+        "votes_sent": {
+          "phishing": 52,
+          "legitimate": 48,
+          "nTrees": 100
+        }
+      },
+      "condition_b_random_forest_plus_ai": {
+        "explanation_available": true,
+        "http_status": 200,
+        "latency_ms": 12021,
+        "explanation_text": "Our Random Forest model—which has an accuracy of 82.58% on its test set using 100 decision trees—narrowly classified this URL as phishing with 52 out of 100 votes pointing to phishing and a probability of 51.7%. Please remember that this is only a statistical prediction from our machine learning model, not absolute proof that the website is safe or dangerous, and the model can certainly be wrong. The decision was very close, balanced between features that slightly pushed the score toward phishing and others that pulled it back toward legitimate.\n\nHere are the strongest feature contributions that influenced the model's prediction:\n* **number of slashes (/)**: Had a value of 0, pushing the prediction toward legitimate.\n* **number of hyphens (-)**: Had a value of 0, pushing the prediction toward phishing.\n* **number of dots (.)**: Had a value of 3, pushing the prediction toward legitimate.\n* **number of equal signs (=)**: Had a value of 0, pushing the prediction toward legitimate.",
+        "classifier_prediction_unchanged": true,
+        "grounding": {
+          "mentions_a_top_contributing_feature": true,
+          "top_features_actually_named": [
+            "n_slash",
+            "n_hypens",
+            "n_dots"
+          ],
+          "top_features_from_model": [
+            "n_slash",
+            "n_hypens",
+            "n_dots"
+          ],
+          "verdict_language_agrees_with_model": false,
+          "claims_to_have_visited_url": false,
+          "states_it_is_not_proof_of_safety": false
+        }
+      },
+      "js_matches_python": true
+    },
+    {
+      "test_row": 4,
+      "features": [
+        38,
+        3,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "expected_from_python": {
+        "predicted_class": 1,
+        "phishing_probability": 0.524008
+      },
+      "actual_js": {
+        "predicted_class": 1,
+        "label": "Phishing",
+        "phishing_probability": 0.5240083322389999,
+        "votes": {
+          "phishing": 63,
+          "legitimate": 37
+        },
+        "n_trees": 100,
+        "top_contributions": [
+          {
+            "feature": "n_slash",
+            "delta": -0.11743986791399992
+          },
+          {
+            "feature": "url_length",
+            "delta": -0.11390914148799995
+          },
+          {
+            "feature": "n_equal",
+            "delta": 0.08989110591999996
+          },
+          {
+            "feature": "n_questionmark",
+            "delta": 0.08043710605999997
+          },
+          {
+            "feature": "n_dots",
+            "delta": -0.04016625938799999
+          }
+        ]
+      },
+      "condition_a_random_forest_alone": {
+        "prediction_shown_to_user": "Phishing",
+        "probability_shown_to_user": 0.5240083322389999,
+        "explanation_available": false,
+        "explanation_source": "none — raw numeric contributions only"
+      },
+      "explanation_request": {
+        "label_sent": "Phishing",
+        "probability_sent": 0.5240083322389999,
+        "contributions_sent": 6,
+        "votes_sent": {
+          "phishing": 63,
+          "legitimate": 37,
+          "nTrees": 100
+        }
+      },
+      "condition_b_random_forest_plus_ai": {
+        "explanation_available": false,
+        "http_status": 502,
+        "error": "Gemini error",
+        "latency_ms": 32574
+      },
+      "js_matches_python": true
+    },
+    {
+      "test_row": 8,
+      "features": [
+        114,
+        3,
+        10,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "expected_from_python": {
+        "predicted_class": 0,
+        "phishing_probability": 0.160707
+      },
+      "actual_js": {
+        "predicted_class": 0,
+        "label": "Legitimate",
+        "phishing_probability": 0.16070719590100002,
+        "votes": {
+          "phishing": 4,
+          "legitimate": 96
+        },
+        "n_trees": 100,
+        "top_contributions": [
+          {
+            "feature": "n_hypens",
+            "delta": -0.26789938887100007
+          },
+          {
+            "feature": "n_slash",
+            "delta": -0.21509054003900008
+          },
+          {
+            "feature": "n_equal",
+            "delta": -0.046028855316000004
+          },
+          {
+            "feature": "n_redirection",
+            "delta": 0.033011802069000014
+          },
+          {
+            "feature": "n_dots",
+            "delta": -0.02264139653600001
+          }
+        ]
+      },
+      "condition_a_random_forest_alone": {
+        "prediction_shown_to_user": "Legitimate",
+        "probability_shown_to_user": 0.16070719590100002,
+        "explanation_available": false,
+        "explanation_source": "none — raw numeric contributions only"
+      },
+      "explanation_request": {
+        "label_sent": "Legitimate",
+        "probability_sent": 0.16070719590100002,
+        "contributions_sent": 6,
+        "votes_sent": {
+          "phishing": 4,
+          "legitimate": 96,
+          "nTrees": 100
+        }
+      },
+      "condition_b_random_forest_plus_ai": {
+        "explanation_available": false,
+        "http_status": 502,
+        "error": "Gemini error",
+        "latency_ms": 34455
+      },
+      "js_matches_python": true
+    },
+    {
+      "test_row": 12,
+      "features": [
+        40,
+        4,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "expected_from_python": {
+        "predicted_class": 1,
+        "phishing_probability": 0.605547
+      },
+      "actual_js": {
+        "predicted_class": 1,
+        "label": "Phishing",
+        "phishing_probability": 0.605546850029,
+        "votes": {
+          "phishing": 77,
+          "legitimate": 23
+        },
+        "n_trees": 100,
+        "top_contributions": [
+          {
+            "feature": "n_slash",
+            "delta": -0.17835477280599998
+          },
+          {
+            "feature": "n_dots",
+            "delta": 0.06479026200900001
+          },
+          {
+            "feature": "n_hypens",
+            "delta": 0.033611552777
+          },
+          {
+            "feature": "url_length",
+            "delta": 0.032488955788
+          },
+          {
+            "feature": "n_equal",
+            "delta": -0.032365856002000024
+          }
+        ]
+      },
+      "condition_a_random_forest_alone": {
+        "prediction_shown_to_user": "Phishing",
+        "probability_shown_to_user": 0.605546850029,
+        "explanation_available": false,
+        "explanation_source": "none — raw numeric contributions only"
+      },
+      "explanation_request": {
+        "label_sent": "Phishing",
+        "probability_sent": 0.605546850029,
+        "contributions_sent": 6,
+        "votes_sent": {
+          "phishing": 77,
+          "legitimate": 23,
+          "nTrees": 100
+        }
+      },
+      "condition_b_random_forest_plus_ai": {
+        "explanation_available": true,
+        "http_status": 200,
+        "latency_ms": 17865,
+        "explanation_text": "Based on the Random Forest model's statistical analysis, the system predicted this URL as **Phishing** with a probability of about 61%, receiving 77 out of 100 decision tree votes pointing that way. Please remember that this is only a machine learning prediction and not definitive proof of danger; the model can be wrong and has an overall test accuracy of 82.58%. \n\nHere are the strongest feature reasons behind this specific prediction:\n\n* **number of dots (.)**: Having 4 dots pushed the model toward predicting phishing, as complex or unusually structured domain names often use extra dots to mimic legitimate sites.\n* **URL length (characters)**: A length of 40 characters contributed toward the phishing score, since suspicious links are sometimes longer to hide details from the user.\n* **number of slashes (/)**: Having 0 slashes pushed the prediction back toward legitimate.\n* **embedded URL redirects (count of '://' minus one)**: A count of 1 contributed toward the legitimate side.",
+        "classifier_prediction_unchanged": true,
+        "grounding": {
+          "mentions_a_top_contributing_feature": true,
+          "top_features_actually_named": [
+            "n_slash",
+            "n_dots"
+          ],
+          "top_features_from_model": [
+            "n_slash",
+            "n_dots",
+            "n_hypens"
+          ],
+          "verdict_language_agrees_with_model": true,
+          "claims_to_have_visited_url": false,
+          "states_it_is_not_proof_of_safety": true
+        }
+      },
+      "js_matches_python": true
+    },
+    {
+      "test_row": 16,
+      "features": [
+        101,
+        2,
+        10,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "expected_from_python": {
+        "predicted_class": 0,
+        "phishing_probability": 0.127845
+      },
+      "actual_js": {
+        "predicted_class": 0,
+        "label": "Legitimate",
+        "phishing_probability": 0.12784503313700005,
+        "votes": {
+          "phishing": 3,
+          "legitimate": 97
+        },
+        "n_trees": 100,
+        "top_contributions": [
+          {
+            "feature": "n_hypens",
+            "delta": -0.26750948371199984
+          },
+          {
+            "feature": "n_slash",
+            "delta": -0.18304468346400005
+          },
+          {
+            "feature": "n_equal",
+            "delta": -0.040452154886000014
+          },
+          {
+            "feature": "n_redirection",
+            "delta": -0.039133423309999985
+          },
+          {
+            "feature": "n_dots",
+            "delta": -0.026544540659000006
+          }
+        ]
+      },
+      "condition_a_random_forest_alone": {
+        "prediction_shown_to_user": "Legitimate",
+        "probability_shown_to_user": 0.12784503313700005,
+        "explanation_available": false,
+        "explanation_source": "none — raw numeric contributions only"
+      },
+      "explanation_request": {
+        "label_sent": "Legitimate",
+        "probability_sent": 0.12784503313700005,
+        "contributions_sent": 6,
+        "votes_sent": {
+          "phishing": 3,
+          "legitimate": 97,
+          "nTrees": 100
+        }
+      },
+      "condition_b_random_forest_plus_ai": {
+        "explanation_available": false,
+        "http_status": 502,
+        "error": "Gemini error",
+        "latency_ms": 26754
+      },
+      "js_matches_python": true
+    },
+    {
+      "test_row": 20,
+      "features": [
+        45,
+        2,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "expected_from_python": {
+        "predicted_class": 0,
+        "phishing_probability": 0.250258
+      },
+      "actual_js": {
+        "predicted_class": 0,
+        "label": "Legitimate",
+        "phishing_probability": 0.2502583467379999,
+        "votes": {
+          "phishing": 12,
+          "legitimate": 88
+        },
+        "n_trees": 100,
+        "top_contributions": [
+          {
+            "feature": "n_underline",
+            "delta": -0.17476260589500003
+          },
+          {
+            "feature": "n_slash",
+            "delta": -0.1729526404359999
+          },
+          {
+            "feature": "n_equal",
+            "delta": -0.03612758780100001
+          },
+          {
+            "feature": "n_redirection",
+            "delta": -0.034747768024999987
+          },
+          {
+            "feature": "n_dots",
+            "delta": -0.02926113144499999
+          }
+        ]
+      },
+      "condition_a_random_forest_alone": {
+        "prediction_shown_to_user": "Legitimate",
+        "probability_shown_to_user": 0.2502583467379999,
+        "explanation_available": false,
+        "explanation_source": "none — raw numeric contributions only"
+      },
+      "explanation_request": {
+        "label_sent": "Legitimate",
+        "probability_sent": 0.2502583467379999,
+        "contributions_sent": 6,
+        "votes_sent": {
+          "phishing": 12,
+          "legitimate": 88,
+          "nTrees": 100
+        }
+      },
+      "condition_b_random_forest_plus_ai": {
+        "explanation_available": true,
+        "http_status": 200,
+        "latency_ms": 17032,
+        "explanation_text": "Our Random Forest model, which has an accuracy of 82.58% on its test set, analyzed this URL and predicted it is **Legitimate** with 88 out of 100 decision trees voting that way. Please remember that this is only a statistical prediction and not absolute proof, as machine learning models can sometimes make mistakes. \n\nHere are the main reasons that influenced the model's decision:\n* **number of underscores (_):** Having 3 underscores pushed the prediction toward legitimate.\n* **number of slashes (/):** Having 0 slashes pushed the prediction toward legitimate.\n* **number of equal signs (=):** Having 0 equal signs pushed the prediction toward legitimate.\n* **embedded URL redirects (count of '://' minus one):** Having a count of 1 pushed the prediction toward legitimate.",
+        "classifier_prediction_unchanged": true,
+        "grounding": {
+          "mentions_a_top_contributing_feature": true,
+          "top_features_actually_named": [
+            "n_underline",
+            "n_slash",
+            "n_equal"
+          ],
+          "top_features_from_model": [
+            "n_underline",
+            "n_slash",
+            "n_equal"
+          ],
+          "verdict_language_agrees_with_model": true,
+          "claims_to_have_visited_url": false,
+          "states_it_is_not_proof_of_safety": false
+        }
+      },
+      "js_matches_python": true
+    },
+    {
+      "test_row": 24,
+      "features": [
+        46,
+        2,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "expected_from_python": {
+        "predicted_class": 1,
+        "phishing_probability": 0.505316
+      },
+      "actual_js": {
+        "predicted_class": 1,
+        "label": "Phishing",
+        "phishing_probability": 0.5053157720869998,
+        "votes": {
+          "phishing": 53,
+          "legitimate": 47
+        },
+        "n_trees": 100,
+        "top_contributions": [
+          {
+            "feature": "n_slash",
+            "delta": -0.18757226760299997
+          },
+          {
+            "feature": "n_hypens",
+            "delta": 0.05745145634800004
+          },
+          {
+            "feature": "n_equal",
+            "delta": -0.035461467098000014
+          },
+          {
+            "feature": "n_dots",
+            "delta": -0.035397100524000004
+          },
+          {
+            "feature": "n_redirection",
+            "delta": -0.02999310577399999
+          }
+        ]
+      },
+      "condition_a_random_forest_alone": {
+        "prediction_shown_to_user": "Phishing",
+        "probability_shown_to_user": 0.5053157720869998,
+        "explanation_available": false,
+        "explanation_source": "none — raw numeric contributions only"
+      },
+      "explanation_request": {
+        "label_sent": "Phishing",
+        "probability_sent": 0.5053157720869998,
+        "contributions_sent": 6,
+        "votes_sent": {
+          "phishing": 53,
+          "legitimate": 47,
+          "nTrees": 100
+        }
+      },
+      "condition_b_random_forest_plus_ai": {
+        "explanation_available": true,
+        "http_status": 200,
+        "latency_ms": 12594,
+        "explanation_text": "Based on the model's analysis, our Random Forest classifier—which uses 100 decision trees and achieves an 82.58% accuracy on its test set—predicts that this URL is Phishing with a slight lean (53 out of 100 votes). Please keep in mind that this is only a statistical prediction and not absolute proof of danger, as machine learning models can sometimes make mistakes. The prediction was a close call, influenced by a mix of characteristics that pushed the model in both directions.\n\nHere are the strongest reasons behind the model's decision:\n* **number of hyphens (-):** Having 1 hyphen pushed the prediction toward phishing.\n* **URL length (characters):** A length of 46 characters also pushed the prediction toward phishing.\n* **number of slashes (/):** Having 0 slashes pushed the prediction toward legitimate.\n* **number of equal signs (=):** Having 0 equal signs pushed the prediction toward legitimate.",
+        "classifier_prediction_unchanged": true,
+        "grounding": {
+          "mentions_a_top_contributing_feature": true,
+          "top_features_actually_named": [
+            "n_slash",
+            "n_hypens",
+            "n_equal"
+          ],
+          "top_features_from_model": [
+            "n_slash",
+            "n_hypens",
+            "n_equal"
+          ],
+          "verdict_language_agrees_with_model": true,
+          "claims_to_have_visited_url": false,
+          "states_it_is_not_proof_of_safety": false
+        }
+      },
+      "js_matches_python": true
+    },
+    {
+      "test_row": 28,
+      "features": [
+        75,
+        3,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "expected_from_python": {
+        "predicted_class": 1,
+        "phishing_probability": 0.565092
+      },
+      "actual_js": {
+        "predicted_class": 1,
+        "label": "Phishing",
+        "phishing_probability": 0.5650915987409999,
+        "votes": {
+          "phishing": 59,
+          "legitimate": 41
+        },
+        "n_trees": 100,
+        "top_contributions": [
+          {
+            "feature": "n_slash",
+            "delta": -0.208742857323
+          },
+          {
+            "feature": "url_length",
+            "delta": 0.052248744906999975
+          },
+          {
+            "feature": "n_hypens",
+            "delta": 0.05214102922200003
+          },
+          {
+            "feature": "n_equal",
+            "delta": -0.038100292084000016
+          },
+          {
+            "feature": "n_dots",
+            "delta": -0.03739804969700001
+          }
+        ]
+      },
+      "condition_a_random_forest_alone": {
+        "prediction_shown_to_user": "Phishing",
+        "probability_shown_to_user": 0.5650915987409999,
+        "explanation_available": false,
+        "explanation_source": "none — raw numeric contributions only"
+      },
+      "explanation_request": {
+        "label_sent": "Phishing",
+        "probability_sent": 0.5650915987409999,
+        "contributions_sent": 6,
+        "votes_sent": {
+          "phishing": 59,
+          "legitimate": 41,
+          "nTrees": 100
+        }
+      },
+      "condition_b_random_forest_plus_ai": {
+        "explanation_available": true,
+        "http_status": 200,
+        "latency_ms": 5770,
+        "explanation_text": "Our Random Forest model, which has an 82.58% accuracy rate on its test set, analyzed this URL and leaned toward a phishing prediction with 59 out of 100 decision trees voting phishing (yielding a 56.5% probability). This is only a statistical prediction from our machine learning model and does not serve as absolute proof that the website is safe or dangerous, as the model can sometimes be wrong. \n\nThe model's decision was shaped by a mix of features that either pushed the score toward phishing or toward legitimate:\n* **URL length (characters)** (value: 75) pushed the prediction toward phishing due to its longer character count.\n* **number of hyphens (-)** (value: 1) also contributed toward a phishing classification.\n* **number of slashes (/)** (value: 0) pushed the prediction back toward legitimate.\n* **number of equal signs (=)** (value: 0) further supported the legitimate side of the prediction.",
+        "classifier_prediction_unchanged": true,
+        "grounding": {
+          "mentions_a_top_contributing_feature": true,
+          "top_features_actually_named": [
+            "n_slash",
+            "url_length",
+            "n_hypens"
+          ],
+          "top_features_from_model": [
+            "n_slash",
+            "url_length",
+            "n_hypens"
+          ],
+          "verdict_language_agrees_with_model": false,
+          "claims_to_have_visited_url": false,
+          "states_it_is_not_proof_of_safety": false
+        }
+      },
+      "js_matches_python": true
+    },
+    {
+      "test_row": 32,
+      "features": [
+        396,
+        24,
+        0,
+        18,
+        0,
+        2,
+        9,
+        1,
+        8,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "expected_from_python": {
+        "predicted_class": 1,
+        "phishing_probability": 0.990413
+      },
+      "actual_js": {
+        "predicted_class": 1,
+        "label": "Phishing",
+        "phishing_probability": 0.99041336283,
+        "votes": {
+          "phishing": 99,
+          "legitimate": 1
+        },
+        "n_trees": 100,
+        "top_contributions": [
+          {
+            "feature": "n_equal",
+            "delta": 0.081996838379
+          },
+          {
+            "feature": "url_length",
+            "delta": 0.06886819462799998
+          },
+          {
+            "feature": "n_slash",
+            "delta": -0.06620858643400002
+          },
+          {
+            "feature": "n_at",
+            "delta": 0.066112095702
+          },
+          {
+            "feature": "n_questionmark",
+            "delta": 0.05024701427800001
+          }
+        ]
+      },
+      "condition_a_random_forest_alone": {
+        "prediction_shown_to_user": "Phishing",
+        "probability_shown_to_user": 0.99041336283,
+        "explanation_available": false,
+        "explanation_source": "none — raw numeric contributions only"
+      },
+      "explanation_request": {
+        "label_sent": "Phishing",
+        "probability_sent": 0.99041336283,
+        "contributions_sent": 6,
+        "votes_sent": {
+          "phishing": 99,
+          "legitimate": 1,
+          "nTrees": 100
+        }
+      },
+      "condition_b_random_forest_plus_ai": {
+        "explanation_available": true,
+        "http_status": 200,
+        "latency_ms": 7578,
+        "explanation_text": "Our Random Forest model, which has an accuracy of 82.58% on its test set, analyzed this URL's characteristics and predicted it is likely a phishing link with 99 out of 100 decision tree votes pointing in that direction. Please keep in mind that this is only a statistical prediction from our machine learning model and not definitive proof that the website is dangerous or safe—the model can sometimes make mistakes. Here are the key features the model looked at and what they mean in everyday terms:\n\n* **number of equal signs (=):** There were 9 equal signs found in the URL, which pushed the prediction toward phishing by acting as a strong indicator often seen in complex tracking or redirect links.\n* **URL length (characters):** The URL was 396 characters long, a feature that favored a phishing classification because unusually long addresses are frequently used to hide suspicious destinations.\n* **number of at signs (@):** The presence of 1 \"at\" symbol pushed the prediction toward phishing, as this character is commonly used to trick users about where a link truly leads.\n* **number of ampersands (&):** Having 8 ampersands also leaned the prediction toward phishing due to its frequent use in stringing together long parameters in web addresses.",
+        "classifier_prediction_unchanged": true,
+        "grounding": {
+          "mentions_a_top_contributing_feature": true,
+          "top_features_actually_named": [
+            "n_equal",
+            "url_length"
+          ],
+          "top_features_from_model": [
+            "n_equal",
+            "url_length",
+            "n_slash"
+          ],
+          "verdict_language_agrees_with_model": true,
+          "claims_to_have_visited_url": false,
+          "states_it_is_not_proof_of_safety": false
+        }
+      },
+      "js_matches_python": true
+    },
+    {
+      "test_row": 36,
+      "features": [
+        76,
+        4,
+        4,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "expected_from_python": {
+        "predicted_class": 1,
+        "phishing_probability": 0.703472
+      },
+      "actual_js": {
+        "predicted_class": 1,
+        "label": "Phishing",
+        "phishing_probability": 0.7034716108520003,
+        "votes": {
+          "phishing": 82,
+          "legitimate": 18
+        },
+        "n_trees": 100,
+        "top_contributions": [
+          {
+            "feature": "n_equal",
+            "delta": 0.11843882087999998
+          },
+          {
+            "feature": "n_slash",
+            "delta": -0.11555512120099992
+          },
+          {
+            "feature": "n_questionmark",
+            "delta": 0.06854839774899998
+          },
+          {
+            "feature": "n_redirection",
+            "delta": -0.042797982508
+          },
+          {
+            "feature": "n_underline",
+            "delta": -0.030430018423
+          }
+        ]
+      },
+      "condition_a_random_forest_alone": {
+        "prediction_shown_to_user": "Phishing",
+        "probability_shown_to_user": 0.7034716108520003,
+        "explanation_available": false,
+        "explanation_source": "none — raw numeric contributions only"
+      },
+      "explanation_request": {
+        "label_sent": "Phishing",
+        "probability_sent": 0.7034716108520003,
+        "contributions_sent": 6,
+        "votes_sent": {
+          "phishing": 82,
+          "legitimate": 18,
+          "nTrees": 100
+        }
+      },
+      "condition_b_random_forest_plus_ai": {
+        "explanation_available": false,
+        "http_status": 502,
+        "error": "Gemini error",
+        "latency_ms": 19370
+      },
+      "js_matches_python": true
+    }
+  ]
+}

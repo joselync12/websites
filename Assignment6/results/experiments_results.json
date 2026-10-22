@@ -1,0 +1,364 @@
+{
+  "metadata": {
+    "assignment": 6,
+    "step": "2 - machine learning experiments",
+    "generated_utc": "2026-10-19T22:47:50.716994+00:00",
+    "python": "3.13.3",
+    "pandas": "3.0.6",
+    "numpy": "2.5.4",
+    "scikit_learn": "1.9.1",
+    "matplotlib": "3.11.2",
+    "random_state": 42,
+    "feature_order": [
+      "url_length",
+      "n_dots",
+      "n_hypens",
+      "n_underline",
+      "n_slash",
+      "n_questionmark",
+      "n_equal",
+      "n_at",
+      "n_and",
+      "n_exclamation",
+      "n_space",
+      "n_tilde",
+      "n_comma",
+      "n_plus",
+      "n_asterisk",
+      "n_hastag",
+      "n_dollar",
+      "n_percent",
+      "n_redirection"
+    ],
+    "dataset_source": "https://www.kaggle.com/datasets/danielfernandon/web-page-phishing-dataset",
+    "reference_notebook": "https://www.kaggle.com/code/mrudhuhas/advanced-url-analysis-for-phishing-detection/notebook"
+  },
+  "dataset": {
+    "original_rows": 100077,
+    "duplicate_rows_removed": 78186,
+    "cleaned_rows": 21891,
+    "legitimate_rows": 6019,
+    "phishing_rows": 15872,
+    "train_rows": 17523,
+    "test_rows": 4368,
+    "test_phishing_share": 0.7383241758241759
+  },
+  "baseline_replication": {
+    "reference_note": "Reference accuracies reported in the Midterm notebook (Google Colab).",
+    "decision_tree": {
+      "reference_accuracy": 0.8141025641025641,
+      "actual_accuracy_this_run": 0.8141025641025641,
+      "delta": 0.0,
+      "exact_match": true
+    },
+    "random_forest": {
+      "reference_accuracy": 0.8257783882783882,
+      "actual_accuracy_this_run": 0.8257783882783882,
+      "delta": 0.0,
+      "exact_match": true
+    }
+  },
+  "model_comparison": [
+    {
+      "model": "Random Forest (baseline)",
+      "accuracy": 0.8257783883,
+      "precision_phishing": 0.8418423973,
+      "recall_phishing": 0.9407751938,
+      "f1_phishing": 0.8885634793,
+      "f1_macro": 0.7447536851,
+      "fit_seconds": 0.549065093,
+      "predict_seconds": 0.051300958,
+      "tn": 573,
+      "fp": 570,
+      "fn": 191,
+      "tp": 3034,
+      "cv_accuracy_mean": 0.8147181964,
+      "cv_accuracy_std": 0.0033772404,
+      "cv_f1_mean": 0.8801191974,
+      "cv_f1_std": 0.0025157246
+    },
+    {
+      "model": "k-Nearest Neighbors",
+      "accuracy": 0.8237179487,
+      "precision_phishing": 0.8727604009,
+      "recall_phishing": 0.8911627907,
+      "f1_phishing": 0.8818656029,
+      "f1_macro": 0.7673529998,
+      "fit_seconds": 0.015266158,
+      "predict_seconds": 0.492102115,
+      "tn": 724,
+      "fp": 419,
+      "fn": 351,
+      "tp": 2874,
+      "cv_accuracy_mean": 0.7909180835,
+      "cv_accuracy_std": 0.0077123434,
+      "cv_f1_mean": 0.8579927491,
+      "cv_f1_std": 0.0058725435
+    },
+    {
+      "model": "Gradient Boosting",
+      "accuracy": 0.8214285714,
+      "precision_phishing": 0.8546562228,
+      "recall_phishing": 0.9134883721,
+      "f1_phishing": 0.8830935252,
+      "f1_macro": 0.7525932742,
+      "fit_seconds": 2.684671774,
+      "predict_seconds": 0.014166729,
+      "tn": 642,
+      "fp": 501,
+      "fn": 279,
+      "tp": 2946,
+      "cv_accuracy_mean": 0.8142156943,
+      "cv_accuracy_std": 0.0034729678,
+      "cv_f1_mean": 0.8771930576,
+      "cv_f1_std": 0.0025786958
+    },
+    {
+      "model": "Decision Tree (baseline)",
+      "accuracy": 0.8141025641,
+      "precision_phishing": 0.8617691154,
+      "recall_phishing": 0.8911627907,
+      "f1_phishing": 0.8762195122,
+      "f1_macro": 0.7515288737,
+      "fit_seconds": 0.067588704,
+      "predict_seconds": 0.003562878,
+      "tn": 682,
+      "fp": 461,
+      "fn": 351,
+      "tp": 2874,
+      "cv_accuracy_mean": 0.8022015974,
+      "cv_accuracy_std": 0.0031053232,
+      "cv_f1_mean": 0.8675698988,
+      "cv_f1_std": 0.0034362483
+    },
+    {
+      "model": "SVM (RBF kernel)",
+      "accuracy": 0.8138736264,
+      "precision_phishing": 0.8518086348,
+      "recall_phishing": 0.9054263566,
+      "f1_phishing": 0.877799489,
+      "f1_macro": 0.7437485203,
+      "fit_seconds": 18.390345362,
+      "predict_seconds": 5.789186488,
+      "tn": 635,
+      "fp": 508,
+      "fn": 305,
+      "tp": 2920,
+      "cv_accuracy_mean": 0.8071351171,
+      "cv_accuracy_std": 0.0036455428,
+      "cv_f1_mean": 0.8725311585,
+      "cv_f1_std": 0.002738077
+    },
+    {
+      "model": "Logistic Regression",
+      "accuracy": 0.7841117216,
+      "precision_phishing": 0.8328471412,
+      "recall_phishing": 0.8852713178,
+      "f1_phishing": 0.8582594318,
+      "f1_macro": 0.7027734989,
+      "fit_seconds": 0.137097302,
+      "predict_seconds": 0.005210246,
+      "tn": 570,
+      "fp": 573,
+      "fn": 370,
+      "tp": 2855,
+      "cv_accuracy_mean": 0.7774426118,
+      "cv_accuracy_std": 0.0033075441,
+      "cv_f1_mean": 0.8530440936,
+      "cv_f1_std": 0.0024300834
+    },
+    {
+      "model": "Dummy (most-frequent)",
+      "accuracy": 0.7383241758,
+      "precision_phishing": 0.7383241758,
+      "recall_phishing": 1.0,
+      "f1_phishing": 0.849466614,
+      "f1_macro": 0.424733307,
+      "fit_seconds": 0.001938458,
+      "predict_seconds": 0.000894469,
+      "tn": 0,
+      "fp": 1143,
+      "fn": 0,
+      "tp": 3225,
+      "cv_accuracy_mean": 0.7250468227,
+      "cv_accuracy_std": 8.8494e-05,
+      "cv_f1_mean": 0.8406111771,
+      "cv_f1_std": 5.94722e-05
+    }
+  ],
+  "explanation_groundwork": {
+    "method": "per-tree root-to-leaf path attribution on the Random Forest (same logic as the Midterm site's analyzer.js)",
+    "sanity_check_reconstruction_error": 2.220446049250313e-16,
+    "examples": [
+      {
+        "test_row": 0,
+        "actual": 0,
+        "predicted": 1,
+        "phishing_probability": 0.517021852820299,
+        "top_contributions": [
+          {
+            "feature": "n_slash",
+            "delta": -0.19625264751703578
+          },
+          {
+            "feature": "n_hypens",
+            "delta": 0.04094141913945713
+          },
+          {
+            "feature": "n_dots",
+            "delta": -0.036777904917845966
+          },
+          {
+            "feature": "n_equal",
+            "delta": -0.03403876681696508
+          },
+          {
+            "feature": "n_redirection",
+            "delta": 0.030040611981947213
+          }
+        ]
+      },
+      {
+        "test_row": 1455,
+        "actual": 1,
+        "predicted": 1,
+        "phishing_probability": 0.7453823242206622,
+        "top_contributions": [
+          {
+            "feature": "n_slash",
+            "delta": 0.07973698513035045
+          },
+          {
+            "feature": "n_hypens",
+            "delta": -0.04673326224356294
+          },
+          {
+            "feature": "url_length",
+            "delta": 0.038005030794649446
+          },
+          {
+            "feature": "n_equal",
+            "delta": -0.0370538753099476
+          },
+          {
+            "feature": "n_redirection",
+            "delta": 0.03220573782042074
+          }
+        ]
+      },
+      {
+        "test_row": 2911,
+        "actual": 1,
+        "predicted": 1,
+        "phishing_probability": 0.9396273531248838,
+        "top_contributions": [
+          {
+            "feature": "n_at",
+            "delta": 0.15821467315489865
+          },
+          {
+            "feature": "n_equal",
+            "delta": 0.07793738215650901
+          },
+          {
+            "feature": "n_slash",
+            "delta": -0.027198074931411825
+          },
+          {
+            "feature": "url_length",
+            "delta": 0.019547732037727448
+          },
+          {
+            "feature": "n_redirection",
+            "delta": -0.017787104190045006
+          }
+        ]
+      },
+      {
+        "test_row": 4367,
+        "actual": 1,
+        "predicted": 1,
+        "phishing_probability": 0.8243119881478458,
+        "top_contributions": [
+          {
+            "feature": "n_equal",
+            "delta": 0.08934235558683117
+          },
+          {
+            "feature": "n_slash",
+            "delta": 0.08472700657457999
+          },
+          {
+            "feature": "n_hypens",
+            "delta": 0.0414518124093484
+          },
+          {
+            "feature": "n_redirection",
+            "delta": -0.0330533726940016
+          },
+          {
+            "feature": "url_length",
+            "delta": -0.03145132872846666
+          }
+        ]
+      }
+    ]
+  },
+  "hybrid_system": {
+    "status": "implemented-and-evaluated",
+    "note": "The hybrid system (Random Forest classifier + AI explanation assistant) has been built and evaluated. The classifier is UNCHANGED by design: the explanation layer sits strictly after the model and the Worker returns only prose, never a verdict. Therefore the classifier metrics below are the Random Forest's own measured values (not a new measurement), and the explanation layer is evaluated on grounding, latency, and reliability instead of accuracy.",
+    "classifier": {
+      "unchanged_by_design": true,
+      "model": "Random Forest (100 trees)",
+      "accuracy": 0.8257783882783882,
+      "precision_phishing": 0.8418423973,
+      "recall_phishing": 0.9407751938,
+      "f1_phishing": 0.8885634793,
+      "source": "same Random Forest measured in model_comparison; not re-measured for the hybrid"
+    },
+    "explanation_layer": {
+      "experiment": "random_forest_alone_vs_random_forest_plus_ai_explanation",
+      "run_utc": "2026-10-22T19:59:07.123Z",
+      "worker": "mission-comms-chatbot",
+      "examples_total": 10,
+      "js_inference_matched_python": 10,
+      "classifier_prediction_unchanged": 6,
+      "explanations_returned": 6,
+      "failures": 4,
+      "failure_reasons": [
+        {
+          "test_row": 4,
+          "error": "Gemini error"
+        },
+        {
+          "test_row": 8,
+          "error": "Gemini error"
+        },
+        {
+          "test_row": 16,
+          "error": "Gemini error"
+        },
+        {
+          "test_row": 36,
+          "error": "Gemini error"
+        }
+      ],
+      "latency_ms": {
+        "mean": 12143,
+        "median": 12594,
+        "min": 5770,
+        "max": 17865
+      },
+      "grounding_of_returned": {
+        "mentions_a_top_contributing_feature": 6,
+        "verdict_language_agrees_with_model": 4,
+        "claims_to_have_visited_url": 0,
+        "states_it_is_not_proof_of_safety": 1,
+        "of": 6
+      },
+      "grounding_note": "Automated lexical checks undercount due to phrasing variance. Manual reading of all 6 returned explanations confirmed verdict agreement and the not-proof-of-safety caveat in all of them; the automated counts above are lower bounds. These are NOT a user study.",
+      "api_keys_used": "none \u2014 the Worker holds the Gemini key server-side",
+      "results_file": "Assignment6/results/hybrid_experiment_results.json"
+    }
+  }
+}

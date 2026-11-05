@@ -3,8 +3,12 @@ Midterm/
 
 # Python virtual environments
 Assignment6/.venv/
+Assignment7/.venv/
 .venv/
 venv/
+
+# Assignment 7 dataset (downloaded from Hugging Face, ~47 MB)
+Assignment7/data/
 
 # macOS / editor junk
 .DS_Store

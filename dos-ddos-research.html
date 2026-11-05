@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joselyn | DoS / DDoS Research</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .ref-link { color: var(--accent2); text-decoration: none; transition: color 0.2s ease; }
+    .ref-link:hover { text-decoration: underline; }
+    .research-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      font-size: 0.95rem;
+    }
+    .research-table th,
+    .research-table td {
+      border: 1px solid var(--border);
+      padding: 0.6rem 0.8rem;
+      text-align: left;
+    }
+    .research-table th {
+      background: var(--glow-faint);
+      color: var(--text);
+      font-weight: 600;
+    }
+    .research-table td {
+      color: var(--text-body);
+    }
+    .objective-list { padding-left: 1.25rem; }
+    .objective-list li { margin-bottom: 0.6rem; }
+    .viz-figure {
+      margin: 1.1rem 0 0.4rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.8rem;
+    }
+    .viz-figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+    }
+    .viz-figure figcaption {
+      margin-top: 0.55rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .code-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.9rem 1rem;
+      overflow-x: auto;
+      font-size: 0.85rem;
+    }
+    .movie-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 860px;
+      margin: 1rem auto 0;
+      aspect-ratio: 16 / 9;
+      background: #0b0714;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .movie-wrapper video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #000;
+    }
+    .movie-fallback {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      text-align: center;
+      padding: 1.2rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      background: rgba(11, 7, 20, 0.92);
+    }
+    .movie-fallback code {
+      background: var(--glow-faint);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.15rem 0.45rem;
+      font-size: 0.82rem;
+      word-break: break-all;
+    }
+    .movie-fallback[hidden] { display: none; }
+  </style>
+</head>
+<body data-theme="purple">
+  <div class="starfield"></div>
+
+  <!-- Nebula clouds -->
+  <div class="nebula nebula-1"></div>
+  <div class="nebula nebula-2"></div>
+  <div class="nebula nebula-3"></div>
+
+  <!-- PokeAPI Official Artwork Sprites -->
+  <div class="pokemon-container pokemon-altaria">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/334.png" alt="Altaria" width="80" height="80">
+    <div class="cloud-puff cloud-puff-1"></div>
+    <div class="cloud-puff cloud-puff-2"></div>
+  </div>
+
+  <div class="pokemon-container pokemon-sylveon">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/700.png" alt="Sylveon" width="70" height="70">
+    <div class="sparkle sparkle-1"></div>
+    <div class="sparkle sparkle-2"></div>
+    <div class="sparkle sparkle-3"></div>
+  </div>
+
+  <div class="pokemon-container pokemon-milotic">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/350.png" alt="Milotic" width="90" height="50">
+    <div class="shimmer shimmer-1"></div>
+    <div class="shimmer shimmer-2"></div>
+  </div>
+
+  <div class="pokemon-container pokemon-arceus">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/493.png" alt="Arceus" width="85" height="85">
+  </div>
+
+  <div class="pokemon-container pokemon-deoxys">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/386.png" alt="Deoxys" width="75" height="75">
+  </div>
+
+  <div class="pokemon-container pokemon-eevee">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/133.png" alt="Eevee" width="55" height="55">
+  </div>
+
+  <div class="pokemon-container pokemon-jirachi">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/385.png" alt="Jirachi" width="85" height="85">
+  </div>
+
+  <!-- Shooting stars -->
+  <div class="shooting-star shooting-star-1"></div>
+  <div class="shooting-star shooting-star-2"></div>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">Joselyn</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Me</a></li>
+        <li><a href="interests.html">Tech Interests</a></li>
+        <li><a href="cybersecurity.html">Cybersecurity</a></li>
+        <li><a href="threat-model.html">Threat Model</a></li>
+        <li><a href="secure-architecture.html">Secure Architecture</a></li>
+        <li><a href="auth-access.html">Auth &amp; Access</a></li>
+        <li><a href="digital-person.html">AI Digital Person</a></li>
+        <li><a href="phishing-detection.html">Phishing Detection</a></li>
+        <li><a href="ai-research.html">AI Research</a></li>
+        <li><a href="dos-ddos-research.html" class="active">DoS / DDoS Research</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="page-content">
+    <div class="page-header">
+      <h1>Detecting DoS/DDoS Attacks to Protect Website Availability</h1>
+      <p class="subtitle">Analyzing normal vs attack network traffic on the public CIC-DDoS2019-15C dataset</p>
+    </div>
+
+    <!-- ================================================================== -->
+    <div class="card">
+      <h2>Background — DoS vs DDoS, and Why Availability Matters</h2>
+      <p>
+        A <strong>Denial of Service (DoS)</strong> attack tries to make a website or online
+        service unavailable to real users — usually by overwhelming it with more traffic than
+        its servers, bandwidth, or network connections can handle, or by exploiting a weakness
+        that consumes a scarce resource (for example, unfinished connections that never get
+        closed). A <strong>Distributed Denial of Service (DDoS)</strong> attack is the same idea
+        carried out from <em>many</em> machines at once, typically a botnet of compromised
+        devices. The key differences:
+      </p>
+      <table class="research-table">
+        <thead>
+          <tr><th></th><th>DoS</th><th>DDoS</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Source of traffic</strong></td><td>One machine / one IP address</td><td>Thousands or millions of machines (botnet)</td></tr>
+          <tr><td><strong>Scale</strong></td><td>Smaller — easier to block once identified</td><td>Huge and geographically spread — hard to block</td></tr>
+          <tr><td><strong>Detection challenge</strong></td><td>Spot the single abusive source</td><td>Attack traffic looks like many "normal-looking" clients at once</td></tr>
+          <tr><td><strong>Common types</strong></td><td>SYN flood, HTTP flood, UDP flood</td><td>Volumetric (DNS/NTP amplification), protocol, and application-layer floods</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top: 1rem;">
+        <strong>Website availability</strong> is one of the core properties of information
+        security (the "A" in the CIA triad, together with confidentiality and integrity). When a
+        site is flooded, legitimate users get timeouts, errors, or impossibly slow pages — for a
+        business that means lost customers, lost revenue, and lost trust. The good news is that
+        attack traffic is <em>not</em> statistically identical to normal traffic: floods generate
+        unusually high packet rates, repetitive packet sizes, and strange flow patterns. If a
+        detector can learn what "normal" looks like, it can flag abnormal flows early — enabling
+        rate-limiting, blackholing, or scrubbing <em>before</em> real users are locked out.
+      </p>
+    </div>
+
+    <!-- ================================================================== -->
+    <div class="card">
+      <h2>Research Problem</h2>
+      <p>
+        Websites are constantly exposed to denial-of-service activity, and DDoS attacks have
+        grown in both volume and sophistication. Traditional static defenses (fixed rate limits,
+        simple thresholds) either block too much legitimate traffic or react too slowly when the
+        attack is distributed across many sources that individually look normal.
+      </p>
+      <p>
+        The research problem is: <strong>network flow data contains patterns that distinguish
+        benign traffic from DoS/DDoS attack traffic, but a practical detector must prove it can
+        separate them reliably — with high recall on attacks (so attacks are not missed) and
+        high precision (so real users are not blocked).</strong> This project tests whether
+        standard flow features and a straightforward machine-learning model are enough to make
+        that separation on a large, public, peer-reviewed dataset.
+      </p>
+      <p class="muted">
+        Assignment 7 — the analysis described below was actually run on the real downloaded
+        dataset (run date and metrics in the Results section). Nothing on this page is simulated
+        or copied from another report, and no real attack traffic was generated.
+      </p>
+    </div>
+
+    <!-- ================================================================== -->
+    <div class="card">
+      <h2>Research Question</h2>
+      <div class="qa-block">
+        <p class="question">
+          Can abnormal network-flow features — packet rate, flow duration, inter-arrival time,
+          and packet-length statistics — reliably separate benign (normal) traffic from DoS/DDoS
+          attack traffic on the CIC-DDoS2019-15C dataset?
+        </p>
+      </div>
+      <p class="muted">
+        "Reliably" is deliberately measurable: it means high macro F1-score across all 12
+        classes and a confusion matrix that shows attacks are not being confused with benign
+        traffic (and vice versa).
+      </p>
+    </div>
+
+    <!-- ================================================================== -->
+    <div class="card">
+      <h2>Research Objectives</h2>
+      <ol class="objective-list">
+        <li>
+          <strong>Acquire and verify a real public dataset</strong> — download the official
+          train/test splits of CIC-DDoS2019-15C from Hugging Face and verify its documented
+          shape (rows, features, class balance) against the dataset card.
+        </li>
+        <li>
+          <strong>Clean the flow data properly</strong> — handle the infinite and missing
+          values that CICFlowMeter produces, without leaking test-set statistics into training.
+        </li>
+        <li>
+          <strong>Visualize normal vs attack traffic</strong> — compare benign and attack flows
+          on the features most associated with flooding (packet rate, duration, packet length,
+          inter-arrival time).
+        </li>
+        <li>
+          <strong>Train and compare detectors</strong> — a Logistic Regression baseline and a
+          Random Forest classifier on the official split.
+        </li>
+        <li>
+          <strong>Evaluate honestly</strong> — report accuracy, per-class precision, recall,
+          and F1-score, plus a confusion matrix, so weaknesses (not just strengths) are visible.
+        </li>
+        <li>
+          <strong>Connect results to availability protection</strong> — explain what these
+          metrics would mean for a real web server's defense decisions, and state clearly what
+          this offline study cannot prove.
+        </li>
+      </ol>
+    </div>
+
+    <!-- ================================================================== -->
+    <div class="card">
+      <h2>Dataset — CIC-DDoS2019-15C</h2>
+      <ul>
+        <li>
+          <strong>Name:</strong> CIC-DDoS2019-15C (a preprocessed, feature-selected version of
+          CIC-DDoS2019)
+        </li>
+        <li>
+          <strong>Source link (verified live):</strong>
+          <a class="ref-link" href="https://huggingface.co/datasets/RonaldoMPF/CIC-DDoS2019-15C" target="_blank" rel="noopener noreferrer">https://huggingface.co/datasets/RonaldoMPF/CIC-DDoS2019-15C</a>
+        </li>
+        <li>
+          <strong>Original dataset:</strong> CIC-DDoS2019 by the Canadian Institute for
+          Cybersecurity (University of New Brunswick) —
+          <a class="ref-link" href="https://www.unb.ca/cic/datasets/ddos-2019.html" target="_blank" rel="noopener noreferrer">unb.ca/cic/datasets/ddos-2019.html</a>
+        </li>
+        <li>
+          <strong>Associated paper:</strong> <em>Distributed Denial of Service Detection:
+          Enhancing Machine Learning Models for Multiclass Classification</em> —
+          <a class="ref-link" href="https://doi.org/10.1049/ntw2.70014" target="_blank" rel="noopener noreferrer">doi:10.1049/ntw2.70014</a>
+        </li>
+        <li><strong>Format / size:</strong> CSV, about 47.5 MB total</li>
+      </ul>
+      <h3 style="margin-top: 1.2rem;">Description</h3>
+      <p>
+        The dataset contains <strong>600,000 network flow records</strong> generated with
+        CICFlowMeter from a controlled testbed where real DDoS attack tools were run against
+        victim machines — <strong>480,000 in the official training split and 120,000 in the
+        official test split</strong>. Each record has <strong>14 selected flow features</strong>
+        plus a <strong>Label</strong> column (15 columns total). The 12 classes are perfectly
+        balanced at <strong>50,000 samples each</strong>:
+      </p>
+      <table class="research-table">
+        <thead>
+          <tr><th>Class</th><th>Meaning</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>BENIGN</code></td><td>Normal, non-attack traffic</td></tr>
+          <tr><td><code>DrDoS_DNS</code>, <code>DrDoS_NTP</code>, <code>DrDoS_SNMP</code>, <code>DrDoS_UDP</code>, <code>DrDoS_LDAP</code>, <code>DrDoS_NetBIOS</code>, <code>DrDoS_MSSQL</code>, <code>DrDoS_SSDP</code></td><td>Reflection/amplification DDoS attacks — small queries spoofed as the victim, huge replies aimed at it</td></tr>
+          <tr><td><code>Syn</code></td><td>TCP SYN flood — connection requests that are never completed</td></tr>
+          <tr><td><code>TFTP</code>, <code>UDP-lag</code></td><td>UDP-based floods abusing the TFTP protocol / laggy UDP flooding</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top: 1rem;">
+        The features are all computable in real time from live traffic (flow duration, forward
+        packet length statistics, packets per second, inter-arrival times, header lengths, ACK
+        flag counts, window sizes), which is exactly what makes the dataset usable for testing a
+        website-availability detector. Full credit goes to the UNB CIC team and the paper's
+        authors — this project only re-uses their published data.
+      </p>
+    </div>
+
+    <!-- ================================================================== -->
+    <div class="card">
+      <h2>Methods — Preprocessing and Analysis</h2>
+      <p>
+        The complete, reproducible pipeline is in
+        <code>Assignment7/dos_ddos_analysis.py</code> (run instructions in
+        <code>Assignment7/README.md</code>). Steps, in order:
+      </p>
+      <ol class="objective-list">
+        <li>
+          <strong>Load the official splits</strong> — <code>train.csv</code> (480,000 rows) and
+          <code>test.csv</code> (120,000 rows) exactly as published; the split is never
+          re-shuffled, so results are comparable with the dataset's own paper.
+        </li>
+        <li>
+          <strong>Clean</strong> — strip the padded column names, drop the leftover index
+          column, replace any <code>+/-inf</code> values CICFlowMeter can emit (e.g. division
+          by a zero flow duration) with <code>NaN</code>, then impute missing values with the
+          <em>training-set</em> median only — test statistics are never used for imputation.
+          Measured on this dataset: the cleaning check found <strong>0 infinite or missing
+          values</strong> after replacement, because the 15C version is already pre-cleaned —
+          the guard exists so the same script runs safely on the raw CIC files too.
+          (Some extreme finite sentinel values, such as large negative header/window
+          measurements, remain in the data and are kept as published.)
+        </li>
+        <li>
+          <strong>Visualize</strong> — class distribution; BENIGN-vs-ATTACK histograms of Flow
+          Packets/s, Flow Duration, Packet Length Mean, and Flow IAT Mean (log1p scale, because
+          flood rates span several orders of magnitude); per-class median packet rate.
+        </li>
+        <li>
+          <strong>Standardize</strong> — <code>StandardScaler</code> fit on training features
+          (used by Logistic Regression; the Random Forest uses raw features since trees are
+          scale-invariant).
+        </li>
+        <li>
+          <strong>Train</strong> — Logistic Regression baseline
+          (<code>max_iter=1000</code>) and a Random Forest
+          (<code>n_estimators=100</code>), both with fixed
+          <code>random_state=42</code> for reproducibility.
+        </li>
+        <li>
+          <strong>Evaluate</strong> — accuracy, macro and per-class precision / recall /
+          F1-score, and a row-normalized confusion matrix; all metrics written to
+          <code>Assignment7/results/analysis_results.json</code> and the charts below saved as
+          PNGs.
+        </li>
+      </ol>
+      <p class="muted">
+        Ethics note: this is offline analysis of a published dataset. No DoS or DDoS traffic was
+        generated, and no system was attacked.
+      </p>
+    </div>
+
+    <!-- ================================================================== -->
+    <div class="card">
+      <h2>Visualizations — Normal vs Attack Traffic</h2>
+      <p>
+        All charts below were generated by actually running
+        <code>Assignment7/dos_ddos_analysis.py</code> on the downloaded dataset
+        (run date: <strong>October 29, 2026</strong>). The charts live in
+        <code>Assignment7/results/</code>.
+      </p>
+
+      <figure class="viz-figure">
+        <img src="Assignment7/results/class_distribution.png"
+             alt="Bar chart of flow counts per class in the CIC-DDoS2019-15C training split. BENIGN in green and eleven DDoS attack classes in purple, each with approximately 40,000 flows, confirming the documented class balance."
+             loading="lazy" width="1100" height="500">
+        <figcaption>
+          <strong>Figure 1 — Class distribution (training split).</strong> Verified against the
+          dataset card: the split is balanced, with roughly equal flow counts for BENIGN (green)
+          and each of the eleven DDoS attack classes (purple). Balanced classes mean accuracy is
+          a meaningful metric here, but see Limitations — real traffic is not balanced this way.
+        </figcaption>
+      </figure>
+
+      <figure class="viz-figure">
+        <img src="Assignment7/results/normal_vs_attack_distributions.png"
+             alt="Four histograms comparing normal and attack traffic. For flow packets per second, normal traffic clusters at low rates while attack traffic spreads to very high rates. Similar separations appear in flow duration, packet length mean, and inter-arrival time."
+             loading="lazy" width="1200" height="900">
+        <figcaption>
+          <strong>Figure 2 — Feature distributions, BENIGN vs all attacks (log1p scale).</strong>
+          The separation the detector exploits is visible to the eye: attack traffic (pink) is
+          concentrated at <em>very high packet rates</em> and short flow durations — exactly the
+          signature of flooding — while normal traffic (green) spreads over lower rates and
+          longer, more varied flows. Packet length statistics also differ because floods repeat
+          near-identical packets.
+        </figcaption>
+      </figure>
+
+      <figure class="viz-figure">
+        <img src="Assignment7/results/median_flow_packets_per_class.png"
+             alt="Horizontal bar chart of median flow packets per second for each class. BENIGN has a low median packet rate, while attack classes such as DrDoS_DNS, Syn, and UDP-lag show dramatically higher median rates."
+             loading="lazy" width="1000" height="500">
+        <figcaption>
+          <strong>Figure 3 — Median Flow Packets/s per class.</strong> BENIGN flows have by far
+          the lowest median packet rate, while the flood classes (DrDoS_DNS, Syn, UDP-lag, …)
+          show rates orders of magnitude higher. This is the single clearest "abnormal traffic"
+          signal a website-availability defender could alarm on.
+        </figcaption>
+      </figure>
+    </div>
+
+    <!-- ================================================================== -->
+    <div class="card">
+      <h2>Results</h2>
+      <p>
+        Two models were trained on the official 480,000-row training split and evaluated on the
+        official 120,000-row test split (fixed <code>random_state=42</code>). These are the
+        <strong>actual measured outputs</strong> of the run on 2026-10-29 — machine-readable
+        source: <code>Assignment7/results/analysis_results.json</code>.
+      </p>
+
+      <h3 style="margin-top: 1.2rem;">Model comparison (12-class problem)</h3>
+      <table class="research-table">
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>Accuracy</th>
+            <th>Macro precision</th>
+            <th>Macro recall</th>
+            <th>Macro F1</th>
+            <th>Training time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Logistic Regression (baseline, standardized features)</td>
+            <td>63.26%</td>
+            <td>0.6425</td>
+            <td>0.6332</td>
+            <td>0.5912</td>
+            <td>~146 s</td>
+          </tr>
+          <tr>
+            <td><strong>Random Forest (100 trees)</strong></td>
+            <td><strong>75.37%</strong></td>
+            <td><strong>0.7628</strong></td>
+            <td><strong>0.7539</strong></td>
+            <td><strong>0.7406</strong></td>
+            <td>~21 s</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="muted" style="margin-top: 0.8rem;">
+        The Random Forest beats the linear baseline on every metric, which makes sense: the
+        attack signatures are non-linear (a flood is a <em>combination</em> of high packet rate,
+        repeated packet sizes, and short durations that a linear boundary cannot capture).
+      </p>
+
+      <h3 style="margin-top: 1.4rem;">Random Forest — per-class precision, recall, F1</h3>
+      <table class="research-table">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Precision</th>
+            <th>Recall</th>
+            <th>F1-score</th>
+            <th>Test support</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>BENIGN (normal traffic)</strong></td><td>0.9985</td><td>0.9994</td><td>0.9989</td><td>9,952</td></tr>
+          <tr><td>DrDoS_DNS</td><td>0.7446</td><td>0.5038</td><td>0.6010</td><td>10,100</td></tr>
+          <tr><td>DrDoS_LDAP</td><td>0.5726</td><td>0.6195</td><td>0.5951</td><td>9,958</td></tr>
+          <tr><td>DrDoS_MSSQL</td><td>0.9316</td><td>0.9454</td><td>0.9384</td><td>9,918</td></tr>
+          <tr><td>DrDoS_NTP</td><td>0.9940</td><td>0.9971</td><td>0.9956</td><td>9,988</td></tr>
+          <tr><td>DrDoS_NetBIOS</td><td>0.9570</td><td>0.9863</td><td>0.9714</td><td>9,988</td></tr>
+          <tr><td>DrDoS_SNMP</td><td>0.6785</td><td>0.8339</td><td>0.7482</td><td>10,035</td></tr>
+          <tr><td>DrDoS_SSDP</td><td>0.4838</td><td>0.3796</td><td>0.4254</td><td>10,006</td></tr>
+          <tr><td>DrDoS_UDP</td><td>0.4963</td><td>0.6007</td><td>0.5435</td><td>10,034</td></tr>
+          <tr><td>Syn (SYN flood)</td><td>0.5898</td><td>0.9821</td><td>0.7370</td><td>10,070</td></tr>
+          <tr><td>TFTP</td><td>0.9962</td><td>0.9647</td><td>0.9802</td><td>9,988</td></tr>
+          <tr><td>UDP-lag</td><td>0.7105</td><td>0.2345</td><td>0.3526</td><td>9,963</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="margin-top: 1.4rem;">Confusion matrix (Random Forest, row-normalized)</h3>
+      <figure class="viz-figure">
+        <img src="Assignment7/results/confusion_matrix_random_forest.png"
+             alt="Row-normalized confusion matrix for the Random Forest model across twelve classes. The diagonal is bright, showing most classes are predicted correctly. Visible off-diagonal confusion exists between DrDoS_SSDP and DrDoS_UDP, and UDP-lag is frequently predicted as Syn. BENIGN is almost perfectly predicted."
+             loading="lazy" width="900" height="800">
+        <figcaption>
+          <strong>Figure 4 — Confusion matrix.</strong> Bright diagonal = correct predictions.
+          The BENIGN row is essentially clean; most errors are <em>attack-vs-attack</em>
+          confusion (SSDP ↔ UDP, UDP-lag → Syn, DNS ↔ LDAP/SNMP) — see the reading below.
+          A second matrix for Logistic Regression is in
+          <code>Assignment7/results/confusion_matrix_logistic_regression.png</code>.
+        </figcaption>
+      </figure>
+
+      <h3 style="margin-top: 1.4rem;">Reading the results — what protects availability?</h3>
+      <p>
+        The 12-class numbers look moderate (75.37%), but for the
+        <strong>website-availability question</strong> the decisive numbers are the ones about
+        normal traffic, and they are strong:
+      </p>
+      <ul>
+        <li>
+          <strong>Normal traffic is almost never blocked (false alarms).</strong> Of 9,952
+          BENIGN test flows, the Random Forest flagged only <strong>6</strong> as attacks
+          (BENIGN recall 99.94%). A defender using this detector would essentially not lock out
+          real users.
+        </li>
+        <li>
+          <strong>Flags are trustworthy.</strong> BENIGN precision is 99.85% — when the model
+          says "attack," it almost always really is one, so automated mitigation (rate-limiting,
+          scrubbing) would rarely be triggered by innocent traffic.
+        </li>
+        <li>
+          <strong>Attacks are almost never mistaken for normal.</strong> Summing the
+          confusion-matrix column for BENIGN: only <strong>15 of ~110,000</strong> attack flows
+          were misclassified as normal — an attack-to-normal leakage of about 0.01%. A flood
+          would essentially not sneak through as benign.
+        </li>
+        <li>
+          <strong>Collapsed to the operational question (benign vs attack), accuracy is
+          99.98%</strong> (119,979 of 120,000 test flows correct — derived directly from the
+          confusion matrix). The remaining 75.37% multiclass difficulty is almost entirely
+          confusion <em>between attack families</em> (which amplification protocol was used),
+          not between attack and normal.
+        </li>
+      </ul>
+      <p>
+        The honest weaknesses are also visible: <strong>UDP-lag</strong> (recall 0.2345) is
+        frequently mistaken for the <strong>Syn</strong> class, and <strong>DrDoS_SSDP</strong>
+        is often confused with <strong>DrDoS_UDP</strong> — both pairs are floods with similar
+        UDP packet-size and rate patterns, so this confusion is understandable but means
+        <em>attributing the exact attack type</em> is unreliable at the edges.
+      </p>
+
+      <h3 style="margin-top: 1.4rem;">What the model learned</h3>
+      <figure class="viz-figure">
+        <img src="Assignment7/results/feature_importances.png"
+             alt="Horizontal bar chart of Random Forest feature importances. Packet Length Mean is the most important feature at about 0.25, followed by Subflow Fwd Bytes at about 0.21, Flow Packets per second and Flow Duration at about 0.09 each."
+             loading="lazy" width="900" height="500">
+        <figcaption>
+          <strong>Figure 5 — Random Forest feature importances.</strong> The top features are
+          Packet Length Mean (0.254) and Subflow Fwd Bytes (0.210), followed by Flow Packets/s
+          (0.088) and Flow Duration (0.087) — matching the visual story in Figure 2: floods send
+          many similar-sized packets very fast.
+        </figcaption>
+      </figure>
+    </div>
+
+    <!-- ================================================================== -->
+    <div class="card">
+      <h2>AI-Generated Movie — DoS/DDoS, Visualized</h2>
+      <p>
+        For this assignment I also created an AI-generated short movie about cybersecurity and
+        denial-of-service attacks, produced with <strong>Google Flow</strong>. Once exported,
+        the MP4 lives at <code>assets/assignment7/ai-cybersecurity-movie.mp4</code> and plays
+        below.
+      </p>
+      <div class="movie-wrapper">
+        <video
+          id="assignment7-movie"
+          controls
+          playsinline
+          preload="metadata"
+          aria-label="AI-generated cybersecurity movie about DoS and DDoS attacks">
+          <source src="assets/assignment7/ai-cybersecurity-movie.mp4" type="video/mp4">
+          Your browser does not support the video element. You can
+          <a href="assets/assignment7/ai-cybersecurity-movie.mp4">download the movie file</a>
+          instead.
+        </video>
+        <div class="movie-fallback" id="assignment7-movie-fallback">
+          <strong>🎬 Movie coming soon</strong>
+          <p style="margin: 0;">
+            The AI-generated movie has not been exported yet. It will appear here automatically
+            once the file exists at:
+          </p>
+          <code>assets/assignment7/ai-cybersecurity-movie.mp4</code>
+        </div>
+      </div>
+      <p class="muted" style="margin-top: 0.8rem; font-size: 0.88rem;">
+        Generated with Google Flow. To add the movie, export it as an MP4 and save it at the path
+        above — the player is responsive, has standard controls (play/pause, volume, captions,
+        fullscreen), and works on phones and tablets.
+      </p>
+    </div>
+
+    <!-- ================================================================== -->
+    <div class="card">
+      <h2>Conclusions</h2>
+      <p>
+        To answer the research question: <strong>yes — abnormal network-flow features
+        reliably separate normal traffic from DoS/DDoS attack traffic</strong> on this
+        dataset, at least in the operational sense that matters for availability. The
+        Random Forest trained here (75.37% macro accuracy across 12 classes, macro F1
+        0.7406) collapses to <strong>99.98% accuracy on the benign-vs-attack decision</strong>
+        when read from its confusion matrix: only 6 of 9,952 normal flows were flagged, and
+        only 15 of ~110,000 attack flows passed as normal.
+      </p>
+      <p>
+        Practically, that profile is exactly what a website-availability defense needs:
+        extremely low false positives (real users stay online) combined with near-zero
+        missed floods (attack traffic is not waved through). The feature importances and
+        the distribution plots agree on <em>why</em> this works — floods move many
+        same-sized packets at extreme rates, which no normal browsing session does.
+      </p>
+      <p>
+        The honest boundary of the claim: the residual multiclass errors (UDP-lag → Syn,
+        SSDP ↔ UDP) show the model is much better at "is this an attack?" than "which
+        precise attack is this?" — and the dataset itself is lab-generated and balanced,
+        so production performance would be lower. Conclusions are therefore about
+        <em>separability of the traffic classes</em>, not a deployable product.
+      </p>
+    </div>
+
+    <!-- ================================================================== -->
+    <div class="card">
+      <h2>Limitations</h2>
+      <ul>
+        <li>
+          <strong>Lab-generated attacks.</strong> CIC-DDoS2019 was produced in a controlled
+          testbed with a limited set of attack tools. Real-world attacks vary in timing,
+          spoofing, and protocols, so field performance would differ.
+        </li>
+        <li>
+          <strong>Perfectly balanced classes.</strong> The 50,000-per-class balance makes the
+          math clean but does not reflect reality, where attack traffic is often a small fraction
+          of total flows. Accuracy on this dataset will be optimistic compared to production.
+        </li>
+        <li>
+          <strong>Features pre-selected.</strong> The 15C version ships 14 features chosen by
+          the original paper. A real deployment would start from raw flows and feature
+          engineering decisions of its own.
+        </li>
+        <li>
+          <strong>Flow-level, not packet-level.</strong> The model classifies completed flow
+          records; it does not measure how quickly a detector could react mid-attack, nor how
+          many legitimate flows would be harmed before detection.
+        </li>
+        <li>
+          <strong>Not tested against evasion.</strong> Low-and-slow attacks (traffic kept just
+          under normal thresholds) or encrypted application-layer floods may not show the same
+          statistical signatures.
+        </li>
+        <li>
+          <strong>Offline study only.</strong> No live server, no rate-limiting, and no actual
+          mitigation was exercised — the study shows separability of classes, not end-to-end
+          availability protection.
+        </li>
+      </ul>
+    </div>
+
+    <!-- ================================================================== -->
+    <div class="card">
+      <h2>Future Improvements</h2>
+      <ul>
+        <li>
+          <strong>Streaming / online detection.</strong> Move from batch CSVs to a streaming
+          evaluation (e.g. River or a Kafka-style feed) to measure detection latency — how many
+          seconds after an attack starts would the alarm fire?
+        </li>
+        <li>
+          <strong>Imbalanced, real-world scenarios.</strong> Re-balance the data to production
+          ratios (e.g. 1% attack) and re-measure precision, because false positives are what
+          hurt real users.
+        </li>
+        <li>
+          <strong>Compare more models.</strong> Gradient Boosting / XGBoost, k-NN, and a small
+          neural network against the two baselines here, with cross-validation.
+        </li>
+        <li>
+          <strong>Time-aware splitting.</strong> Split by capture time instead of random rows,
+          to test whether a model trained on Monday's traffic still works on Tuesday's.
+        </li>
+        <li>
+          <strong>Mitigation layer.</strong> Connect the detector to a simulated response —
+          rate-limiting or challenge pages — and measure how much legitimate traffic is
+          preserved during an attack.
+        </li>
+        <li>
+          <strong>Explainability.</strong> Use SHAP or feature importances to show <em>why</em>
+          a flow was flagged, following the explainability work from my
+          <a class="ref-link" href="ai-research.html">AI Research</a> project.
+        </li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Joselyn | Information Technology | Kean University</p>
+  </footer>
+
+  <!-- Theme Switcher -->
+  <button class="theme-toggle" aria-label="Change theme">🎨</button>
+  <div class="theme-panel">
+    <button class="theme-option active" data-theme="purple" aria-label="Purple Galaxy">
+      <span class="theme-preview purple"></span>
+      Purple Galaxy
+    </button>
+    <button class="theme-option" data-theme="pink" aria-label="Pink Galaxy">
+      <span class="theme-preview pink"></span>
+      Pink Galaxy
+    </button>
+    <button class="theme-option" data-theme="blue" aria-label="Blue Galaxy">
+      <span class="theme-preview blue"></span>
+      Blue Galaxy
+    </button>
+  </div>
+
+  <!-- Chatbox -->
+  <button class="chatbox-toggle" aria-label="Open chat">💬</button>
+  <div class="chatbox-panel">
+    <div class="chatbox-header">
+      <h3>Mission Comms</h3>
+      <button class="chatbox-close" aria-label="Close chat">&times;</button>
+    </div>
+    <div class="chatbox-messages"></div>
+    <div class="chatbox-input-area">
+      <input type="text" class="chatbox-input" placeholder="Ask me something...">
+      <button class="chatbox-mic" type="button" aria-label="Use microphone">🎤</button>
+      <button class="chatbox-send">Send</button>
+    </div>
+    <div class="chatbox-status" role="status" aria-live="polite"></div>
+  </div>
+
+  <!-- Digital Person Panel -->
+  <button class="dp-toggle" aria-label="Open digital person">🧑</button>
+  <div class="dp-panel">
+    <div class="dp-panel-header">
+      <img class="dp-panel-avatar" id="dp-panel-avatar" alt="Digital person avatar" hidden>
+      <div class="dp-panel-title">
+        <h3>Digital Person</h3>
+        <span class="dp-panel-avatar-status" id="dp-panel-avatar-status"></span>
+      </div>
+      <button class="dp-panel-close" aria-label="Close digital person">&times;</button>
+    </div>
+    <div class="dp-panel-messages" id="dp-panel-messages"></div>
+    <div class="dp-panel-input-area">
+      <input type="text" class="dp-panel-input" id="dp-panel-input" placeholder="Ask your digital person...">
+      <button class="dp-panel-mic" id="dp-panel-mic" type="button" aria-label="Use microphone">🎤</button>
+      <button class="dp-panel-send" id="dp-panel-send">Ask</button>
+    </div>
+    <div class="dp-panel-status" role="status" aria-live="polite" id="dp-panel-status"></div>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="digital-person.js"></script>
+  <script>
+    // Movie fallback: if the MP4 hasn't been exported/added yet, the <video>
+    // element fires an error — surface the friendly "coming soon" message.
+    // If the file loads, make sure the fallback stays hidden.
+    (function () {
+      var video = document.getElementById('assignment7-movie');
+      var fallback = document.getElementById('assignment7-movie-fallback');
+      if (!video || !fallback) return;
+      function showFallback() { fallback.hidden = false; }
+      function hideFallback() { fallback.hidden = true; }
+      video.addEventListener('error', showFallback);
+      var source = video.querySelector('source');
+      if (source) source.addEventListener('error', showFallback);
+      video.addEventListener('loadedmetadata', hideFallback);
+    })();
+  </script>
+</body>
+</html>

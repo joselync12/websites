@@ -587,13 +587,14 @@
       <h2>AI-Generated Movie — DoS/DDoS, Visualized</h2>
       <p>
         For this assignment I also created an AI-generated short movie about cybersecurity and
-        denial-of-service attacks, produced with <strong>Google Flow</strong>. Once exported,
-        the MP4 lives at <code>assets/assignment7/ai-cybersecurity-movie.mp4</code> and plays
-        below.
+        denial-of-service attacks, produced with <strong>Google Flow</strong>. It was exported
+        as five separate scenes and <strong>combined into a single movie</strong>
+        (<code>assets/assignment7/ai-cybersecurity-movie.mp4</code> — about 40 seconds,
+        1280×720, 16:9) that plays below with standard controls: play/pause, volume,
+        captions, and fullscreen. It works on phones and tablets.
       </p>
       <div class="movie-wrapper">
         <video
-          id="assignment7-movie"
           controls
           playsinline
           preload="metadata"
@@ -603,19 +604,16 @@
           <a href="assets/assignment7/ai-cybersecurity-movie.mp4">download the movie file</a>
           instead.
         </video>
-        <div class="movie-fallback" id="assignment7-movie-fallback">
-          <strong>🎬 Movie coming soon</strong>
-          <p style="margin: 0;">
-            The AI-generated movie has not been exported yet. It will appear here automatically
-            once the file exists at:
-          </p>
+        <div class="movie-fallback" hidden>
+          <strong>🎬 Movie unavailable</strong>
+          <p style="margin: 0;">The movie file could not be loaded:</p>
           <code>assets/assignment7/ai-cybersecurity-movie.mp4</code>
         </div>
       </div>
-      <p class="muted" style="margin-top: 0.8rem; font-size: 0.88rem;">
-        Generated with Google Flow. To add the movie, export it as an MP4 and save it at the path
-        above — the player is responsive, has standard controls (play/pause, volume, captions,
-        fullscreen), and works on phones and tablets.
+      <p class="muted" style="margin-top: 0.9rem; font-size: 0.88rem;">
+        Generated with Google Flow. The five original scene files remain in
+        <code>assets/assignment7/scenes/</code>, and the combined file was produced by
+        concatenating them in scene order (1 → 5) without re-encoding.
       </p>
     </div>
 
@@ -761,12 +759,12 @@
   </div>
 
   <!-- Digital Person Panel -->
-  <button class="dp-toggle" aria-label="Open digital person">🧑</button>
+  <button class="dp-toggle" aria-label="Open digital person"><img class="dp-toggle-avatar" src="assets/img/dawn.png" alt="" aria-hidden="true"></button>
   <div class="dp-panel">
     <div class="dp-panel-header">
-      <img class="dp-panel-avatar" id="dp-panel-avatar" alt="Digital person avatar" hidden>
+      <img class="dp-panel-avatar" id="dp-panel-avatar" alt="Dawn" hidden>
       <div class="dp-panel-title">
-        <h3>Digital Person</h3>
+        <h3>Dawn</h3>
         <span class="dp-panel-avatar-status" id="dp-panel-avatar-status"></span>
       </div>
       <button class="dp-panel-close" aria-label="Close digital person">&times;</button>
@@ -783,19 +781,21 @@
   <script src="script.js"></script>
   <script src="digital-person.js"></script>
   <script>
-    // Movie fallback: if the MP4 hasn't been exported/added yet, the <video>
-    // element fires an error — surface the friendly "coming soon" message.
-    // If the file loads, make sure the fallback stays hidden.
+    // Scene fallbacks: if a scene MP4 is missing, surface a friendly note
+    // instead of a broken player. Hide it again once the file loads.
     (function () {
-      var video = document.getElementById('assignment7-movie');
-      var fallback = document.getElementById('assignment7-movie-fallback');
-      if (!video || !fallback) return;
-      function showFallback() { fallback.hidden = false; }
-      function hideFallback() { fallback.hidden = true; }
-      video.addEventListener('error', showFallback);
-      var source = video.querySelector('source');
-      if (source) source.addEventListener('error', showFallback);
-      video.addEventListener('loadedmetadata', hideFallback);
+      var videos = document.querySelectorAll('.movie-wrapper video');
+      videos.forEach(function (video) {
+        var wrapper = video.closest('.movie-wrapper');
+        var fallback = wrapper && wrapper.querySelector('.movie-fallback');
+        if (!fallback) return;
+        function showFallback() { fallback.hidden = false; }
+        function hideFallback() { fallback.hidden = true; }
+        video.addEventListener('error', showFallback);
+        var source = video.querySelector('source');
+        if (source) source.addEventListener('error', showFallback);
+        video.addEventListener('loadedmetadata', hideFallback);
+      });
     })();
   </script>
 </body>

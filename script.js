@@ -64,6 +64,56 @@ async function getBotResponse(userMessage) {
   }
 }
 
+/* --- Voice selection: prefer a natural female English voice (Dawn) --- */
+let availableVoices = [];
+
+function refreshVoices() {
+  if ('speechSynthesis' in window) {
+    availableVoices = window.speechSynthesis.getVoices() || [];
+  }
+}
+
+if ('speechSynthesis' in window) {
+  refreshVoices();
+  // Chrome/Firefox load voices asynchronously
+  window.speechSynthesis.addEventListener('voiceschanged', refreshVoices);
+}
+
+function pickAssistantVoice() {
+  if (!availableVoices.length) refreshVoices();
+  const voices = availableVoices;
+  if (!voices.length) return null;
+
+  // Prefer English voices; fall back to all voices if none are English
+  const en = voices.filter((v) => /^en(-|_|$)/i.test(v.lang || ''));
+  const pool = en.length ? en : voices;
+
+  const nameOf = (v) => (v.name || '').toLowerCase();
+  const notMale = (v) => !/male/i.test(nameOf(v));
+
+  // Tier 1: downloaded natural voices (Siri / Premium / Enhanced / Natural)
+  // — these sound markedly more human than the built-in legacy voices.
+  const naturalHints = ['siri', 'premium', 'enhanced', 'natural'];
+  for (const hint of naturalHints) {
+    const match = pool.find((v) => nameOf(v).includes(hint) && notMale(v));
+    if (match) return match;
+  }
+
+  // Tier 2: known female-sounding voices
+  const preferred = [
+    'female', 'samantha', 'zira', 'victoria', 'susan', 'karen', 'moira',
+    'fiona', 'tessa', 'kate', 'anna', 'amy', 'ava', 'joanna', 'allison',
+    'google uk english female', 'google us english',
+  ];
+  for (const hint of preferred) {
+    const match = pool.find((v) => nameOf(v).includes(hint));
+    if (match) return match;
+  }
+
+  // Tier 3: any voice that is not explicitly male
+  return pool.find(notMale) || null;
+}
+
 /* --- Shared text-to-speech (used by chatbox + digital person) --- */
 function speakText(text, statusEl) {
   if (!('speechSynthesis' in window)) {
@@ -73,14 +123,33 @@ function speakText(text, statusEl) {
 
   window.speechSynthesis.cancel();
   const utterance = new SpeechSynthesisUtterance(text);
-  utterance.rate = 1;
-  utterance.pitch = 1;
+  const voice = pickAssistantVoice();
+  if (voice) utterance.voice = voice;
+  utterance.rate = 1.05; // slightly brisker = more conversational
+  utterance.pitch = 1.0; // natural tone (1.1 sounded chipmunk-y)
 
   utterance.onstart = () => { if (statusEl) statusEl.textContent = 'Speaking...'; };
   utterance.onend = () => { if (statusEl) statusEl.textContent = ''; };
   utterance.onerror = () => { if (statusEl) statusEl.textContent = 'Could not play audio.'; };
 
   window.speechSynthesis.speak(utterance);
+}
+
+/* --- Mic guard: browsers only allow ONE speech recognition at a time.
+   The chatbox + both digital-person mics share this registry so starting
+   one mic always stops any other that is still listening. --- */
+const activeRecognizers = new Set();
+
+function registerRecognition(rec) {
+  activeRecognizers.add(rec);
+}
+
+function stopOtherRecognitions(except) {
+  activeRecognizers.forEach((rec) => {
+    if (rec !== except) {
+      try { rec.stop(); } catch (e) { /* already stopped */ }
+    }
+  });
 }
 
 function initChatbox() {
@@ -118,6 +187,7 @@ function initChatbox() {
     recognition.lang = 'en-US';
     recognition.interimResults = false;
     recognition.maxAlternatives = 1;
+    registerRecognition(recognition);
 
     recognition.onstart = () => {
       isListening = true;
@@ -135,7 +205,10 @@ function initChatbox() {
     };
 
     recognition.onerror = (event) => {
-      setStatus(`Microphone error: ${event.error}`);
+      // 'aborted' = we stopped it ourselves via the mic guard — not a real error
+      if (event.error !== 'aborted') {
+        setStatus(`Microphone error: ${event.error}`);
+      }
       isListening = false;
       micBtn.classList.remove('listening');
     };
@@ -158,10 +231,20 @@ function initChatbox() {
         window.speechSynthesis.cancel();
       }
 
+      // Stop any other mic first (only one recognition can run at a time)
+      stopOtherRecognitions(recognition);
+
       try {
         recognition.start();
       } catch (error) {
-        setStatus('Could not start microphone.');
+        // Another instance may still be stopping — retry once shortly after
+        setTimeout(() => {
+          try {
+            recognition.start();
+          } catch (err) {
+            setStatus('Could not start microphone.');
+          }
+        }, 150);
       }
     });
   }

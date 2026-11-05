@@ -6,6 +6,7 @@
    ============================================ */
 
 const DP_AVATAR_KEY = 'dpAvatar';
+const DP_DEFAULT_AVATAR = 'assets/img/dawn.png';
 
 function dpLoadAvatar() {
   try { return localStorage.getItem(DP_AVATAR_KEY); } catch (e) { return null; }
@@ -13,6 +14,8 @@ function dpLoadAvatar() {
 
 function dpSaveAvatar(dataUrl) {
   try { localStorage.setItem(DP_AVATAR_KEY, dataUrl); } catch (e) { /* storage full/unavailable */ }
+  // Let panels on this page refresh immediately (storage events only fire cross-tab)
+  try { window.dispatchEvent(new Event('dp-avatar-changed')); } catch (e) { /* ignore */ }
 }
 
 /* --- Shared: attach speech recognition to a mic button --- */
@@ -36,6 +39,7 @@ function dpSetupMic(micBtn, inputEl, statusEl, onTranscript) {
   recognition.lang = 'en-US';
   recognition.interimResults = false;
   recognition.maxAlternatives = 1;
+  if (typeof registerRecognition === 'function') registerRecognition(recognition);
 
   recognition.onstart = () => {
     isListening = true;
@@ -53,7 +57,10 @@ function dpSetupMic(micBtn, inputEl, statusEl, onTranscript) {
   };
 
   recognition.onerror = (event) => {
-    setStatus(`Microphone error: ${event.error}`);
+    // 'aborted' = stopped by the shared mic guard when another mic took over
+    if (event.error !== 'aborted') {
+      setStatus(`Microphone error: ${event.error}`);
+    }
     isListening = false;
     micBtn.classList.remove('listening');
   };
@@ -76,10 +83,20 @@ function dpSetupMic(micBtn, inputEl, statusEl, onTranscript) {
       window.speechSynthesis.cancel();
     }
 
+    // Stop any other mic first (only one recognition can run at a time)
+    if (typeof stopOtherRecognitions === 'function') stopOtherRecognitions(recognition);
+
     try {
       recognition.start();
     } catch (error) {
-      setStatus('Could not start microphone.');
+      // Another instance may still be stopping — retry once shortly after
+      setTimeout(() => {
+        try {
+          recognition.start();
+        } catch (err) {
+          setStatus('Could not start microphone.');
+        }
+      }, 150);
     }
   });
 
@@ -118,15 +135,18 @@ function initDpPanel() {
     return msg;
   }
 
-  // Show avatar if one was created on the digital person page
+  // Show Dawn by default; an uploaded photo overrides her
   function refreshAvatar() {
-    const avatar = dpLoadAvatar();
-    if (avatar && avatarImg) {
-      avatarImg.src = avatar;
-      avatarImg.hidden = false;
-      return true;
-    }
-    return false;
+    if (!avatarImg) return false;
+    const avatar = dpLoadAvatar() || DP_DEFAULT_AVATAR;
+    avatarImg.src = avatar;
+    avatarImg.hidden = false;
+    return true;
+  }
+
+  // If the sprite ever fails to load, hide it instead of showing a broken image
+  if (avatarImg) {
+    avatarImg.addEventListener('error', () => { avatarImg.hidden = true; });
   }
 
   let hasAvatar = refreshAvatar();
@@ -161,11 +181,11 @@ function initDpPanel() {
       if (!greeted) {
         greeted = true;
         if (hasAvatar) {
-          addMsg("Hi! I'm your digital person. Ask me anything!", 'bot');
+          addMsg("Hi! I'm Dawn. Ask me anything!", 'bot');
         } else {
           const hint = document.createElement('div');
           hint.classList.add('dp-panel-hint');
-          hint.innerHTML = 'No digital person yet. <a href="digital-person.html">Create one</a> by uploading a photo!';
+          hint.innerHTML = 'Dawn is offline right now. <a href="digital-person.html">Open her page</a> to set her up!';
           messages.appendChild(hint);
         }
       }
@@ -192,7 +212,8 @@ function initDpPanel() {
 
   recognition = dpSetupMic(micBtn, input, statusEl, (transcript) => askQuestion(transcript));
 
-  // Listen for avatar creation on the digital person page (same tab)
+  // Listen for avatar changes (same tab via custom event, other tabs via storage)
+  window.addEventListener('dp-avatar-changed', () => { hasAvatar = refreshAvatar(); });
   window.addEventListener('storage', (e) => {
     if (e.key === DP_AVATAR_KEY) {
       hasAvatar = refreshAvatar();
@@ -264,7 +285,7 @@ function initDigitalPersonPage() {
     setTimeout(() => {
       avatar.src = photoDataUrl;
       stage.hidden = false;
-      createStatus.textContent = 'Your digital person is ready! It will also appear in the 🧑 panel on every page.';
+      createStatus.textContent = 'Dawn is ready! She will also appear in the 🧑 panel on every page.';
       stage.scrollIntoView({ behavior: 'smooth', block: 'start' });
       questionInput.focus();
       setAvatarStatus('Online');
@@ -274,18 +295,21 @@ function initDigitalPersonPage() {
     }, 600);
   });
 
-  // If an avatar already exists, show it right away
+  // Show Dawn by default; a saved photo overrides her
   const saved = dpLoadAvatar();
+  if (avatar) {
+    avatar.addEventListener('error', () => { avatar.hidden = true; });
+    avatar.src = saved || DP_DEFAULT_AVATAR;
+  }
   if (saved) {
     photoDataUrl = saved;
-    avatar.src = saved;
     preview.src = saved;
     previewWrap.hidden = false;
     fileName.textContent = 'Saved photo';
     createBtn.disabled = false;
-    stage.hidden = false;
-    setAvatarStatus('Online');
   }
+  stage.hidden = false;
+  setAvatarStatus('Online');
 
   /* --- 3. Ask + AI response --- */
   function askQuestion() {

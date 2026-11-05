@@ -40,13 +40,13 @@
   <main class="page-content">
     <div class="page-header">
       <h1>AI Digital Person</h1>
-      <p class="subtitle">Upload a photo and bring your digital person to life</p>
+      <p class="subtitle">Meet Dawn — or upload a photo to give her a new look</p>
     </div>
 
     <!-- Step 1: Upload a photo -->
     <div class="card">
-      <h2>1. Upload a Photo</h2>
-      <p>Choose a photo from your device to become your digital person's avatar. The image stays in your browser — it is never uploaded anywhere.</p>
+      <h2>1. Upload a Photo (optional)</h2>
+      <p>Choose a photo from your device to replace Dawn as your digital person's avatar. The image stays in your browser — it is never uploaded anywhere.</p>
       <div class="dp-upload-area">
         <label class="dp-file-label" for="dp-photo-input">📷 Choose Photo</label>
         <input type="file" id="dp-photo-input" accept="image/*">
@@ -67,12 +67,12 @@
 
     <!-- Step 3: Digital person + chat -->
     <div class="card dp-stage" id="dp-stage" hidden>
-      <h2>3. Meet Your Digital Person</h2>
+      <h2>3. Meet Dawn</h2>
 
       <div class="dp-avatar-frame">
-        <img id="dp-avatar" class="dp-avatar" alt="Digital person avatar">
+        <img id="dp-avatar" class="dp-avatar" alt="Dawn">
         <div class="dp-avatar-ring"></div>
-        <div class="dp-avatar-name">Mission Comms Companion</div>
+        <div class="dp-avatar-name">Dawn</div>
         <div class="dp-avatar-status" id="dp-avatar-status"></div>
       </div>
 
@@ -130,12 +130,12 @@
   </div>
 
   <!-- Digital Person Panel -->
-  <button class="dp-toggle" aria-label="Open digital person">🧑</button>
+  <button class="dp-toggle" aria-label="Open digital person"><img class="dp-toggle-avatar" src="assets/img/dawn.png" alt="" aria-hidden="true"></button>
   <div class="dp-panel">
     <div class="dp-panel-header">
-      <img class="dp-panel-avatar" id="dp-panel-avatar" alt="Digital person avatar" hidden>
+      <img class="dp-panel-avatar" id="dp-panel-avatar" alt="Dawn" hidden>
       <div class="dp-panel-title">
-        <h3>Digital Person</h3>
+        <h3>Dawn</h3>
         <span class="dp-panel-avatar-status" id="dp-panel-avatar-status"></span>
       </div>
       <button class="dp-panel-close" aria-label="Close digital person">&times;</button>

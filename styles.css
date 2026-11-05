@@ -1461,6 +1461,16 @@ footer {
   box-shadow: 0 6px 28px var(--glow);
 }
 
+/* Dawn sprite replaces the old 🧑 emoji in the floating toggle */
+.dp-toggle-avatar {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+  border-radius: 50%;
+  background: var(--glow-faint);
+  pointer-events: none;
+}
+
 .dp-panel {
   position: fixed;
   bottom: 10rem;

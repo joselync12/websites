@@ -226,7 +226,7 @@ function initChatbox() {
   // Initial greeting
   const greeting = document.createElement('div');
   greeting.classList.add('chat-msg', 'bot');
-  greeting.textContent = "Hi there! I'm Joselyn's assistant. Ask me about her major, hobbies, interests, or cybersecurity tips!";
+  greeting.textContent = "Hi! I'm the Mission Comms assistant — ask me about cybersecurity, tech, or anything you're curious about!";
   messagesContainer.appendChild(greeting);
 }
 

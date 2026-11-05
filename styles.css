@@ -441,6 +441,26 @@ footer {
   color: var(--accent2);
 }
 
+/* Chatbox title group + Dawn trainer avatar */
+.chatbox-title {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-width: 0;
+}
+
+.chatbox-avatar {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  object-fit: contain;
+  padding: 2px;
+  background: var(--glow-faint);
+  border: 2px solid var(--accent2);
+  box-shadow: 0 0 10px var(--glow2-faint);
+}
+
 .chatbox-close {
   background: none;
   border: none;

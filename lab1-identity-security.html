@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joselyn | Lab 1: Identity and Security</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .lab-note {
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+      background: var(--glow-faint);
+      border: 1px dashed var(--accent2);
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.4rem;
+      font-size: 0.93rem;
+      color: var(--text-body);
+    }
+    .lab-note strong { color: var(--accent2); }
+    .lab-meta {
+      margin-top: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .research-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      font-size: 0.95rem;
+    }
+    .research-table th,
+    .research-table td {
+      border: 1px solid var(--border);
+      padding: 0.6rem 0.8rem;
+      text-align: left;
+    }
+    .research-table th {
+      background: var(--glow-faint);
+      color: var(--text);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .research-table td {
+      color: var(--text-body);
+    }
+    .code-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.9rem 1rem;
+      overflow-x: auto;
+      font-size: 0.85rem;
+      margin: 0.8rem 0;
+    }
+    .step-list { padding-left: 1.25rem; }
+    .step-list li { margin-bottom: 0.6rem; }
+    .pending-list { padding-left: 1.25rem; color: var(--text-muted); }
+    .pending-list li { margin-bottom: 0.45rem; }
+  </style>
+</head>
+<body data-theme="purple">
+  <div class="starfield"></div>
+
+  <!-- Nebula clouds -->
+  <div class="nebula nebula-1"></div>
+  <div class="nebula nebula-2"></div>
+  <div class="nebula nebula-3"></div>
+
+  <!-- PokeAPI Official Artwork Sprites -->
+  <div class="pokemon-container pokemon-altaria">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/334.png" alt="Altaria" width="80" height="80">
+    <div class="cloud-puff cloud-puff-1"></div>
+    <div class="cloud-puff cloud-puff-2"></div>
+  </div>
+
+  <div class="pokemon-container pokemon-sylveon">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/700.png" alt="Sylveon" width="70" height="70">
+    <div class="sparkle sparkle-1"></div>
+    <div class="sparkle sparkle-2"></div>
+    <div class="sparkle sparkle-3"></div>
+  </div>
+
+  <div class="pokemon-container pokemon-milotic">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/350.png" alt="Milotic" width="90" height="50">
+    <div class="shimmer shimmer-1"></div>
+    <div class="shimmer shimmer-2"></div>
+  </div>
+
+  <div class="pokemon-container pokemon-arceus">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/493.png" alt="Arceus" width="85" height="85">
+  </div>
+
+  <div class="pokemon-container pokemon-deoxys">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/386.png" alt="Deoxys" width="75" height="75">
+  </div>
+
+  <div class="pokemon-container pokemon-eevee">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/133.png" alt="Eevee" width="75" height="75">
+  </div>
+
+  <div class="pokemon-container pokemon-jirachi">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/385.png" alt="Jirachi" width="85" height="85">
+  </div>
+
+  <!-- Shooting stars -->
+  <div class="shooting-star shooting-star-1"></div>
+  <div class="shooting-star shooting-star-2"></div>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">Joselyn</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Me</a></li>
+        <li><a href="interests.html">Tech Interests</a></li>
+        <li><a href="cybersecurity.html">Cybersecurity</a></li>
+        <li><a href="threat-model.html">Threat Model</a></li>
+        <li><a href="secure-architecture.html">Secure Architecture</a></li>
+        <li><a href="auth-access.html">Auth &amp; Access</a></li>
+        <li><a href="digital-person.html">AI Digital Person</a></li>
+        <li><a href="phishing-detection.html">Phishing Detection</a></li>
+        <li><a href="ai-research.html">AI Research</a></li>
+        <li><a href="dos-ddos-research.html">DoS / DDoS Research</a></li>
+        <li><a href="lab1-identity-security.html" class="active">Lab 1: Identity and Security</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="page-content">
+    <div class="page-header">
+      <h1>Lab 1: Identity and Security</h1>
+      <p class="subtitle">CPS 3498 — Examining network settings, reachability, and how traffic travels</p>
+      <p class="lab-meta">
+        Student: Joselyn Carvajal &middot; Instructor: Xiwan Guo &middot; Date: November 5, 2026
+      </p>
+    </div>
+
+    <div class="lab-note" role="note">
+      <span aria-hidden="true">🚧</span>
+      <span>
+        <strong>In progress.</strong> This lab report is still being written. Network
+        measurements and conclusions will be added only after they are verified against
+        my own lab output and screenshots — no value is reported here unless it appears
+        in my own results.
+      </span>
+    </div>
+
+    <!-- ================================================================== -->
+    <div class="card">
+      <h2>Description</h2>
+      <p>
+        The purpose of this lab is to help examine my computer's network settings and
+        practice tools that can show me whether other devices can be reached and how
+        network traffic travels. The computer currently being used is a 13-inch MacBook
+        Pro (2020), running macOS Sequoia 15.7.4. The location for the lab work is
+        between the Kean Green Lane Building and the town of Elizabeth, using the
+        Cougar-Net and MyOptimum 92247f networks.
+      </p>
+      <table class="research-table">
+        <thead>
+          <tr><th>Item</th><th>Value</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Computer</strong></td><td>13-inch MacBook Pro (2020)</td></tr>
+          <tr><td><strong>Operating system</strong></td><td>macOS Sequoia 15.7.4</td></tr>
+          <tr><td><strong>Location</strong></td><td>Between the Kean Green Lane Building and the town of Elizabeth</td></tr>
+          <tr><td><strong>Network connection</strong></td><td>Wi-Fi: Cougar-Net &amp; MyOptimum 92247f</td></tr>
+          <tr><td><strong>Network provider</strong></td><td>Kean University campus network &amp; Optimum</td></tr>
+          <tr><td><strong>Upstream ISP</strong></td><td>Not identified in the available information</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top: 1rem;">
+        For Cougar-Net, the network provider is the Kean University network, and the
+        upstream ISP is not shown. For MyOptimum 92247f, the provider is the Optimum
+        network, and the upstream ISP is not shown.
+      </p>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ================================================================== -->
+    <div class="card">
+      <h2>Procedure and Notes</h2>
+      <p>Using the MacBook on the Cougar-Net Wi-Fi network at Kean University:</p>
+      <ol class="step-list">
+        <li>Open the Terminal.</li>
+        <li>
+          Type <code>man ifconfig</code> to read the macOS manual page for the
+          <code>ifconfig</code> command:
+          <div class="code-block">man ifconfig</div>
+        </li>
+        <li>Type the commands for the connectivity and routing observations.</li>
+        <li>Check the address resolution and any issues.</li>
+        <li>Record the results.</li>
+      </ol>
+      <p>
+        <strong>Notes:</strong> the upstream ISP was not identified in the available
+        information for either network. Measurements, commands beyond
+        <code>man ifconfig</code>, and observations are still being finalized in this
+        draft and will be added here as they are completed and verified.
+      </p>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ================================================================== -->
+    <div class="card">
+      <h2>Results and Reports</h2>
+      <p>
+        The command manual and network tools in this lab connect several parts of
+        TCP/IP communication. An <strong>IP address</strong> identifies a device on an
+        IP network, the <strong>subnet mask</strong> distinguishes the local network
+        from host addresses, and the <strong>default gateway</strong> forwards traffic
+        to other networks. <strong>DNS</strong> provides the IP address associated with
+        a host name. <strong>ARP</strong> resolves a local IPv4 address to a hardware
+        address, while <strong>ping</strong> and <strong>traceroute</strong> provide
+        different views of reachability and the path to a destination.
+      </p>
+      <p>
+        <strong>Status: measurements pending.</strong> Following the lab's own rule —
+        <em>do not report a value unless it appears in your own output or
+        screenshots</em> — no measured values are published on this page yet. The
+        following will be summarized once the lab work is verified against my own
+        output:
+      </p>
+      <ul class="pending-list">
+        <li>The Mac's Cougar-Net configuration (measured values)</li>
+        <li>Whether the selected hosts responded</li>
+        <li>How the routes differed</li>
+        <li>How the ARP cache changed</li>
+      </ul>
+      <p style="margin-top: 1rem;">
+        <strong>Conclusion:</strong> to be written after the measured values are
+        entered and checked against my own lab work.
+      </p>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ================================================================== -->
+    <div class="card">
+      <h2>References</h2>
+      <p>
+        CPS 3498, &ldquo;Lab 1: Identity and Security,&rdquo; course laboratory
+        handout, 2026. The macOS <code>ifconfig</code> manual page was opened with the
+        command <code>man ifconfig</code>.
+      </p>
+      <p>
+        <strong>Acknowledgement:</strong> ChatGPT assisted with organizing and editing
+        this report draft. The network measurements and conclusions must be checked
+        against my own lab work.
+      </p>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Joselyn | Information Technology | Kean University</p>
+  </footer>
+
+  <!-- Theme Switcher -->
+  <button class="theme-toggle" aria-label="Change theme">🎨</button>
+  <div class="theme-panel">
+    <button class="theme-option active" data-theme="purple" aria-label="Purple Galaxy">
+      <span class="theme-preview purple"></span>
+      Purple Galaxy
+    </button>
+    <button class="theme-option" data-theme="pink" aria-label="Pink Galaxy">
+      <span class="theme-preview pink"></span>
+      Pink Galaxy
+    </button>
+    <button class="theme-option" data-theme="blue" aria-label="Blue Galaxy">
+      <span class="theme-preview blue"></span>
+      Blue Galaxy
+    </button>
+  </div>
+
+  <!-- Chatbox -->
+  <button class="chatbox-toggle" aria-label="Open chat">💬</button>
+  <div class="chatbox-panel">
+    <div class="chatbox-header">
+      <div class="chatbox-title">
+        <img class="chatbox-avatar" src="assets/img/dawn.png" alt="Mission Comms avatar" width="34" height="34" onerror="this.style.display='none'">
+        <h3>Mission Comms</h3>
+      </div>
+      <button class="chatbox-close" aria-label="Close chat">&times;</button>
+    </div>
+    <div class="chatbox-messages"></div>
+    <div class="chatbox-input-area">
+      <input type="text" class="chatbox-input" placeholder="Ask me something...">
+      <button class="chatbox-mic" type="button" aria-label="Use microphone">🎤</button>
+      <button class="chatbox-send">Send</button>
+    </div>
+    <div class="chatbox-status" role="status" aria-live="polite"></div>
+  </div>
+
+  <!-- Digital Person Panel -->
+  <button class="dp-toggle" aria-label="Open digital person"><img class="dp-toggle-avatar" src="assets/img/dawn.png" alt="" aria-hidden="true"></button>
+  <div class="dp-panel">
+    <div class="dp-panel-header">
+      <img class="dp-panel-avatar" id="dp-panel-avatar" alt="Dawn" hidden>
+      <div class="dp-panel-title">
+        <h3>Dawn</h3>
+        <span class="dp-panel-avatar-status" id="dp-panel-avatar-status"></span>
+      </div>
+      <button class="dp-panel-close" aria-label="Close digital person">&times;</button>
+    </div>
+    <div class="dp-panel-messages" id="dp-panel-messages"></div>
+    <div class="dp-panel-input-area">
+      <input type="text" class="dp-panel-input" id="dp-panel-input" placeholder="Ask your digital person...">
+      <button class="dp-panel-mic" id="dp-panel-mic" type="button" aria-label="Use microphone">🎤</button>
+      <button class="dp-panel-send" id="dp-panel-send">Ask</button>
+    </div>
+    <div class="dp-panel-status" role="status" aria-live="polite" id="dp-panel-status"></div>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="digital-person.js"></script>
+</body>
+</html>
